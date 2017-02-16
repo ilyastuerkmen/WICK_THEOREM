@@ -137,5 +137,5 @@ cout << "ttsqo3:  " <<  ttsqo3 << endl;
 STR<TwoTensorSQO<ParticleHole>> s6({ttsqo1, ttsqo2});
 STR<TwoTensorSQO<ParticleHole>> s7({ttsqo2, ttsqo1});
 cout << "STR OUTPUT TWOTENS: " << s6*s7 << endl;
-  
+
 }

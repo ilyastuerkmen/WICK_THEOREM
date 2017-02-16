@@ -7,23 +7,16 @@
 
   using namespace std;
 
-template<class Formalism>  
-class TwoTensorSQO {
+template<class Formalism> class TwoTensorSQO {
 public:
-  
-TwoTensorSQO( pair<string, SQO_Idx_Type> const &, pair<string, SQO_Idx_Type> const & );
-TwoTensorSQO( TwoTensorSQO<Formalism> const & );
-
-pair<string, SQO_Idx_Type> idx1;
-pair<string, SQO_Idx_Type> idx2;
-
+  TwoTensorSQO( pair<string, SQO_Idx_Type> const &, pair<string, SQO_Idx_Type> const & );
+  TwoTensorSQO( TwoTensorSQO<Formalism> const & );
+  pair<string, SQO_Idx_Type> idx1;
+  pair<string, SQO_Idx_Type> idx2;
 };
 
-template<class Formalism> 
-bool operator == ( TwoTensorSQO<Formalism> const &, TwoTensorSQO<Formalism> const & );
+template<class Formalism> bool operator == ( TwoTensorSQO<Formalism> const &, TwoTensorSQO<Formalism> const & );
 
-template<class Formalism> 
-ostream & operator << ( ostream &, TwoTensorSQO<Formalism> const & );
-
+template<class Formalism> ostream & operator << ( ostream &, TwoTensorSQO<Formalism> const & );
 
 #endif

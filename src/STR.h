@@ -5,37 +5,43 @@
 #include "TwoTensorSQO.h"
 #include <list>
 #include <initializer_list>
-  
+
   using namespace std;
 
-template<class OBJ>
-class STR : public list<OBJ> {
+template<class T> class STRBase : public list<T> {
 public:
-
-STR();
-STR( initializer_list<OBJ> );
-STR( STR<OBJ> const & );
-
-void normalproduct();
-double _prefactor ;
-//bool normalproduct;
-
-bool operator == ( STR<OBJ> const & );
-
-private:
-bool identical( STR<OBJ> const & ); 
-
+  STRBase();
+  STRBase( initializer_list<T> );
+  STRBase( STRBase<T> const & );
+  double _prefactor ;
+  bool identical( STRBase<T> const & );
 };
 
-template<class OBJ> STR<OBJ>  operator * ( double const &, STR<OBJ> const & );
-template<class OBJ> STR<OBJ>  operator * ( STR<OBJ> const &, double const & );
-template<class OBJ> STR<OBJ>  operator * ( OBJ const &, STR<OBJ> const & );
-template<class OBJ> STR<OBJ>  operator * ( STR<OBJ> const &, OBJ const & );
-template<class OBJ> STR<OBJ>  operator * ( STR<OBJ> const & , STR<OBJ> const & );
+template<class T> class STR {};
 
-template<class OBJ>
-ostream & operator << ( ostream &, STR<OBJ> const & );
+template<class Formalism>class STR<SQO<Formalism>> : public STRBase<SQO<Formalism>> {
+public:
+  STR<SQO<Formalism>>();
+  STR<SQO<Formalism>>( initializer_list<SQO<Formalism>> );
+  STR(STR<SQO<Formalism>> const &);
+  void normalproduct();
+  bool operator == ( STR<SQO<Formalism>> const & );
+};
 
+template<class Formalism> class STR<TwoTensorSQO<Formalism>> : public STRBase<TwoTensorSQO<Formalism>>{
+public:
+  STR<TwoTensorSQO<Formalism>>();
+  STR<TwoTensorSQO<Formalism>>( initializer_list<TwoTensorSQO<Formalism>> );
+  STR(STR<TwoTensorSQO<Formalism>> const &);
+  bool operator == ( STR<TwoTensorSQO<Formalism>> const & );
+};
 
+template<class T> STR<T>  operator * ( double const &, STR<T> const & );
+template<class T> STR<T>  operator * ( STR<T> const &, double const & );
+template<class T> STR<T>  operator * ( T const &, STR<T> const & );
+template<class T> STR<T>  operator * ( STR<T> const &, T const & );
+template<class T> STR<T>  operator * ( STR<T> const & , STR<T> const & );
+
+template<class T> ostream & operator << ( ostream &, STR<T> const & );
 
 #endif
