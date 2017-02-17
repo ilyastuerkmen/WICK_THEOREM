@@ -65,7 +65,6 @@ cout << "4*s2" << endl;
 cout << d1*s2 << endl;
 cout << endl;
 
-/*
 cout << "s2*4" << endl;
 cout << s2*d1 << endl;
 cout << endl;
@@ -141,8 +140,8 @@ cout << "STR OUTPUT TWOTENS: " << s6*s7 << endl;
 //PFSTT<ParticleHole> pf1({s6,s7});
 //PFSTT<ParticleHole> pf2({s6,s7}, 3 );
 
-cout << "PFSTT: " << endl;
-*/
+cout << "PFSTT TEST: " << endl;
+
 
 
 

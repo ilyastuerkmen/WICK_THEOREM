@@ -29,6 +29,8 @@ inline ostream & operator << ( ostream & o , TwoTensorSQO<Elementary> const & tt
   o << "\\delta_{" << ttsqo.idx1.first << ttsqo.idx2.first << "}" ;
   return o;
 }
+
+
 inline ostream & operator << ( ostream & o , TwoTensorSQO<ParticleHole> const & ttsqo ) {
   o << "\\gamma_{" << ttsqo.idx1.first << ttsqo.idx2.first << "}" ;
   return o;

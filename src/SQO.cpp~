@@ -20,5 +20,4 @@ bool operator == ( SQO<Formalism> const & sqo1, SQO<Formalism> const & sqo2 ) {
 } 
 
 template class SQO<ParticleHole>;
-template class SQO<Elementary>;
-
+ostream & operator << ( ostream & o, SQO<ParticleHole> const & sqo );
