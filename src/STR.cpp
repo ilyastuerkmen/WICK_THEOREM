@@ -190,6 +190,8 @@ template<class Formalism> bool STRTTCompare<Formalism>::operator () ( STR<TwoTen
   }
 }
 
+
+
 template STR<SQO<Elementary>> operator * ( double const &, STR<SQO<Elementary>> const & );
 template STR<SQO<ParticleHole>> operator * ( double const &, STR<SQO<ParticleHole>> const & );
 template STR<SQO<Elementary>> operator * ( STR<SQO<Elementary>> const &, double const & );

@@ -94,6 +94,8 @@ template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> 
 }
 
 
+
+
 template PFSTT<Elementary>::PFSTT();
 template PFSTT<ParticleHole>::PFSTT();
 template PFSTT<Elementary>::PFSTT( initializer_list<STR<TwoTensorSQO<Elementary>>>, double const & );
