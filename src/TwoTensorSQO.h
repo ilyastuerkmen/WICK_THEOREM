@@ -16,7 +16,7 @@ public:
 };
 
 template<class Formalism> bool operator == ( TwoTensorSQO<Formalism> const &, TwoTensorSQO<Formalism> const & );
-
-template<class Formalism> ostream & operator << ( ostream &, TwoTensorSQO<Formalism> const & );
+ostream & operator << ( ostream &, TwoTensorSQO<Elementary> const & );
+ostream & operator << ( ostream &, TwoTensorSQO<ParticleHole> const & );
 
 #endif

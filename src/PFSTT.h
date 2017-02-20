@@ -8,7 +8,7 @@
   using namespace std;
 
 template<class Formalism>
-class PFSTT : map< STR<TwoTensorSQO<Formalism>> , double > {
+class PFSTT : public map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> > {
 public:
 
 PFSTT();
@@ -16,7 +16,7 @@ PFSTT( initializer_list<STR<TwoTensorSQO<Formalism>>> , double const & = 0);
 PFSTT( PFSTT<Formalism> const & );
 
 double realnumber;
-
+double & operator [] ( STR<TwoTensorSQO<Formalism>> const & ) ;
 PFSTT<Formalism> & operator = ( PFSTT<Formalism> const & );
 
 };
@@ -34,6 +34,6 @@ template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formali
 template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formalism>> const & )
 */
 
-template<class Formalism> ostream & operator << ( ostream &, PFSTT<Formalism> const & ); 
+template<class Formalism> ostream & operator << ( ostream &, PFSTT<Formalism> const & );
 
 #endif

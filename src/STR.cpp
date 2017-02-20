@@ -1,12 +1,7 @@
 #include "STR.h"
 
-template class STR<SQO<ParticleHole>>;
-template class STR<SQO<Elementary>>;
-template class STR<TwoTensorSQO<ParticleHole>>;
-template class STR<TwoTensorSQO<Elementary>>;
-
 template<class T> STRBase<T>::STRBase() : list<T>() , _prefactor(1) {};
-template<class T> STRBase<T>::STRBase( initializer_list<T> il) : list<T>(il), _prefactor(1) {}
+template<class T> STRBase<T>::STRBase( initializer_list<T>il) : list<T>(il), _prefactor(1) {}
 template<class T> STRBase<T>::STRBase( STRBase<T> const & ssqo) : list<T>(ssqo), _prefactor(ssqo._prefactor) {}
 template<class T> bool STRBase<T>::identical( STRBase<T> const & s) {
   if ( (*this).size() != s.size() ) { return false;}
@@ -24,43 +19,42 @@ template<class T> bool STRBase<T>::identical( STRBase<T> const & s) {
     return ( ((*this)._prefactor == s._prefactor) && ( count == (*this).size() )  );
   }
 }
-template<class T> STR<T> operator * (double const & d, STR<T> const & ssqo ) {
-  STR<T> tmp(ssqo);
+template<class T> STR<T> operator * (double const & d, STR<T>  const & ssqo ) {
+  STR<T>  tmp(ssqo);
   tmp._prefactor = d*ssqo._prefactor;
   return tmp;
 }
-template<class T> STR<T> operator * (STR<T> const & ssqo, double const & d ) {
-  STR<T> tmp(ssqo);
+template<class T> STR<T> operator * (STR<T>  const & ssqo, double const & d ) {
+  STR<T>  tmp(ssqo);
   tmp._prefactor = d*ssqo._prefactor;
   return tmp;
 
 }
-template<class T> STR<T>  operator * ( T const & sqo, STR<T> const & ssqo) {
-   STR<T> tmp(ssqo);
+template<class T> STR<T> operator * ( T const & sqo, STR<T>  const & ssqo) {
+   STR<T>  tmp(ssqo);
    tmp.list<T>::push_front(sqo);
    return tmp;
 }
-template<class T> STR<T>  operator * ( STR<T> const & ssqo, T const & sqo) {
-   STR<T> tmp(ssqo);
+template<class T> STR<T> operator * ( STR<T>  const & ssqo, T const & sqo) {
+   STR<T>  tmp(ssqo);
    tmp.list<T>::push_back(sqo);
    return tmp;
 }
-template<class T> STR<T>  operator * ( STR<T> const & lssqo, STR<T> const & rssqo) {
-  STR<T> tmp(lssqo);
+template<class T> STR<T> operator * ( STR<T>  const & lssqo, STR<T>  const & rssqo) {
+  STR<T>  tmp(lssqo);
   tmp._prefactor *= rssqo._prefactor;
   for ( typename STR<T>::const_iterator it = rssqo.begin(); it != rssqo.end(); it++ ) {
      tmp.list<T>::push_back(*it);
   }
   return tmp;
 }
-template<class T> ostream & operator << ( ostream & o, STR<T> const & ssqo ){
+template<class T> ostream & operator << ( ostream & o, STR<T>  const & ssqo ){
   o << ssqo._prefactor ;
   for ( typename STR<T>::const_iterator it = ssqo.begin(); it != ssqo.end(); it++ )
     o << *it ;
 
   return o;
 }
-
 
 template<class Formalism> STR<SQO<Formalism>>::STR(): STRBase<SQO<Formalism>>() {};
 template<class Formalism> STR<SQO<Formalism>>::STR( initializer_list<SQO<Formalism>> il) : STRBase<SQO<Formalism>>(il) {}
@@ -172,35 +166,78 @@ template<class Formalism> bool STR<TwoTensorSQO<Formalism>>::operator == ( STR<T
     }
     return true;
 }
-template<class Formalism> bool STR<TwoTensorSQO<Formalism>>::operator < ( STR<TwoTensorSQO<Formalism>> const & s ) {
-  if ( (*this).size() < s.size() ) { return true; }
-  else if ( s.size() < (*this).size() ) { return false; }
-  else { 
+template<class Formalism> bool STRTTCompare<Formalism>::operator () ( STR<TwoTensorSQO<Formalism>> const & lstr, STR<TwoTensorSQO<Formalism>> const & rstr  ) const {
+  if ( lstr.size() < rstr.size() ) { return true; }
+  else if ( rstr.size() < lstr.size() ) { return false; }
+  else {
     string tmp1("");
     string tmp2("");
-    
-    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=(*this).begin(); it!=(*this).end(); it++ ) {
+
+    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=lstr.begin(); it!=lstr.end(); it++ ) {
       tmp1 += (*it).idx1.first;
       tmp1 += (*it).idx2.first;
     }
-    
-    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=s.begin(); it!=s.end(); it++ ) {
+
+    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=rstr.begin(); it!=rstr.end(); it++ ) {
       tmp2 += (*it).idx1.first;
       tmp2 += (*it).idx2.first;
     }
 
     sort(tmp1.begin(), tmp1.end());
     sort(tmp2.begin(), tmp2.end());
-    
+
     return tmp1 < tmp2;
   }
 }
 
+template STR<SQO<Elementary>> operator * ( double const &, STR<SQO<Elementary>> const & );
+template STR<SQO<ParticleHole>> operator * ( double const &, STR<SQO<ParticleHole>> const & );
+template STR<SQO<Elementary>> operator * ( STR<SQO<Elementary>> const &, double const & );
+template STR<SQO<ParticleHole>> operator * ( STR<SQO<ParticleHole>> const &, double const & );
+template STR<SQO<Elementary>> operator * ( SQO<Elementary> const &, STR<SQO<Elementary>> const & );
+template STR<SQO<ParticleHole>> operator * ( SQO<ParticleHole> const &, STR<SQO<ParticleHole>> const & );
+template STR<SQO<Elementary>> operator * ( STR<SQO<Elementary>> const &, SQO<Elementary> const & );
+template STR<SQO<ParticleHole>> operator * ( STR<SQO<ParticleHole>> const &, SQO<ParticleHole> const & );
+template STR<SQO<Elementary>> operator * ( STR<SQO<Elementary>> const & , STR<SQO<Elementary>> const & );
+template STR<SQO<ParticleHole>> operator * ( STR<SQO<ParticleHole>> const & , STR<SQO<ParticleHole>> const & );
+template ostream & operator << ( ostream &, STR<SQO<Elementary>>const & );
+template ostream & operator << ( ostream & o, STR<SQO<ParticleHole>> const & );
+template STR<SQO<Elementary>>::STR();
+template STR<SQO<ParticleHole>>::STR();
+template STR<SQO<Elementary>>::STR( initializer_list<SQO<Elementary>>);
+template STR<SQO<ParticleHole>>::STR( initializer_list<SQO<ParticleHole>>);
+template STR<SQO<Elementary>>::STR( STR<SQO<Elementary>> const & );
+template STR<SQO<ParticleHole>>::STR( STR<SQO<ParticleHole>> const & );
+template void STR<SQO<Elementary>>::normalproduct();
+template void STR<SQO<ParticleHole>>::normalproduct();
+template bool STR<SQO<Elementary>>::operator == ( STR<SQO<Elementary>> const & );
+template bool STR<SQO<ParticleHole>>::operator == ( STR<SQO<ParticleHole>> const & );
+
+
+
+template STR<TwoTensorSQO<Elementary>> operator * ( double const &, STR<TwoTensorSQO<Elementary>> const & );
+template STR<TwoTensorSQO<ParticleHole>> operator * ( double const &, STR<TwoTensorSQO<ParticleHole>> const & );
+template STR<TwoTensorSQO<Elementary>> operator * ( STR<TwoTensorSQO<Elementary>> const &, double const & );
+template STR<TwoTensorSQO<ParticleHole>> operator * ( STR<TwoTensorSQO<ParticleHole>> const &, double const & );
+template STR<TwoTensorSQO<Elementary>> operator * ( TwoTensorSQO<Elementary> const &, STR<TwoTensorSQO<Elementary>> const & );
+template STR<TwoTensorSQO<ParticleHole>> operator * ( TwoTensorSQO<ParticleHole> const &, STR<TwoTensorSQO<ParticleHole>> const & );
+template STR<TwoTensorSQO<Elementary>> operator * ( STR<TwoTensorSQO<Elementary>> const &, TwoTensorSQO<Elementary> const & );
+template STR<TwoTensorSQO<ParticleHole>> operator * ( STR<TwoTensorSQO<ParticleHole>> const &, TwoTensorSQO<ParticleHole> const & );
+template STR<TwoTensorSQO<Elementary>> operator * ( STR<TwoTensorSQO<Elementary>> const & , STR<TwoTensorSQO<Elementary>> const & );
+template STR<TwoTensorSQO<ParticleHole>> operator * ( STR<TwoTensorSQO<ParticleHole>> const & , STR<TwoTensorSQO<ParticleHole>> const & );
+template ostream & operator << ( ostream &, STR<TwoTensorSQO<Elementary>>const & );
+template ostream & operator << ( ostream & o, STR<TwoTensorSQO<ParticleHole>> const & );
+template STR<TwoTensorSQO<Elementary>>::STR();
+template STR<TwoTensorSQO<ParticleHole>>::STR();
+template STR<TwoTensorSQO<Elementary>>::STR( initializer_list<TwoTensorSQO<Elementary>>);
+template STR<TwoTensorSQO<ParticleHole>>::STR( initializer_list<TwoTensorSQO<ParticleHole>>);
+template STR<TwoTensorSQO<Elementary>>::STR( STR<TwoTensorSQO<Elementary>> const & );
+template STR<TwoTensorSQO<ParticleHole>>::STR( STR<TwoTensorSQO<ParticleHole>> const & );
+template bool STR<TwoTensorSQO<Elementary>>::operator == ( STR<TwoTensorSQO<Elementary>> const & );
+template bool STR<TwoTensorSQO<ParticleHole>>::operator == ( STR<TwoTensorSQO<ParticleHole>> const & );
+template bool STRTTCompare<Elementary>::operator () ( STR<TwoTensorSQO<Elementary>> const &, STR<TwoTensorSQO<Elementary>> const & ) const ;
+template bool STRTTCompare<ParticleHole>::operator () ( STR<TwoTensorSQO<ParticleHole>> const &, STR<TwoTensorSQO<ParticleHole>> const & ) const;
+
+
 // ********** MAY A FUNCTION NAMED "ALL_EQUAL_STRINGS" WHICH GIVES BACK "EQUAL_STRINGS" **********************
 // ***********************************************************************************************************
-
-
-
-
-
-

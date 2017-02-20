@@ -19,7 +19,7 @@ public:
 
 template<class T> class STR {};
 
-template<class Formalism>class STR<SQO<Formalism>> : public STRBase<SQO<Formalism>> {
+template<class Formalism> class STR<SQO<Formalism>> : public STRBase<SQO<Formalism>> {
 public:
   STR<SQO<Formalism>>();
   STR<SQO<Formalism>>( initializer_list<SQO<Formalism>> );
@@ -28,13 +28,17 @@ public:
   bool operator == ( STR<SQO<Formalism>> const & );
 };
 
-template<class Formalism> class STR<TwoTensorSQO<Formalism>> : public STRBase<TwoTensorSQO<Formalism>>{
+template<class Formalism> class STR<TwoTensorSQO<Formalism>> : public STRBase<TwoTensorSQO<Formalism>> {
 public:
   STR<TwoTensorSQO<Formalism>>();
   STR<TwoTensorSQO<Formalism>>( initializer_list<TwoTensorSQO<Formalism>> );
   STR(STR<TwoTensorSQO<Formalism>> const &);
   bool operator == ( STR<TwoTensorSQO<Formalism>> const & );
-  bool operator < ( STR<TwoTensorSQO<Formalism>> const & );
+};
+
+template<class Formalism> class STRTTCompare {
+public:
+ bool operator () ( STR<TwoTensorSQO<Formalism>> const &, STR<TwoTensorSQO<Formalism>> const &  ) const;
 };
 
 template<class T> STR<T>  operator * ( double const &, STR<T> const & );
@@ -42,7 +46,6 @@ template<class T> STR<T>  operator * ( STR<T> const &, double const & );
 template<class T> STR<T>  operator * ( T const &, STR<T> const & );
 template<class T> STR<T>  operator * ( STR<T> const &, T const & );
 template<class T> STR<T>  operator * ( STR<T> const & , STR<T> const & );
-
 template<class T> ostream & operator << ( ostream &, STR<T> const & );
 
 #endif

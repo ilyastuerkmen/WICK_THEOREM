@@ -1,16 +1,10 @@
 #include "TwoTensorSQO.h"
 
-template<class Formalism>
-TwoTensorSQO<Formalism>::TwoTensorSQO( pair<string, SQO_Idx_Type> const & p1, pair<string, SQO_Idx_Type> const & p2 ) 
+template<class Formalism> TwoTensorSQO<Formalism>::TwoTensorSQO( pair<string, SQO_Idx_Type> const & p1, pair<string, SQO_Idx_Type> const & p2 )
   : idx1(p1), idx2(p2) {}
-
-template<class Formalism>
-TwoTensorSQO<Formalism>::TwoTensorSQO( TwoTensorSQO<Formalism> const & ttsqo )
+template<class Formalism> TwoTensorSQO<Formalism>::TwoTensorSQO( TwoTensorSQO<Formalism> const & ttsqo )
   : idx1(ttsqo.idx1), idx2(ttsqo.idx2) {}
-
-template<class Formalism>
-bool operator == ( TwoTensorSQO<Formalism> const & ttsqo1, TwoTensorSQO<Formalism> const & ttsqo2 )
-{
+template<class Formalism> bool operator == ( TwoTensorSQO<Formalism> const & ttsqo1, TwoTensorSQO<Formalism> const & ttsqo2 ) {
   string tmp1(ttsqo1.idx1.first);
   tmp1 += ttsqo1.idx2.first;
 
@@ -24,15 +18,18 @@ bool operator == ( TwoTensorSQO<Formalism> const & ttsqo1, TwoTensorSQO<Formalis
 
 }
 
-
-inline ostream & operator << ( ostream & o , TwoTensorSQO<Elementary> const & ttsqo ) {
+ostream & operator << ( ostream & o , TwoTensorSQO<Elementary> const & ttsqo ) {
   o << "\\delta_{" << ttsqo.idx1.first << ttsqo.idx2.first << "}" ;
   return o;
 }
-inline ostream & operator << ( ostream & o , TwoTensorSQO<ParticleHole> const & ttsqo ) {
+ostream & operator << ( ostream & o , TwoTensorSQO<ParticleHole> const & ttsqo ) {
   o << "\\gamma_{" << ttsqo.idx1.first << ttsqo.idx2.first << "}" ;
   return o;
 }
 
-template class TwoTensorSQO<Elementary>;
-template class TwoTensorSQO<ParticleHole>;
+template TwoTensorSQO<Elementary>::TwoTensorSQO( pair<string, SQO_Idx_Type> const &, pair<string, SQO_Idx_Type> const &);
+template TwoTensorSQO<ParticleHole>::TwoTensorSQO( pair<string, SQO_Idx_Type> const &, pair<string, SQO_Idx_Type> const &);
+template TwoTensorSQO<Elementary>::TwoTensorSQO( TwoTensorSQO<Elementary> const & );
+template TwoTensorSQO<ParticleHole>::TwoTensorSQO( TwoTensorSQO<ParticleHole> const & );
+template bool operator == ( TwoTensorSQO<Elementary> const &, TwoTensorSQO<Elementary> const & );
+template bool operator == ( TwoTensorSQO<ParticleHole> const &, TwoTensorSQO<ParticleHole> const & );
