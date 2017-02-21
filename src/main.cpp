@@ -159,4 +159,11 @@ cout << "pf3 + 3: " << pf3 + 3 << endl;
 cout << "pf3 + s8: " << pf3 +s8 << endl;
 cout << "pf3 + pf2: " << pf3 +pf2 << endl;
 
+cout << endl;
+cout << "operator *" << endl;
+cout << "pf3 * 3: " << pf3*3 << endl;
+cout << "pf3 * s8: " << pf3*s8 << endl;
+cout << "pf3 * pf2: " << pf3*pf2 << endl;
+
+
 }

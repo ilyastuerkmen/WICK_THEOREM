@@ -23,16 +23,15 @@ PFSTT<Formalism> & operator = ( PFSTT<Formalism> const & );
 
 template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const & , double const & );
 template<class Formalism> PFSTT<Formalism> operator + ( double const & , PFSTT<Formalism> const & );
-
 template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const & , STR<TwoTensorSQO<Formalism>> const & );
 template<class Formalism> PFSTT<Formalism> operator + ( STR<TwoTensorSQO<Formalism>> const & , PFSTT<Formalism> const & );
-
 template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const & , PFSTT<Formalism> const & );
-/*
-template<class Formalism> PFSTT<Formalism> operator * ( double const & );
-template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formalism>> const & )
-template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formalism>> const & )
-*/
+
+template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &, double const & );
+template<class Formalism> PFSTT<Formalism> operator * ( double const & , PFSTT<Formalism> const &);
+template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &, STR<TwoTensorSQO<Formalism>> const & );
+template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formalism>> const &, PFSTT<Formalism> const & );
+template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &, PFSTT<Formalism> const & );
 
 template<class Formalism> ostream & operator << ( ostream &, PFSTT<Formalism> const & );
 

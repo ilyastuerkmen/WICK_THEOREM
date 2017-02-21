@@ -41,6 +41,11 @@ public:
  bool operator () ( STR<TwoTensorSQO<Formalism>> const &, STR<TwoTensorSQO<Formalism>> const &  ) const;
 };
 
+template<class Formalism> class STRSQOCompare {
+public:
+  bool operator () ( STR<SQO<Formalism>> const &, STR<SQO<Formalism>> const & ) const;
+};
+
 template<class T> STR<T>  operator * ( double const &, STR<T> const & );
 template<class T> STR<T>  operator * ( STR<T> const &, double const & );
 template<class T> STR<T>  operator * ( T const &, STR<T> const & );

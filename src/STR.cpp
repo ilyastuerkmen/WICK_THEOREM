@@ -1,6 +1,6 @@
 #include "STR.h"
 
-template<class T> STRBase<T>::STRBase() : list<T>() , _prefactor(1) {};
+template<class T> STRBase<T>::STRBase() : list<T>() , _prefactor(1) {}
 template<class T> STRBase<T>::STRBase( initializer_list<T>il) : list<T>(il), _prefactor(1) {}
 template<class T> STRBase<T>::STRBase( STRBase<T> const & ssqo) : list<T>(ssqo), _prefactor(ssqo._prefactor) {}
 template<class T> bool STRBase<T>::identical( STRBase<T> const & s) {
@@ -56,7 +56,7 @@ template<class T> ostream & operator << ( ostream & o, STR<T>  const & ssqo ){
   return o;
 }
 
-template<class Formalism> STR<SQO<Formalism>>::STR(): STRBase<SQO<Formalism>>() {};
+template<class Formalism> STR<SQO<Formalism>>::STR(): STRBase<SQO<Formalism>>() {}
 template<class Formalism> STR<SQO<Formalism>>::STR( initializer_list<SQO<Formalism>> il) : STRBase<SQO<Formalism>>(il) {}
 template<class Formalism> STR<SQO<Formalism>>::STR( STR<SQO<Formalism>> const & st) : STRBase<SQO<Formalism>>(st) {}
 template<class Formalism> void STR<SQO<Formalism>>::normalproduct() {
@@ -140,8 +140,21 @@ template<class Formalism> bool STR<SQO<Formalism>>::operator == ( STR<SQO<Formal
     return equal;
   }
 }
+template<class Formalism> bool STRSQOCompare<Formalism>::operator() (STR<SQO<Formalism>> const & lstr, STR<SQO<Formalism>> const & rstr) const {
+  if ( lstr.size() < rstr.size() ) { return true; }
+  else if ( rstr.size() < lstr.size() ) { return false; }
+  else {
+    string tmp1("");
+    string tmp2("");
 
-template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR() : STRBase<TwoTensorSQO<Formalism>>() {};
+    for ( typename list<SQO<Formalism>>::const_iterator it=lstr.begin(); it!=lstr.end(); it++ ) { tmp1 += (*it).idx;  }
+    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=rstr.begin(); it!=rstr.end(); it++ ) { tmp2 += (*it).idx;  }
+
+    return tmp1 < tmp2;
+  }
+}
+
+template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR() : STRBase<TwoTensorSQO<Formalism>>() {}
 template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR( initializer_list<TwoTensorSQO<Formalism>> il) : STRBase<TwoTensorSQO<Formalism>>(il) {}
 template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR( STR<TwoTensorSQO<Formalism>> const & st) : STRBase<TwoTensorSQO<Formalism>>(st) {}
 template<class Formalism> bool STR<TwoTensorSQO<Formalism>>::operator == ( STR<TwoTensorSQO<Formalism>> const & s ) {
@@ -214,7 +227,8 @@ template void STR<SQO<Elementary>>::normalproduct();
 template void STR<SQO<ParticleHole>>::normalproduct();
 template bool STR<SQO<Elementary>>::operator == ( STR<SQO<Elementary>> const & );
 template bool STR<SQO<ParticleHole>>::operator == ( STR<SQO<ParticleHole>> const & );
-
+template bool STRSQOCompare<Elementary>::operator () ( STR<SQO<Elementary>> const &, STR<SQO<Elementary>> const & ) const ;
+template bool STRSQOCompare<ParticleHole>::operator () ( STR<SQO<ParticleHole>> const &, STR<SQO<ParticleHole>> const & ) const;
 
 
 template STR<TwoTensorSQO<Elementary>> operator * ( double const &, STR<TwoTensorSQO<Elementary>> const & );
