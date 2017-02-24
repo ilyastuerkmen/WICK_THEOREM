@@ -6,15 +6,15 @@
   using namespace std;
 
 template<class Formalism>
-class LCSSQO : public map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare> {
+class LCSSQO : public map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>> {
 public:
 
 LCSSQO();
 LCSSQO( initializer_list< pair<STR<SQO<Formalism>>, PFSTT<Formalism>> > );
 LCSSQO( LCSSQO<Formalism> const & );
 
-double & operator [] ( STR<SQO<Formalism>> const & ) ;
-LCSSQO<Formalism> & operator = ( PFSTT<Formalism> const & );
+PFSTT<Formalism> & operator [] ( STR<SQO<Formalism>> const & ) ;
+LCSSQO<Formalism> & operator = ( LCSSQO <Formalism> const & );
 
 };
 

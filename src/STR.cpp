@@ -148,7 +148,7 @@ template<class Formalism> bool STRSQOCompare<Formalism>::operator() (STR<SQO<For
     string tmp2("");
 
     for ( typename list<SQO<Formalism>>::const_iterator it=lstr.begin(); it!=lstr.end(); it++ ) { tmp1 += (*it).idx;  }
-    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=rstr.begin(); it!=rstr.end(); it++ ) { tmp2 += (*it).idx;  }
+    for ( typename list<SQO<Formalism>>::const_iterator it=rstr.begin(); it!=rstr.end(); it++ ) { tmp2 += (*it).idx;  }
 
     return tmp1 < tmp2;
   }

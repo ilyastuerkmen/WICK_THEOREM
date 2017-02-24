@@ -1,6 +1,6 @@
 //#include "StringSQO.cpp"
 
-#include "PFSTT.h"
+#include "LCSSQO.h"
 
 #include <iostream>
 #include <string>
@@ -165,5 +165,32 @@ cout << "pf3 * 3: " << pf3*3 << endl;
 cout << "pf3 * s8: " << pf3*s8 << endl;
 cout << "pf3 * pf2: " << pf3*pf2 << endl;
 
+cout << endl;
+cout << "LCSSQO" << endl;
+cout << "ostream" << endl;
+pair<STR<SQO<ParticleHole>>, PFSTT<ParticleHole>> pa1(make_pair(s4, pf3));
+pair<STR<SQO<ParticleHole>>, PFSTT<ParticleHole>> pa2(make_pair(s5, pf2));
+LCSSQO<ParticleHole> lc1({pa1,pa2});
+cout << lc1 << endl;
+cout << "operator +" << endl;
+cout << lc1 + s5 << endl;
+cout << s5+lc1 << endl;
+cout << endl;
+cout << lc1 + lc1 << endl;
+cout << "operator *" << endl;
+cout << lc1*5 << endl;
+cout << 5*lc1 << endl;
+cout << endl;
+cout << lc1*s5 << endl;
+cout << s5*lc1 << endl;
+cout << endl;
+cout << lc1*s8 << endl;
+cout << s8*lc1 << endl;
+cout << endl;
+cout << lc1*pf2 << endl;
+cout << pf2*lc1 << endl;
+cout << endl;
+cout << lc1*lc1 << endl;
+cout << endl;
 
 }

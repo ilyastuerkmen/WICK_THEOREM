@@ -86,11 +86,17 @@ template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const &
 template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const & pf, double const & d){
   PFSTT<Formalism> tmp(pf);
   tmp.realnumber *= d;
+  for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
+    (*it).second *= d;
+  }
   return tmp;
 }
 template<class Formalism> PFSTT<Formalism> operator * ( double const & d, PFSTT<Formalism> const & pf) {
   PFSTT<Formalism> tmp(pf);
   tmp.realnumber *= d;
+  for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
+    (*it).second *= d;
+  }
   return tmp;
 }
 template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const & pf, STR<TwoTensorSQO<Formalism>> const & str){
@@ -125,11 +131,11 @@ template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &
 
 template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> const & pf ) {
   for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++ ) {
-    if ( it == pf.begin() ) { o << "( " << (*it).second << "*" << (*it).first; }
-    else { o << " + " << (*it).second << "*" << (*it).first; }
+    if ( it == pf.begin() ) { o << "(" << (*it).second << "*" << (*it).first; }
+    else { o << "+" << (*it).second << "*" << (*it).first; }
   }
-  if ( pf.realnumber != 0 ) { o << " + " << pf.realnumber ; }
-  o << " )";
+  if ( pf.realnumber != 0 ) { o << "+" << pf.realnumber ; }
+  o << ")";
   return o;
 }
 
