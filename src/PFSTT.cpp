@@ -33,7 +33,8 @@ template<class Formalism> double & PFSTT<Formalism>::operator [] ( STR<TwoTensor
   for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::iterator it=(*this).begin(); it!=(*this).end(); it++  ) {
     if ( (*it).first == str ) { return (*it).second;}
   }
-  throw;
+  (*this).insert(make_pair(str, 0));
+  return (*(*this).find(str)).second;
 }
 
 template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const & pf, double const & d ) {
@@ -119,13 +120,17 @@ template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &
   PFSTT<Formalism> tmp;
   tmp.realnumber = lpf.realnumber * rpf.realnumber;
   for (typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it1=lpf.begin(); it1!=lpf.end(); it1++  ) {
-    tmp.insert(make_pair( (*it1).first, ((*it1).second * rpf.realnumber) ));
+    if(tmp.find((*it1).first) == tmp.end() ) {  tmp[(*it1).first] = ((*it1).second * rpf.realnumber);}
+    else { tmp[(*it1).first] += ((*it1).second * rpf.realnumber); }
     for (typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it2=rpf.begin(); it2!=rpf.end(); it2++  ) {
-      if ( it1 == lpf.begin() ) { tmp.insert(make_pair( (*it2).first, ((*it2).second * lpf.realnumber) )); }
-      tmp.insert(make_pair( ((*it1).first * (*it2).first), ((*it1).second * (*it2).second) )) ;
+      if ( it1 == lpf.begin() ) {
+        if(tmp.find((*it2).first) == tmp.end() ) {  tmp[(*it2).first] = ((*it2).second * lpf.realnumber);}
+        else { tmp[(*it2).first] += ((*it2).second * lpf.realnumber); }
+      }
+      if ( tmp.find((*it1).first * (*it2).first) == tmp.end() ) { tmp[((*it1).first * (*it2).first)] = ((*it1).second * (*it2).second); }
+      else {   tmp[((*it1).first * (*it2).first)] += ((*it1).second * (*it2).second); }
     }
   }
-
   return tmp;
 }
 

@@ -1,32 +1,32 @@
-Normalproduct test: 
+Normalproduct test:
 Before:
 1a_{a}^{\dagger}a_{i}a_{b}a_{a}^{\dagger}a_{j}^{\dagger}
-After: 
+After:
 1a_{a}^{\dagger}a_{a}^{\dagger}a_{j}^{\dagger}a_{i}a_{b}
 *********************
 
 
-Random String 4 : 
+Random String 4 :
 1a_{1}a_{2}a_{3}a_{4}^{\dagger}a_{5}^{\dagger}a_{6}^{\dagger}a_{7}^{\dagger}a_{8}^{\dagger}a_{9}
 -1a_{4}^{\dagger}a_{5}^{\dagger}a_{6}^{\dagger}a_{7}^{\dagger}a_{8}^{\dagger}a_{1}a_{2}a_{3}a_{9}
 
-Random String 5 : 
+Random String 5 :
 1a_{1}a_{2}^{\dagger}a_{3}a_{4}^{\dagger}a_{5}^{\dagger}a_{6}a_{7}a_{8}a_{9}
 -1a_{2}^{\dagger}a_{4}^{\dagger}a_{5}^{\dagger}a_{1}a_{3}a_{6}a_{7}a_{8}a_{9}
 
-Random String 6 : 
+Random String 6 :
 1a_{1}^{\dagger}a_{2}^{\dagger}a_{3}a_{4}a_{5}a_{6}a_{7}^{\dagger}a_{8}a_{9}
 1a_{1}^{\dagger}a_{2}^{\dagger}a_{7}^{\dagger}a_{3}a_{4}a_{5}a_{6}a_{8}a_{9}
 
-Random String 7 : 
+Random String 7 :
 1a_{1}^{\dagger}a_{2}^{\dagger}a_{3}a_{4}a_{5}^{\dagger}a_{6}^{\dagger}a_{7}a_{8}^{\dagger}a_{9}
 -1a_{1}^{\dagger}a_{2}^{\dagger}a_{5}^{\dagger}a_{6}^{\dagger}a_{8}^{\dagger}a_{3}a_{4}a_{7}a_{9}
 
-Random String 8 : 
+Random String 8 :
 1a_{1}a_{2}a_{3}a_{4}a_{5}a_{6}^{\dagger}a_{7}a_{8}^{\dagger}a_{9}
 -1a_{6}^{\dagger}a_{8}^{\dagger}a_{1}a_{2}a_{3}a_{4}a_{5}a_{7}a_{9}
 
-Random String 9 : 
+Random String 9 :
 1a_{1}a_{2}^{\dagger}a_{3}a_{4}^{\dagger}a_{5}a_{6}a_{7}a_{8}^{\dagger}a_{9}^{\dagger}
 -1a_{2}^{\dagger}a_{4}^{\dagger}a_{8}^{\dagger}a_{9}^{\dagger}a_{1}a_{3}a_{5}a_{6}a_{7}
 
@@ -74,7 +74,7 @@ s4==s5
 ttsqo1:  \gamma_{ij}
 ttsqo3:  \delta_{ij}
 STR OUTPUT TWOTENS: 1\gamma_{ij}\gamma_{ji}\gamma_{ji}\gamma_{ij}
-PFSTT: 
+PFSTT:
 pf1: (2*1\gamma_{ij}\gamma_{ji})
 pf2: (2*1\gamma_{ij}\gamma_{ji}+3)
 pf3: (4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)
@@ -87,28 +87,16 @@ pf3 + pf2: (6*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\g
 operator *
 pf3 * 3: (12*1\gamma_{ij}\gamma_{ji}+3*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+3*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+21)
 pf3 * s8: (4*1\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{aj}\gamma_{ij}\gamma_{ji})
-pf3 * pf2: (12*1\gamma_{ij}\gamma_{ji}+3*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+3*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+8*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{ij}\gamma_{ji}+21)
+pf3 * pf2: (26*1\gamma_{ij}\gamma_{ji}+3*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+3*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+8*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{ij}\gamma_{ji}+21)
 
 LCSSQO
 ostream
-(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}+3)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
+1a_{j}a_{i}^{\dagger}a_{a}a_{b}
+1\gamma_{aj}\gamma_{ij}\gamma_{ji}
+(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+ (2*1\gamma_{ij}\gamma_{ji}+3)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
 operator +
-(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}+4)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}+4)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
+(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}
++ (2*1\gamma_{ij}\gamma_{ji}+3)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
 
-(8*1\gamma_{ij}\gamma_{ji}+2*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+14)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(4*1\gamma_{ij}\gamma_{ji}+6)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-operator *
-(20*1\gamma_{ij}\gamma_{ji}+5*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+5*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+35)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(10*1\gamma_{ij}\gamma_{ji}+15)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-(20*1\gamma_{ij}\gamma_{ji}+5*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+5*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+35)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(10*1\gamma_{ij}\gamma_{ji}+15)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-
-(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}a_{j}a_{i}^{\dagger}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}+3)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}a_{j}a_{i}^{\dagger}a_{a}a_{b}
-(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}+3)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}+(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}a_{j}a_{i}^{\dagger}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}+3)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}a_{j}a_{i}^{\dagger}a_{a}a_{b}
-
-(4*1\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{aj}\gamma_{ij}\gamma_{ji})*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji})*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-(4*1\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{aj}\gamma_{ij}\gamma_{ji})*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(2*1\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji})*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-
-(12*1\gamma_{ij}\gamma_{ji}+3*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+3*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+8*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{ij}\gamma_{ji}+21)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(6*1\gamma_{ij}\gamma_{ji}+4*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+9)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-(12*1\gamma_{ij}\gamma_{ji}+3*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+3*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+8*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{ij}\gamma_{ji}+21)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}+(6*1\gamma_{ij}\gamma_{ji}+4*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+9)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}
-
-(28*1\gamma_{ij}\gamma_{ji}+7*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+7*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+16*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+4*1\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+4*1\gamma_{ij}\gamma_{ji}\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+49)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}a_{i}^{\dagger}a_{j}a_{a}a_{b}+(12*1\gamma_{ij}\gamma_{ji}+3*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+3*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+8*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{aj}\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}\gamma_{ij}\gamma_{ji}+21)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}a_{j}a_{i}^{\dagger}a_{a}a_{b}+(14*1\gamma_{ij}\gamma_{ji}+3*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+3*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+8*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ij}\gamma_{ji}\gamma_{aj}\gamma_{ij}\gamma_{ji}+2*1\gamma_{ij}\gamma_{ji}\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+21)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}a_{i}^{\dagger}a_{j}a_{a}a_{b}+(6*1\gamma_{ij}\gamma_{ji}+4*1\gamma_{ij}\gamma_{ji}\gamma_{ij}\gamma_{ji}+9)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}a_{j}a_{i}^{\dagger}a_{a}a_{b}
-
+(4*1\gamma_{ij}\gamma_{ji}+1*1\gamma_{aj}\gamma_{ij}\gamma_{ji}+1*1\gamma_{ji}\gamma_{ba}\gamma_{ij}\gamma_{aj}+7)*1a_{i}^{\dagger}a_{j}a_{a}a_{b}
++ (2*1\gamma_{ij}\gamma_{ji}+3)*1a_{j}a_{i}^{\dagger}a_{a}a_{b}

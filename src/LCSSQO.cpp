@@ -119,7 +119,7 @@ template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const
 template<class Formalism> LCSSQO<Formalism> operator * ( STR<SQO<Formalism>> const & strsqo, LCSSQO<Formalism> const & lc ){
   LCSSQO<Formalism> tmp(lc);
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++  ) {
-    tmp.insert(make_pair((*it).first * strsqo , (*it).second * strsqo._prefactor));
+    tmp[strsqo *(*it).first] =  ((*it).second * strsqo._prefactor);
   }
   return tmp;
 }
@@ -134,7 +134,7 @@ template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const
 }
 template<class Formalism> ostream & operator << ( ostream & o, LCSSQO<Formalism> const & lc){
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
-    if ( it != lc.begin() ) { o << "+"; }
+    if ( it != lc.begin() ) { o << "+ "; }
     o << (*it).second << "*" << (*it).first;
   }
   return o;
