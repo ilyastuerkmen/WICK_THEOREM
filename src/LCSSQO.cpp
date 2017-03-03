@@ -139,7 +139,7 @@ template<class Formalism> LCSSQO<Formalism> wickexpansion(STR<SQO<Formalism>> co
  STR<SQO<Formalism>> tmpstr(str);
  tmpstr.normalproduct();
  LCSSQO<Formalism> tmplc({tmpstr});
- for ( typename list<SQO<Formalism>>::const_iterator it1 = (str.begin(); it1 !=str.end(); it1++) {
+ for ( typename list<SQO<Formalism>>::const_iterator it1 =str.begin(); it1 !=str.end(); it1++) {
    STR<SQO<Formalism>> tmp(str);
 
  }
