@@ -17,7 +17,9 @@ template<class Formalism> PFSTT<Formalism> & LCSSQO<Formalism>::operator[] (STR<
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::iterator it=(*this).begin(); it!=(*this).end(); it++ ) {
     if ( (*it).first == str ) { return (*it).second;}
   }
-  throw;
+  PFSTT<Formalism> pf;
+  (*this).insert(make_pair(str, pf ));
+  return (*(*this).find(str)).second;
 }
 template<class Formalism> LCSSQO<Formalism> & LCSSQO<Formalism>::operator= ( LCSSQO<Formalism> const & lc ){
   (*this).clear();
@@ -57,13 +59,13 @@ template<class Formalism> LCSSQO<Formalism> operator + ( STR<SQO<Formalism>>  co
   return tmp;
 }
 template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & llc, LCSSQO<Formalism> const & rlc){
-  bool tmpbool(false);
   LCSSQO<Formalism> tmp(llc);
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it1=rlc.begin(); it1!=rlc.end(); it1++ ) {
+    bool tmpbool(false);
     for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it2=llc.begin(); it2!=llc.end(); it2++ ) {
       if ( (*it1).first == (*it2).first ) { (*(tmp.find((*it1).first))).second = (*it2).second + (*it1).second ; tmpbool = true;  break;}
     }
-    if (tmpbool == true) { tmp.insert( make_pair((*it1).first, (*it1).second)); }
+    if (tmpbool == false) { tmp.insert( make_pair((*it1).first, (*it1).second)); }
   }
   return tmp;
 }
@@ -132,6 +134,19 @@ template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const
   }
   return tmp;
 }
+
+template<class Formalism> LCSSQO<Formalism> wickexpansion(STR<SQO<Formalism>> const & str) {
+ STR<SQO<Formalism>> tmpstr(str);
+ tmpstr.normalproduct();
+ LCSSQO<Formalism> tmplc({tmpstr});
+ for ( typename list<SQO<Formalism>>::const_iterator it1 = (str.begin(); it1 !=str.end(); it1++) {
+   STR<SQO<Formalism>> tmp(str);
+
+ }
+
+ return tmplc;
+}
+
 template<class Formalism> ostream & operator << ( ostream & o, LCSSQO<Formalism> const & lc){
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
     if ( it != lc.begin() ) { o << "+ "; }
