@@ -102,17 +102,19 @@ template<class Formalism> PFSTT<Formalism> operator * ( double const & d, PFSTT<
 }
 template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const & pf, STR<TwoTensorSQO<Formalism>> const & str){
   PFSTT<Formalism> tmp;
-  double invpre = 1/(str._prefactor);
+  STR<TwoTensorSQO<Formalism>> tmpstr(str);
+  tmpstr._prefactor = 1;
   for (typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++  ) {
-    tmp.insert(make_pair( ((*it).first * (str*invpre)), ((*it).second * str._prefactor) )) ;
+    tmp[(*it).first * tmpstr] = (*it).second * str._prefactor;
   }
   return tmp;
 }
 template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formalism>> const & str, PFSTT<Formalism> const & pf){
   PFSTT<Formalism> tmp;
-  double invpre = 1/(str._prefactor);
+  STR<TwoTensorSQO<Formalism>> tmpstr(str);
+  tmpstr._prefactor = 1;
   for (typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++  ) {
-    tmp.insert(make_pair( ((*it).first * (str*invpre)), ((*it).second * str._prefactor) )) ;
+    tmp[ tmpstr * (*it).first ] = (*it).second * str._prefactor;
   }
   return tmp;
 }

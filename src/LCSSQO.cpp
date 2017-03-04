@@ -1,6 +1,6 @@
 #include "LCSSQO.h"
 
-template<class Formalism> LCSSQO<Formalism>::LCSSQO() : map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>() {}
+template<class Formalism> LCSSQO<Formalism>::LCSSQO() : map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>(), fullcontraction() {}
 template<class Formalism> LCSSQO<Formalism>::LCSSQO(initializer_list< pair<STR<SQO<Formalism>>, PFSTT<Formalism>> > il)
   : map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>() {
     for (typename initializer_list<pair<STR<SQO<Formalism>>, PFSTT<Formalism>>>::const_iterator it=il.begin(); it!=il.end(); it++ ) {
@@ -9,6 +9,7 @@ template<class Formalism> LCSSQO<Formalism>::LCSSQO(initializer_list< pair<STR<S
   }
 template<class Formalism> LCSSQO<Formalism>::LCSSQO(LCSSQO<Formalism> const & lc)
   : map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>() {
+    (*this).fullcontraction = lc.fullcontraction;
     for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
       (*this).insert(make_pair((*it).first, (*it).second));
     }
@@ -23,10 +24,19 @@ template<class Formalism> PFSTT<Formalism> & LCSSQO<Formalism>::operator[] (STR<
 }
 template<class Formalism> LCSSQO<Formalism> & LCSSQO<Formalism>::operator= ( LCSSQO<Formalism> const & lc ){
   (*this).clear();
+  (*this).fullcontraction = lc.fullcontraction;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
     (*this).insert(make_pair((*it).first, (*it).second));
   }
   return *this;
+}
+template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & lc , PFSTT<Formalism>  const & pf) {
+  LCSSQO<Formalism> tmp(lc);
+  lc.fullcontraction = lc.fullcontraction + pf;
+}
+template<class Formalism> LCSSQO<Formalism> operator + ( PFSTT<Formalism>  const & pf, LCSSQO<Formalism> const & lc) {
+  LCSSQO<Formalism> tmp(lc);
+  lc.fullcontraction = lc.fullcontraction + pf;
 }
 template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & lc , STR<SQO<Formalism>>  const & str ){
   LCSSQO<Formalism> tmp(lc);
@@ -60,6 +70,7 @@ template<class Formalism> LCSSQO<Formalism> operator + ( STR<SQO<Formalism>>  co
 }
 template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & llc, LCSSQO<Formalism> const & rlc){
   LCSSQO<Formalism> tmp(llc);
+  tmp.fullcontraction = tmp.fullcontraction + rlc.fullcontraction;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it1=rlc.begin(); it1!=rlc.end(); it1++ ) {
     bool tmpbool(false);
     for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it2=llc.begin(); it2!=llc.end(); it2++ ) {
@@ -71,6 +82,7 @@ template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const & lc, double  const & d){
   LCSSQO<Formalism> tmp(lc);
+  tmp.fullcontraction =  tmp.fullcontraction * d;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
    (*it).second =  (*it).second *  d;
   }
@@ -78,6 +90,7 @@ template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( double  const & d, LCSSQO<Formalism> const & lc){
   LCSSQO<Formalism> tmp(lc);
+  tmp.fullcontraction =  tmp.fullcontraction * d;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
    (*it).second =  (*it).second *  d;
   }
@@ -85,6 +98,7 @@ template<class Formalism> LCSSQO<Formalism> operator * ( double  const & d, LCSS
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const & lc, PFSTT<Formalism>  const & pf){
   LCSSQO<Formalism> tmp(lc);
+  tmp.fullcontraction = tmp.fullcontraction * pf;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
    (*it).second = (*it).second * pf;
   }
@@ -92,6 +106,7 @@ template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( PFSTT<Formalism>  const & pf, LCSSQO<Formalism> const & lc){
   LCSSQO<Formalism> tmp(lc);
+  tmp.fullcontraction = tmp.fullcontraction * pf;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
    (*it).second = (*it).second * pf;
   }
@@ -99,13 +114,15 @@ template<class Formalism> LCSSQO<Formalism> operator * ( PFSTT<Formalism>  const
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const & lc, STR<TwoTensorSQO<Formalism>>  const & strtt ){
   LCSSQO<Formalism> tmp(lc);
+  tmp.fullcontraction = tmp.fullcontraction * strtt;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
    (*it).second = (*it).second * strtt;
   }
   return tmp;
 }
-template<class Formalism> LCSSQO<Formalism> operator * ( STR<TwoTensorSQO<Formalism>>  const & strtt, LCSSQO<Formalism> const &lc){
+template<class Formalism> LCSSQO<Formalism> operator * ( STR<TwoTensorSQO<Formalism>>  const & strtt, LCSSQO<Formalism> const & lc){
   LCSSQO<Formalism> tmp(lc);
+  tmp.fullcontraction = tmp.fullcontraction * strtt;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
    (*it).second = (*it).second * strtt;
   }
@@ -113,25 +130,45 @@ template<class Formalism> LCSSQO<Formalism> operator * ( STR<TwoTensorSQO<Formal
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const & lc , STR<SQO<Formalism>> const & strsqo){
   LCSSQO<Formalism> tmp;
+  double tmppre = strsqo._prefactor;
+  STR<SQO<Formalism>> tmpstr(strsqo);
+  tmpstr._prefactor = 1;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++  ) {
-    tmp.insert(make_pair((*it).first * strsqo , (*it).second * strsqo._prefactor));
+    tmp.insert(make_pair( (*it).first * tmpstr , (*it).second * tmppre )) ;
   }
+  tmp[tmpstr] =  tmp.fullcontraction * tmppre;
+  PFSTT<Formalism> tmp2;
+  tmp.fullcontraction = tmp2;
   return tmp;
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( STR<SQO<Formalism>> const & strsqo, LCSSQO<Formalism> const & lc ){
-  LCSSQO<Formalism> tmp(lc);
+  LCSSQO<Formalism> tmp;
+  double tmppre = strsqo._prefactor;
+  STR<SQO<Formalism>> tmpstr(strsqo);
+  tmpstr._prefactor = 1;
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++  ) {
-    tmp[strsqo *(*it).first] =  ((*it).second * strsqo._prefactor);
+    tmp.insert(make_pair( tmpstr * (*it).first ,  (*it).second * tmppre )) ;
   }
+  tmp[tmpstr] =  tmp.fullcontraction * tmppre;
+  PFSTT<Formalism> tmp2;
+  tmp.fullcontraction = tmp2;
   return tmp;
 }
 template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const & llc, LCSSQO<Formalism> const & rlc){
   LCSSQO<Formalism> tmp;
-  for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it1=rlc.begin(); it1!=rlc.end(); it1++ ) {
-    for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it2=llc.begin(); it2!=llc.end(); it2++ ) {
-      tmp.insert(make_pair( (*it1).first * (*it2).first , (*it1).second * (*it2).second ));
+  for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it1=llc.begin(); it1!=rlc.end(); it1++ ) {
+    if(tmp.find((*it1).first) == tmp.end() ) { tmp[(*it1).first] = (*it1).second * rlc.fullcontraction; }
+    else { tmp[(*it1).first] = tmp[(*it1).first] +  ((*it1).second * rlc.fullcontraction);  }
+    for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it2=rlc.begin(); it2!=llc.end(); it2++ ) {
+      if ( it1 == llc.begin() ) {
+        if(tmp.find((*it2).first) == tmp.end() ) { tmp[(*it2).first] = llc.fullcontraction * (*it2).second; }
+        else { tmp[(*it2).first] = tmp[(*it2).first] + (llc.fullcontraction * (*it2).second);  }
+      }
+      if( tmp.find( (*it1).first * (*it2).first) == tmp.end() ) { tmp[(*it1).first * (*it2).first] = (*it1).second * (*it2).second ; }
+      else{ tmp[(*it1).first * (*it2).first] = tmp[(*it1).first * (*it2).first] + ((*it1).second * (*it2).second) ; }
     }
   }
+  tmp.fullcontraction = llc.fullcontraction * rlc.fullcontraction;
   return tmp;
 }
 

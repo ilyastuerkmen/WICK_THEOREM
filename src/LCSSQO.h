@@ -13,11 +13,14 @@ LCSSQO();
 LCSSQO( initializer_list< pair<STR<SQO<Formalism>>, PFSTT<Formalism>> > );
 LCSSQO( LCSSQO<Formalism> const & );
 
+PFSTT<Formalism> fullcontraction;
+
 PFSTT<Formalism> & operator [] ( STR<SQO<Formalism>> const & ) ;
 LCSSQO<Formalism> & operator = ( LCSSQO <Formalism> const & );
 
 };
-
+template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & , PFSTT<Formalism>  const & );
+template<class Formalism> LCSSQO<Formalism> operator + ( PFSTT<Formalism>  const &, LCSSQO<Formalism> const & );
 template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & , STR<SQO<Formalism>>  const & );
 template<class Formalism> LCSSQO<Formalism> operator + ( STR<SQO<Formalism>>  const & , LCSSQO<Formalism> const & );
 template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & , LCSSQO<Formalism> const & );
