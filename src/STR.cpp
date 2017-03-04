@@ -78,7 +78,7 @@ template<class Formalism> void STR<SQO<Formalism>>::normalproduct() {
   };
 
   (*this).list<SQO<Formalism>>::clear() ;
-  (*this)._prefactor = ( sumtranspositions % 2  == 0 ) ? 1 : -1 ;
+  (*this)._prefactor *= ( sumtranspositions % 2  == 0 ) ? 1 : -1 ;
 
   for ( typename list<SQO<Formalism>>::const_iterator it = creations.begin(); it != creations.end(); it++ ) { (*this).push_back(*it); }
   for ( typename list<SQO<Formalism>>::const_iterator it = annihliations.begin(); it != annihliations.end(); it++ ) { (*this).push_back(*it); }
