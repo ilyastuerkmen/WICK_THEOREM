@@ -137,13 +137,24 @@ template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &
 }
 
 template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> const & pf ) {
-  for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++ ) {
-    if ( it == pf.begin() ) { o << "(" << (*it).second << "*" << (*it).first; }
-    else { o << "+" << (*it).second << "*" << (*it).first; }
+   if ( pf.size() == 0 ) {  if ( pf.realnumber != 1 ) { o << pf.realnumber;} }
+   else {
+    for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++ ) {
+      if ( it == pf.begin()) {
+        if ( pf.size() !=1  ) { o << "(" ; }
+        if ( (*it).second != 1 ) { o << (*it).second << " \\cdot " ; }
+        o << (*it).first;
+      }
+      else {
+        o << "+" ;
+        if ( (*it).second != 1 ) { o << (*it).second << " \\cdot " ; }
+        o << (*it).first;
+      }
+    }
+    if ( pf.realnumber != 0  ) { o << " \\cdot " << pf.realnumber ;  }
+    if ( pf.size() !=1  ) {o << ")";}
   }
-  if ( pf.realnumber != 0 ) { o << "+" << pf.realnumber ; }
-  o << ")";
-  return o;
+    return o;
 }
 
 

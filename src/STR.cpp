@@ -49,7 +49,8 @@ template<class T> STR<T> operator * ( STR<T>  const & lssqo, STR<T>  const & rss
   return tmp;
 }
 template<class T> ostream & operator << ( ostream & o, STR<T>  const & ssqo ){
-  o << ssqo._prefactor ;
+
+  if (ssqo._prefactor != 1 ) { o << ssqo._prefactor; } 
   for ( typename STR<T>::const_iterator it = ssqo.begin(); it != ssqo.end(); it++ )
     o << *it ;
 

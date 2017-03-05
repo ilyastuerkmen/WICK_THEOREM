@@ -46,7 +46,7 @@ template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const
   }
   if ( tmpbool == false ) {
     PFSTT<Formalism> pf;
-    pf.realnumber *= str._prefactor;
+    pf.realnumber = str._prefactor;
     STR<SQO<Formalism>> tmpstr(str);
     tmpstr._prefactor = 1;
     tmp.insert( make_pair( tmpstr, pf ) );
@@ -178,29 +178,32 @@ template<class Formalism> LCSSQO<Formalism> wickexpansion(STR<SQO<Formalism>> co
  LCSSQO<Formalism> tmpresult;
  tmpresult = tmpresult + tmpstr;
  LCSSQO<Formalism> previouscontractions;
- int count = 1;
- for ( typename list<SQO<Formalism>>::const_iterator it1 =str.begin(); it1 !=str.end(); it1++) {
-   for ( typename list<SQO<Formalism>>::const_iterator it2 =str.begin(); it2 !=str.end(); it2++) {
-       if ( it2 == str.begin() ) { for ( int i=0; i<count; i++) { ++it2;} ; ++count; }
-       STR<SQO<Formalism>> tmp(str);
-       if ( (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation ) {
-         typename list<SQO<Formalism>>::iterator it3 = find(tmp.begin(), tmp.end(), *it1);
-         it3 = tmp.list<SQO<Formalism>>::erase(it3);
-         typename list<SQO<Formalism>>::iterator it4 = find(tmp.begin(), tmp.end(), *it2);
-         it4 = tmp.list<SQO<Formalism>>::erase(it4);
-         previouscontractions = previouscontractions + tmp;
-         PFSTT<Formalism> tmppf;
-         TwoTensorSQO<Formalism> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it1).idxtype));
-         tmppf = tmppf + tmptt;
-         if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
-         else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
-       }
-    }
-  }
 
-if ( previouscontractions.size() != 0 ) {
+ for ( int firstpos=0; firstpos < str.size(); firstpos++ ) {
+   for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
+    STR<SQO<Formalism>> tmp(str);
+    typename list<SQO<Formalism>>::iterator it1 = tmp.begin();
+    typename list<SQO<Formalism>>::iterator it2 = tmp.begin();
+    for ( int i=0; i<firstpos; i++ ) { ++it1; }
+    for ( int j=0; j<secondpos; j++ ) { ++it2; }
+    if ( (*it1).a == SQO_Type::creation && (*it2).a == SQO_Type::annihliation ) {
+      TwoTensorSQO<Formalism> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
+      STR<TwoTensorSQO<Formalism>> tmpstrtt({tmptt});
+      PFSTT<Formalism> tmppf({tmpstrtt});
+      tmp.list<SQO<Formalism>>::erase(it1);
+      tmp.list<SQO<Formalism>>::erase(it2);
+      previouscontractions = previouscontractions + tmp;
+      tmp.normalproduct();
+      if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
+      else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
+     }
+   }
+ }
+
+if ( previouscontractions.size() > 1 ) {
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
-    tmpresult = tmpresult + wickexpansion((*it1).first);
+    LCSSQO<Formalism> tmpwick( wickexpansion((*it1).first) );
+    if ( tmpwick.size() > 1 ) {  tmpresult = tmpresult + tmpwick;}
   }
 }
  return tmpresult;
@@ -209,7 +212,9 @@ if ( previouscontractions.size() != 0 ) {
 template<class Formalism> ostream & operator << ( ostream & o, LCSSQO<Formalism> const & lc){
   for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
     if ( it != lc.begin() ) { o << "+ "; }
-    o << (*it).second << "*" << (*it).first;
+    if ((*it).second.size() == 0 && (*it).second.realnumber == 1) {}
+    else { o << (*it).second << " \\cdot " ; }
+    o << (*it).first;
   }
   return o;
 }

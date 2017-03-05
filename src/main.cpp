@@ -50,8 +50,19 @@ pair<STR<SQO<ParticleHole>>, PFSTT<ParticleHole>> pa2(make_pair(s5, pf2));
 
 LCSSQO<ParticleHole> lc1({pa1,pa2});
 
-LCSSQO<ParticleHole> lc2 = wickexpansion(s1);
-cout << lc2 << endl;
+cout << "HALLO: " << s2 << endl;
+//LCSSQO<ParticleHole> lc2 = wickexpansion(s1);
+LCSSQO<ParticleHole> lc3 = wickexpansion(s2);
+LCSSQO<ParticleHole> lc4 = wickexpansion(s4);
+LCSSQO<ParticleHole> lc5 = wickexpansion(s5);
+//cout << lc2 << endl;
+
+cout << "lc3:  " << endl;
+cout << lc3 << endl;
+cout << "lc4:  " << endl;
+cout << lc4 << endl;
+cout << "lc5:  " << endl;
+cout << lc5 << endl;
 
 /*
 cout << "Normalproduct test: " << endl;
