@@ -18,12 +18,29 @@ SQO<ParticleHole> b2(SQO_Idx_Type::hole, SQO_Type::annihliation, "j");
 SQO<ParticleHole> c2(SQO_Idx_Type::particle, SQO_Type::annihliation, "a");
 SQO<ParticleHole> d2(SQO_Idx_Type::particle, SQO_Type::annihliation, "b");
 
+//pqrs
+SQO<Elementary>  p(SQO_Idx_Type::particle, SQO_Type::creation, "p");
+SQO<Elementary> q(SQO_Idx_Type::particle, SQO_Type::creation, "q");
+SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "r");
+SQO<Elementary> s(SQO_Idx_Type::particle, SQO_Type::annihliation, "s");
+
+SQO<Elementary>  p2tmp(SQO_Idx_Type::particle, SQO_Type::creation, "p");
+SQO<Elementary> r2tmp(SQO_Idx_Type::particle, SQO_Type::creation, "r");
+SQO<Elementary> q2tmp(SQO_Idx_Type::particle, SQO_Type::annihliation, "q");
+SQO<Elementary> s2tmp(SQO_Idx_Type::particle, SQO_Type::annihliation, "s");
+
+
+STR<SQO<Elementary>> twobodyop({p,q,s,r});
+STR<SQO<Elementary>> twobodyop2({q2tmp,s2tmp,p2tmp,r2tmp});
+STR<SQO<Elementary>> twobodyop3({q2tmp,p,r2tmp,s2tmp});
+
+
+
 STR<SQO<ParticleHole>> s1({a,b});
 STR<SQO<ParticleHole>> s2({a,b,c,a,d});
 STR<SQO<ParticleHole>> s3({a,c,b,a,d});
 STR<SQO<ParticleHole>> s4({a2,b2,c2,d2});
 STR<SQO<ParticleHole>> s5({b2,a2,c2,d2});
-
 
 pair<string, SQO_Idx_Type> p1( a2.idx , a2.idxtype );
 pair<string, SQO_Idx_Type> p2( b2.idx , b2.idxtype );
@@ -50,19 +67,50 @@ pair<STR<SQO<ParticleHole>>, PFSTT<ParticleHole>> pa2(make_pair(s5, pf2));
 
 LCSSQO<ParticleHole> lc1({pa1,pa2});
 
-cout << "HALLO: " << s2 << endl;
+//cout << "HALLO: " << s2 << endl;
 //LCSSQO<ParticleHole> lc2 = wickexpansion(s1);
+/*
 LCSSQO<ParticleHole> lc3 = wickexpansion(s2);
 LCSSQO<ParticleHole> lc4 = wickexpansion(s4);
 LCSSQO<ParticleHole> lc5 = wickexpansion(s5);
 //cout << lc2 << endl;
 
-cout << "lc3:  " << endl;
-cout << lc3 << endl;
-cout << "lc4:  " << endl;
-cout << lc4 << endl;
-cout << "lc5:  " << endl;
-cout << lc5 << endl;
+cout << "$$" << s2 << "$$" <<  endl;
+cout << "$$" << lc3 << "$$" <<  endl;
+
+cout << "$$" << s4 << "$$" <<  endl;
+cout << "$$" << lc3 << "$$" <<  endl;
+
+cout << "$$" << s5 << "$$" <<  endl;
+cout << "$$" << lc3 << "$$" <<  endl;
+*/
+STR<SQO<ParticleHole>> s21 = s2 * c2;
+STR<SQO<ParticleHole>> s22 = s21*b;
+
+
+//LCSSQO<Elementary> lc6 = wickexpansion(s21);
+//cout << "$$" << s21 << "$$" <<  endl;
+//cout << "$$" << lc6 << "$$" <<  endl;
+//LCSSQO<Elementary> lc7 = wickexpansion(s22);
+//cout << "$$" << s22 << "$$" <<  endl;
+//cout << "$$" << lc7 << "$$" <<  endl;
+/*LCSSQO<Elementary> lc8 = wickexpansion(twobodyop, Ref_State::vacuum);
+cout << "$$" << twobodyop << "$$" <<  endl;
+cout << "$$" << ToSTRParticleHole(twobodyop) << "$$" << endl;
+cout << lc8 << endl;
+
+
+LCSSQO<Elementary> lc9 = wickexpansion(twobodyop, Ref_State::fermi);
+cout << "$$" << twobodyop << "$$" <<  endl;
+cout << lc9 << endl;
+
+*/
+cout << "$$" << twobodyop2 << "$$" << endl;
+cout << wickexpansion(twobodyop2, Ref_State::vacuum) << endl;
+
+cout << "$$" << twobodyop3 << "$$" << endl;
+cout << wickexpansion(twobodyop3, Ref_State::vacuum) << endl;
+
 
 /*
 cout << "Normalproduct test: " << endl;

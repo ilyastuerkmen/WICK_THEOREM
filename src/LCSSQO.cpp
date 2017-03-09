@@ -172,40 +172,59 @@ template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const
   return tmp;
 }
 
-template<class Formalism> LCSSQO<Formalism> wickexpansion(STR<SQO<Formalism>> const & str) {
- STR<SQO<Formalism>> tmpstr(str);
+LCSSQO<Elementary> wickexpansion(STR<SQO<Elementary>> const & str, Ref_State const & refstate) {
+ STR<SQO<Elementary>> tmpstr(str);
  tmpstr.normalproduct();
- LCSSQO<Formalism> tmpresult;
+ LCSSQO<Elementary> tmpresult;
  tmpresult = tmpresult + tmpstr;
- LCSSQO<Formalism> previouscontractions;
+ LCSSQO<Elementary> previouscontractions;
 
  for ( int firstpos=0; firstpos < str.size(); firstpos++ ) {
    for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
-    STR<SQO<Formalism>> tmp(str);
-    typename list<SQO<Formalism>>::iterator it1 = tmp.begin();
-    typename list<SQO<Formalism>>::iterator it2 = tmp.begin();
+    STR<SQO<Elementary>> tmp(str);
+    typename list<SQO<Elementary>>::iterator it1 = tmp.begin();
+    typename list<SQO<Elementary>>::iterator it2 = tmp.begin();
     for ( int i=0; i<firstpos; i++ ) { ++it1; }
     for ( int j=0; j<secondpos; j++ ) { ++it2; }
-    if ( (*it1).a == SQO_Type::creation && (*it2).a == SQO_Type::annihliation ) {
-      TwoTensorSQO<Formalism> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
-      STR<TwoTensorSQO<Formalism>> tmpstrtt({tmptt});
-      PFSTT<Formalism> tmppf({tmpstrtt});
-      tmp.list<SQO<Formalism>>::erase(it1);
-      tmp.list<SQO<Formalism>>::erase(it2);
-      previouscontractions = previouscontractions + tmp;
-      tmp.normalproduct();
-      if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
-      else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
-     }
-   }
- }
-
-if ( previouscontractions.size() > 1 ) {
-  for ( typename map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
-    LCSSQO<Formalism> tmpwick( wickexpansion((*it1).first) );
-    if ( tmpwick.size() > 1 ) {  tmpresult = tmpresult + tmpwick;}
+    if (
+      (refstate == Ref_State::vacuum && (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation )   ||
+      (refstate == Ref_State::fermi && (*it1).idxtype == SQO_Idx_Type::hole && (*it2).idxtype == SQO_Idx_Type::hole && (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation ) ||
+      (refstate == Ref_State::fermi && (*it1).idxtype == SQO_Idx_Type::particle && (*it2).idxtype == SQO_Idx_Type::particle && (*it1).a == SQO_Type::creation && (*it2).a == SQO_Type::annihliation)
+    )
+    {
+        TwoTensorSQO<Elementary> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
+        STR<TwoTensorSQO<Elementary>> tmpstrtt({tmptt});
+        PFSTT<Elementary> tmppf({tmpstrtt});
+        tmppf = tmppf * tmp._prefactor;
+        tmp._prefactor = 1;
+        cout << tmppf << endl;
+        tmp.list<SQO<Elementary>>::erase(it1);
+        tmp.list<SQO<Elementary>>::erase(it2);
+        if ( tmp.size() == 0 ) {   tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf;  }
+        else {
+        previouscontractions = previouscontractions + tmp;
+        previouscontractions[tmp] = tmppf;
+        if ( refstate == Ref_State::vacuum ) { tmp.normalproduct();}
+        if ( refstate == Ref_State::fermi ) {
+          STR<SQO<ParticleHole>> tmpparticlehole(ToSTRParticleHole(tmp));
+          tmpparticlehole.normalproduct();
+          tmp = ToSTRElementary(tmpparticlehole);
+         }
+         int sumofpos = firstpos + secondpos -1;
+         tmp = tmp * (( sumofpos % 2  == 0 ) ? 1 : -1);
+        if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
+        else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
+      }
+    }
   }
 }
+  //cout << tmpresult << endl;
+  for ( typename map< STR<SQO<Elementary>>, PFSTT<Elementary>, STRSQOCompare<Elementary>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
+    if ( (*it1).first.size() > 1 ) {
+      LCSSQO<Elementary> tmpwick( wickexpansion((*it1).first, refstate));
+      tmpresult = tmpresult + (*it1).second*tmpwick;
+    }
+  }
  return tmpresult;
 }
 
@@ -216,6 +235,7 @@ template<class Formalism> ostream & operator << ( ostream & o, LCSSQO<Formalism>
     else { o << (*it).second << " \\cdot " ; }
     o << (*it).first;
   }
+   o << "+" << lc.fullcontraction;
   return o;
 }
 
@@ -261,6 +281,3 @@ template LCSSQO<ParticleHole> operator * ( LCSSQO<ParticleHole> const &, STR<SQO
 template LCSSQO<ParticleHole> operator * ( STR<SQO<ParticleHole>> const &, LCSSQO<ParticleHole> const & );
 template LCSSQO<ParticleHole> operator * ( LCSSQO<ParticleHole> const &, LCSSQO<ParticleHole> const & );
 template ostream & operator << ( ostream &, LCSSQO<ParticleHole> const & );
-
-template LCSSQO<ParticleHole> wickexpansion(STR<SQO<ParticleHole>> const & );
-template LCSSQO<Elementary> wickexpansion(STR<SQO<Elementary>> const & );

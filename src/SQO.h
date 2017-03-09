@@ -19,7 +19,11 @@ SQO_Idx_Type idxtype;
 
 };
 
+SQO<ParticleHole> ToParticleHole( SQO<Elementary> const &);
+SQO<Elementary> ToElementary( SQO<ParticleHole> const &);
+
 template<class Formalism> bool operator == ( SQO<Formalism> const &, SQO<Formalism> const & );
-template<class Formalism> ostream & operator << ( ostream & , SQO<Formalism> const & );
+ostream & operator << ( ostream & , SQO<Elementary> const & );
+ostream & operator << ( ostream & , SQO<ParticleHole> const & );
 
 #endif

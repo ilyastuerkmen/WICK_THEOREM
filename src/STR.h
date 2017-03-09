@@ -46,6 +46,9 @@ public:
   bool operator () ( STR<SQO<Formalism>> const &, STR<SQO<Formalism>> const & ) const;
 };
 
+STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & );
+STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & );
+
 template<class T> STR<T>  operator * ( double const &, STR<T> const & );
 template<class T> STR<T>  operator * ( STR<T> const &, double const & );
 template<class T> STR<T>  operator * ( T const &, STR<T> const & );

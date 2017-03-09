@@ -50,7 +50,7 @@ template<class T> STR<T> operator * ( STR<T>  const & lssqo, STR<T>  const & rss
 }
 template<class T> ostream & operator << ( ostream & o, STR<T>  const & ssqo ){
 
-  if (ssqo._prefactor != 1 ) { o << ssqo._prefactor; } 
+  if (ssqo._prefactor != 1 ) { o << ssqo._prefactor; }
   for ( typename STR<T>::const_iterator it = ssqo.begin(); it != ssqo.end(); it++ )
     o << *it ;
 
@@ -159,26 +159,28 @@ template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR() : STRBase<TwoTenso
 template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR( initializer_list<TwoTensorSQO<Formalism>> il) : STRBase<TwoTensorSQO<Formalism>>(il) {}
 template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR( STR<TwoTensorSQO<Formalism>> const & st) : STRBase<TwoTensorSQO<Formalism>>(st) {}
 template<class Formalism> bool STR<TwoTensorSQO<Formalism>>::operator == ( STR<TwoTensorSQO<Formalism>> const & s ) {
+  if ( (*this).size() != s.size() ) { return false; }
+  else {
     STR<TwoTensorSQO<Formalism>> tmp1((*this));
     STR<TwoTensorSQO<Formalism>> tmp2(s);
     int count = 0;
 
     typename list<TwoTensorSQO<Formalism>>::iterator it1;
-
+      it1 = tmp1.begin();
     while ( it1!=tmp1.end() ) {
       count = 0;
-      it1 = tmp1.begin();
       for ( typename list<TwoTensorSQO<Formalism>>::iterator it2=tmp2.begin(); it2!=tmp2.end(); it2++ ) {
-	if ( (*it1) == (*it2) ) {
-	  tmp1.list<TwoTensorSQO<Formalism>>::erase(it1);
-	  tmp2.list<TwoTensorSQO<Formalism>>::erase(it2);
-	  ++count;
-	  break;
-	}
-      }
-      if ( count == 0 ) { return false; }
+	    if ( (*it1) == (*it2) ) {
+	      tmp1.list<TwoTensorSQO<Formalism>>::erase(it1);
+	      tmp2.list<TwoTensorSQO<Formalism>>::erase(it2);
+	      ++count;
+	      break;
+	    }
     }
-    return true;
+    if ( count == (*this).size() ) { return true; }
+    }
+    return false;
+  }
 }
 template<class Formalism> bool STRTTCompare<Formalism>::operator () ( STR<TwoTensorSQO<Formalism>> const & lstr, STR<TwoTensorSQO<Formalism>> const & rstr  ) const {
   if ( lstr.size() < rstr.size() ) { return true; }
@@ -203,6 +205,26 @@ template<class Formalism> bool STRTTCompare<Formalism>::operator () ( STR<TwoTen
     return tmp1 < tmp2;
   }
 }
+
+
+STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & strelementary) {
+  STR<SQO<ParticleHole>> tmp;
+  for ( typename list<SQO<Elementary>>::const_iterator it=strelementary.begin(); it!=strelementary.end(); it++ ) {
+    tmp.push_back(ToParticleHole((*it)));
+  }
+    tmp._prefactor = strelementary._prefactor;
+  return tmp;
+}
+STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & strparticlehole){
+  STR<SQO<Elementary>> tmp;
+  for ( typename list<SQO<ParticleHole>>::const_iterator it=strparticlehole.begin(); it!=strparticlehole.end(); it++ ) {
+    tmp.push_back(ToElementary((*it)));
+  }
+  tmp._prefactor = strparticlehole._prefactor;
+  return tmp;
+}
+
+
 
 
 template STR<SQO<Elementary>> operator * ( double const &, STR<SQO<Elementary>> const & );

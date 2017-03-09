@@ -118,14 +118,16 @@ template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formali
   }
   return tmp;
 }
-template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const & lpf, PFSTT<Formalism> const & rpf ){
+template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const & lpf, PFSTT<Formalism> const & rpf ) {
   PFSTT<Formalism> tmp;
   tmp.realnumber = lpf.realnumber * rpf.realnumber;
   for (typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it1=lpf.begin(); it1!=lpf.end(); it1++  ) {
-    if(tmp.find((*it1).first) == tmp.end() ) {  tmp[(*it1).first] = ((*it1).second * rpf.realnumber);}
-    else { tmp[(*it1).first] += ((*it1).second * rpf.realnumber); }
+    if (rpf.realnumber != 0  ) {
+      if(tmp.find((*it1).first) == tmp.end() ) {  tmp[(*it1).first] = ((*it1).second * rpf.realnumber);}
+      else { tmp[(*it1).first] += ((*it1).second * rpf.realnumber); }
+    }
     for (typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it2=rpf.begin(); it2!=rpf.end(); it2++  ) {
-      if ( it1 == lpf.begin() ) {
+      if ( it1 == lpf.begin() && lpf.realnumber != 0 ) {
         if(tmp.find((*it2).first) == tmp.end() ) {  tmp[(*it2).first] = ((*it2).second * lpf.realnumber);}
         else { tmp[(*it2).first] += ((*it2).second * lpf.realnumber); }
       }
