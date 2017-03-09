@@ -163,22 +163,22 @@ template<class Formalism> bool STR<TwoTensorSQO<Formalism>>::operator == ( STR<T
   else {
     STR<TwoTensorSQO<Formalism>> tmp1((*this));
     STR<TwoTensorSQO<Formalism>> tmp2(s);
-    int count = 0;
 
-    typename list<TwoTensorSQO<Formalism>>::iterator it1;
-      it1 = tmp1.begin();
+    typename list<TwoTensorSQO<Formalism>>::iterator it1 = tmp1.begin();
     while ( it1!=tmp1.end() ) {
-      count = 0;
+      bool tmpbool(false);
       for ( typename list<TwoTensorSQO<Formalism>>::iterator it2=tmp2.begin(); it2!=tmp2.end(); it2++ ) {
-	    if ( (*it1) == (*it2) ) {
-	      tmp1.list<TwoTensorSQO<Formalism>>::erase(it1);
-	      tmp2.list<TwoTensorSQO<Formalism>>::erase(it2);
-	      ++count;
-	      break;
-	    }
+	      if ( (*it1) == (*it2) ) {
+	        tmp1.list<TwoTensorSQO<Formalism>>::erase(it1);
+	        tmp2.list<TwoTensorSQO<Formalism>>::erase(it2);
+          it1=tmp1.begin();
+          tmpbool = true ;
+	        break;
+	      }
+        if (tmpbool == false ) { ++it1;}
+      }
     }
-    if ( count == (*this).size() ) { return true; }
-    }
+    if ( tmp1.size() == 0) { return true; }
     return false;
   }
 }
@@ -186,25 +186,42 @@ template<class Formalism> bool STRTTCompare<Formalism>::operator () ( STR<TwoTen
   if ( lstr.size() < rstr.size() ) { return true; }
   else if ( rstr.size() < lstr.size() ) { return false; }
   else {
-    string tmp1("");
-    string tmp2("");
-
-    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=lstr.begin(); it!=lstr.end(); it++ ) {
-      tmp1 += (*it).idx1.first;
-      tmp1 += (*it).idx2.first;
+    STR<TwoTensorSQO<Formalism>> tmp1(lstr);
+    STR<TwoTensorSQO<Formalism>> tmp2(rstr);
+    typename list<TwoTensorSQO<Formalism>>::iterator it1=tmp1.begin();
+    while ( it1 != tmp1.end()  ) {
+      bool tmpbool(false);
+      for ( typename list<TwoTensorSQO<Formalism>>::iterator it2=tmp2.begin(); it2!=tmp2.end(); it2++ ) {
+        if ( (*it1) == (*it2) ) {
+          tmp1.list<TwoTensorSQO<Formalism>>::erase(it1);
+          tmp2.list<TwoTensorSQO<Formalism>>::erase(it2);
+          it1 = tmp1.begin();
+          tmpbool = true ;
+          break;
+        }
+      }
+      if (tmpbool == false ) { ++it1;}
     }
+    if ( tmp1.size() == 0 ) { return false; }
+    else {
+      string str1("");
+      string str2("");
 
-    for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=rstr.begin(); it!=rstr.end(); it++ ) {
-      tmp2 += (*it).idx1.first;
-      tmp2 += (*it).idx2.first;
+      for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=tmp1.begin(); it!=tmp1.end(); it++ ) {
+        str1 += (*it).idx1.first;
+        str1 += (*it).idx2.first;
+      }
+
+      for ( typename list<TwoTensorSQO<Formalism>>::const_iterator it=tmp2.begin(); it!=tmp2.end(); it++ ) {
+        str2 += (*it).idx1.first;
+        str2 += (*it).idx2.first;
+      }
+
+      return str1 < str2;
     }
-
-    sort(tmp1.begin(), tmp1.end());
-    sort(tmp2.begin(), tmp2.end());
-
-    return tmp1 < tmp2;
   }
 }
+
 
 
 STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & strelementary) {

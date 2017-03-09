@@ -59,6 +59,7 @@ template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const &
     tmpstr._prefactor = 1;
     tmp.insert( make_pair( tmpstr, pre ) );
   }
+
   return tmp;
 }
 template<class Formalism> PFSTT<Formalism> operator + ( STR<TwoTensorSQO<Formalism>> const & str, PFSTT<Formalism> const & pf){
@@ -72,7 +73,10 @@ template<class Formalism> PFSTT<Formalism> operator + ( STR<TwoTensorSQO<Formali
     STR<TwoTensorSQO<Formalism>> tmpstr(str);
     tmpstr._prefactor = 1;
     tmp.insert( make_pair( tmpstr, pre ) );
+
+
   }
+
   return tmp;
 }
 template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const & lpf, PFSTT<Formalism> const & rpf) {
@@ -118,7 +122,7 @@ template<class Formalism> PFSTT<Formalism> operator * ( STR<TwoTensorSQO<Formali
   }
   return tmp;
 }
-template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const & lpf, PFSTT<Formalism> const & rpf ) {
+template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const & lpf, PFSTT<Formalism> const & rpf ){
   PFSTT<Formalism> tmp;
   tmp.realnumber = lpf.realnumber * rpf.realnumber;
   for (typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it1=lpf.begin(); it1!=lpf.end(); it1++  ) {

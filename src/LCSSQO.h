@@ -35,7 +35,7 @@ template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const
 template<class Formalism> LCSSQO<Formalism> operator * ( STR<SQO<Formalism>> const &, LCSSQO<Formalism> const & );
 template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const &, LCSSQO<Formalism> const & );
 
-LCSSQO<Elementary> wickexpansion(STR<SQO<Elementary>> const &, Ref_State const &);
+LCSSQO<Elementary> wickexpansion(STR<SQO<Elementary>> const &, Ref_State const & );
 
 template<class Formalism> ostream & operator << ( ostream &, LCSSQO<Formalism> const & );
 

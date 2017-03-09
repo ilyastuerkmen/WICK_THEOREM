@@ -52,6 +52,25 @@ TwoTensorSQO<ParticleHole> ttsqo2(p2,p1);
 TwoTensorSQO<ParticleHole> ttsqo4(p3,p2);
 TwoTensorSQO<ParticleHole> ttsqo5(p4,p3);
 
+pair<string, SQO_Idx_Type> e1( q.idx , q.idxtype );
+pair<string, SQO_Idx_Type> e2( p.idx , p.idxtype );
+pair<string, SQO_Idx_Type> e3( s.idx , s.idxtype );
+pair<string, SQO_Idx_Type> e4( r.idx , r.idxtype );
+TwoTensorSQO<Elementary> tte1(e1,e2);
+TwoTensorSQO<Elementary> tte2(e3,e4);
+TwoTensorSQO<Elementary> tte3(e1,e4);
+TwoTensorSQO<Elementary> tte4(e3,e2);
+
+STR<TwoTensorSQO<Elementary>> se1({tte1, tte2});
+STR<TwoTensorSQO<Elementary>> se2({tte3, tte4});
+
+PFSTT<Elementary> pe1({se1});
+PFSTT<Elementary> pe2({se2});
+
+//cout << pe1 << endl;
+//cout << pe2 << endl;
+//cout <<  pe2 + pe1 << endl;
+
 STR<TwoTensorSQO<ParticleHole>> s6({ttsqo1, ttsqo2});
 STR<TwoTensorSQO<ParticleHole>> s7({ttsqo2, ttsqo1});
 STR<TwoTensorSQO<ParticleHole>> s8({ttsqo4, ttsqo1, ttsqo2});
@@ -84,8 +103,8 @@ cout << "$$" << lc3 << "$$" <<  endl;
 cout << "$$" << s5 << "$$" <<  endl;
 cout << "$$" << lc3 << "$$" <<  endl;
 */
-STR<SQO<ParticleHole>> s21 = s2 * c2;
-STR<SQO<ParticleHole>> s22 = s21*b;
+//STR<SQO<ParticleHole>> s21 = s2 * c2;
+//STR<SQO<ParticleHole>> s22 = s21*b;
 
 
 //LCSSQO<Elementary> lc6 = wickexpansion(s21);
@@ -105,11 +124,12 @@ cout << "$$" << twobodyop << "$$" <<  endl;
 cout << lc9 << endl;
 
 */
-cout << "$$" << twobodyop2 << "$$" << endl;
+//cout << "$$" << twobodyop2 << "$$" << endl;
+
 cout << wickexpansion(twobodyop2, Ref_State::vacuum) << endl;
 
-cout << "$$" << twobodyop3 << "$$" << endl;
-cout << wickexpansion(twobodyop3, Ref_State::vacuum) << endl;
+//cout << "$$" << twobodyop3 << "$$" << endl;
+//cout << wickexpansion(twobodyop3, Ref_State::vacuum) << endl;
 
 
 /*

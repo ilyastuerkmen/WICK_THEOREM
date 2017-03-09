@@ -32,11 +32,13 @@ template<class Formalism> LCSSQO<Formalism> & LCSSQO<Formalism>::operator= ( LCS
 }
 template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & lc , PFSTT<Formalism>  const & pf) {
   LCSSQO<Formalism> tmp(lc);
-  lc.fullcontraction = lc.fullcontraction + pf;
+  tmp.fullcontraction = tmp.fullcontraction + pf;
+  return tmp;
 }
 template<class Formalism> LCSSQO<Formalism> operator + ( PFSTT<Formalism>  const & pf, LCSSQO<Formalism> const & lc) {
   LCSSQO<Formalism> tmp(lc);
-  lc.fullcontraction = lc.fullcontraction + pf;
+  tmp.fullcontraction = tmp.fullcontraction + pf;
+  return tmp;
 }
 template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & lc , STR<SQO<Formalism>>  const & str ){
   LCSSQO<Formalism> tmp(lc);
@@ -196,11 +198,12 @@ LCSSQO<Elementary> wickexpansion(STR<SQO<Elementary>> const & str, Ref_State con
         STR<TwoTensorSQO<Elementary>> tmpstrtt({tmptt});
         PFSTT<Elementary> tmppf({tmpstrtt});
         tmppf = tmppf * tmp._prefactor;
+        int sumofpos = firstpos + secondpos -1;
+        tmppf = tmppf * (( sumofpos % 2  == 0 ) ? 1 : -1);
         tmp._prefactor = 1;
-        cout << tmppf << endl;
         tmp.list<SQO<Elementary>>::erase(it1);
         tmp.list<SQO<Elementary>>::erase(it2);
-        if ( tmp.size() == 0 ) {   tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf;  }
+        if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }
         else {
         previouscontractions = previouscontractions + tmp;
         previouscontractions[tmp] = tmppf;
@@ -210,21 +213,25 @@ LCSSQO<Elementary> wickexpansion(STR<SQO<Elementary>> const & str, Ref_State con
           tmpparticlehole.normalproduct();
           tmp = ToSTRElementary(tmpparticlehole);
          }
-         int sumofpos = firstpos + secondpos -1;
-         tmp = tmp * (( sumofpos % 2  == 0 ) ? 1 : -1);
+         tmppf = tmppf * tmp._prefactor;
+         tmp._prefactor = 1;
         if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
         else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
       }
     }
   }
 }
-  //cout << tmpresult << endl;
+
+   //cout << tmpresult << endl;
   for ( typename map< STR<SQO<Elementary>>, PFSTT<Elementary>, STRSQOCompare<Elementary>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
-    if ( (*it1).first.size() > 1 ) {
       LCSSQO<Elementary> tmpwick( wickexpansion((*it1).first, refstate));
+          cout << "befor:  " << tmpresult.fullcontraction <<  "    " << ((*it1).second * tmpwick).fullcontraction <<  endl;
+          PFSTT<Elementary> whatever = ((((*it1).second * tmpwick).fullcontraction) + (tmpresult.fullcontraction));
+          cout << "WHATEVER: " << whatever << endl;
       tmpresult = tmpresult + (*it1).second*tmpwick;
-    }
+      cout << "after::  " << tmpresult.fullcontraction << endl;
   }
+
  return tmpresult;
 }
 
