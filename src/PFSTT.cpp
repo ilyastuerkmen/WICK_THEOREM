@@ -143,22 +143,33 @@ template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &
 }
 
 template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> const & pf ) {
-   if ( pf.size() == 0 ) {  if ( pf.realnumber != 1 ) { o << pf.realnumber;} }
+   if ( pf.size() == 0 ) {
+     if ( pf.realnumber != 1 ) { o << pf.realnumber;}
+     else if ( pf.realnumber == 0 ) {}
+   }
    else {
     for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++ ) {
       if ( it == pf.begin()) {
-        if ( pf.size() !=1  ) { o << "(" ; }
-        if ( (*it).second != 1 ) { o << (*it).second << " \\cdot " ; }
+        if ( pf.size() ==1 && pf.realnumber == 0 ) {}
+        else { o << "(" ; }
+        if ( (*it).second != 1 ) {
+          if ( (*it).second == -1 ) { o << "-" ;}
+          else { o << (*it).second << " \\cdot " ; }
+        }
         o << (*it).first;
       }
       else {
-        o << "+" ;
+        if ( (*it).second > 0 ) { o << "+"; }
         if ( (*it).second != 1 ) { o << (*it).second << " \\cdot " ; }
         o << (*it).first;
       }
     }
-    if ( pf.realnumber != 0  ) { o << " \\cdot " << pf.realnumber ;  }
-    if ( pf.size() !=1  ) {o << ")";}
+    if ( pf.realnumber != 0  ) {
+      if ( pf.realnumber > 0 ) { o << "+";}
+      o << pf.realnumber ;
+    }
+    if ( pf.size() ==1 && pf.realnumber == 0 ) {}
+    else { o << ")" ; }
   }
     return o;
 }

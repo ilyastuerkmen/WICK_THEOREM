@@ -18,6 +18,9 @@ template<class Formalism> bool operator == ( SQO<Formalism> const & sqo1, SQO<Fo
   return ( (sqo1.idx == sqo2.idx) && (sqo1.a == sqo2.a) && (sqo1.idxtype == sqo2.idxtype) ) ;
 }
 
+SQO<ParticleHole> ToParticleHole( SQO<ParticleHole> const & particlehole) {
+  return particlehole;
+}
 SQO<ParticleHole> ToParticleHole( SQO<Elementary> const & elementary) {
   SQO_Type tmpsqotype;
   if ( elementary.idxtype == SQO_Idx_Type::general ) { throw;}
@@ -33,12 +36,12 @@ SQO<Elementary> ToElementary( SQO<ParticleHole> const & particlehole){
   else if ( particlehole.idxtype == SQO_Idx_Type::particle  &&  particlehole.a == SQO_Type::annihliation ) { tmpsqotype = SQO_Type::creation;  }
   else if ( particlehole.idxtype == SQO_Idx_Type::particle  &&  particlehole.a == SQO_Type::creation ) { tmpsqotype = SQO_Type::annihliation;  }
   else if ( particlehole.idxtype == SQO_Idx_Type::hole) { tmpsqotype = particlehole.a;  }
-  SQO<Elementary
-
-  >  tmp(particlehole.idxtype, tmpsqotype, particlehole.idx);
+  SQO<Elementary>  tmp(particlehole.idxtype, tmpsqotype, particlehole.idx);
   return tmp;
 }
-
+SQO<Elementary> ToElementary( SQO<Elementary> const & elementary) {
+  return elementary;
+}
 
 
 

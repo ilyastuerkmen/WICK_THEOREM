@@ -2,42 +2,45 @@
 #define LCSSQO_H
 
 #include "PFSTT.h"
+#include <type_traits>
 
   using namespace std;
 
-template<class Formalism>
-class LCSSQO : public map< STR<SQO<Formalism>>, PFSTT<Formalism>, STRSQOCompare<Formalism>> {
+template<class T1, class T2>
+class LCSSQO : public map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>> {
 public:
 
 LCSSQO();
-LCSSQO( initializer_list< pair<STR<SQO<Formalism>>, PFSTT<Formalism>> > );
-LCSSQO( LCSSQO<Formalism> const & );
+LCSSQO( initializer_list< pair<STR<SQO<T1>>, PFSTT<T2>> > );
+LCSSQO( LCSSQO<T1,T2> const & );
 
-PFSTT<Formalism> fullcontraction;
+PFSTT<T2> fullcontraction;
 
-PFSTT<Formalism> & operator [] ( STR<SQO<Formalism>> const & ) ;
-LCSSQO<Formalism> & operator = ( LCSSQO <Formalism> const & );
+PFSTT<T2> & operator [] ( STR<SQO<T1>> const & ) ;
+LCSSQO<T1,T2> & operator = ( LCSSQO <T1,T2> const & );
 
 };
-template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & , PFSTT<Formalism>  const & );
-template<class Formalism> LCSSQO<Formalism> operator + ( PFSTT<Formalism>  const &, LCSSQO<Formalism> const & );
-template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & , STR<SQO<Formalism>>  const & );
-template<class Formalism> LCSSQO<Formalism> operator + ( STR<SQO<Formalism>>  const & , LCSSQO<Formalism> const & );
-template<class Formalism> LCSSQO<Formalism> operator + ( LCSSQO<Formalism> const & , LCSSQO<Formalism> const & );
 
-template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const &, double  const & );
-template<class Formalism> LCSSQO<Formalism> operator * ( double  const & , LCSSQO<Formalism> const &);
-template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const &, PFSTT<Formalism>  const & );
-template<class Formalism> LCSSQO<Formalism> operator * ( PFSTT<Formalism>  const & , LCSSQO<Formalism> const &);
-template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const &, STR<TwoTensorSQO<Formalism>>  const & );
-template<class Formalism> LCSSQO<Formalism> operator * ( STR<TwoTensorSQO<Formalism>>  const & , LCSSQO<Formalism> const &);
-template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const &, STR<SQO<Formalism>> const & );
-template<class Formalism> LCSSQO<Formalism> operator * ( STR<SQO<Formalism>> const &, LCSSQO<Formalism> const & );
-template<class Formalism> LCSSQO<Formalism> operator * ( LCSSQO<Formalism> const &, LCSSQO<Formalism> const & );
+template<class T1,class T2> LCSSQO<T1,T2> operator + ( LCSSQO<T1,T2> const & , PFSTT<T2>  const & );
+template<class T1,class T2> LCSSQO<T1,T2> operator + ( PFSTT<T2>  const &, LCSSQO<T1,T2> const & );
+template<class T1,class T2> LCSSQO<T1,T2> operator + ( LCSSQO<T1,T2> const & , STR<SQO<T1>>  const & );
+template<class T1,class T2> LCSSQO<T1,T2> operator + ( STR<SQO<T1>>  const & , LCSSQO<T1,T2> const & );
+template<class T1,class T2> LCSSQO<T1,T2> operator + ( LCSSQO<T1,T2> const & , LCSSQO<T1,T2> const & );
 
-LCSSQO<Elementary> wickexpansion(STR<SQO<Elementary>> const &, Ref_State const & );
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const &, double  const & );
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( double  const & , LCSSQO<T1, T2> const &);
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const &, PFSTT<T2>  const & );
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( PFSTT<T2>  const & , LCSSQO<T1, T2> const &);
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const &, STR<TwoTensorSQO<T2>>  const & );
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( STR<TwoTensorSQO<T2>>  const & , LCSSQO<T1, T2> const &);
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const &, STR<SQO<T1>> const & );
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( STR<SQO<T1>> const &, LCSSQO<T1, T2> const & );
+template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const &, LCSSQO<T1, T2> const & );
 
-template<class Formalism> ostream & operator << ( ostream &, LCSSQO<Formalism> const & );
+template <class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const &, T2 const & );
 
+template<class T1, class T2> ostream & operator << ( ostream &, LCSSQO<T1, T2> const & );
+
+#include "LCSSQO.ch"
 
 #endif

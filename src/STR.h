@@ -26,6 +26,7 @@ public:
   STR(STR<SQO<Formalism>> const &);
   void normalproduct();
   bool operator == ( STR<SQO<Formalism>> const & );
+  STR<SQO<Formalism>> & operator = ( STR<SQO<Formalism>> const & );
 };
 
 template<class Formalism> class STR<TwoTensorSQO<Formalism>> : public STRBase<TwoTensorSQO<Formalism>> {
@@ -46,8 +47,13 @@ public:
   bool operator () ( STR<SQO<Formalism>> const &, STR<SQO<Formalism>> const & ) const;
 };
 
+STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<ParticleHole>> const & ) ;
 STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & );
+STR<SQO<Elementary>> ToSTRElementary( STR<SQO<Elementary>> const &  );
 STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & );
+
+//template<class T1, class T2> STR<SQO<T2>> STRToSTR(STR<SQO<T1>>, T2 const &);
+
 
 template<class T> STR<T>  operator * ( double const &, STR<T> const & );
 template<class T> STR<T>  operator * ( STR<T> const &, double const & );

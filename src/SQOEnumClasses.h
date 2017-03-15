@@ -7,7 +7,7 @@ enum class SQO_Idx_Type { general, hole, particle };
 
 enum class Ref_State { vacuum, fermi };
 
-class ParticleHole {};
-class Elementary {};
+enum class ParticleHole { vacuum, fermi  };
+enum class Elementary { vacuum, fermi  };
 
 #endif

@@ -19,6 +19,7 @@ SQO_Idx_Type idxtype;
 
 };
 
+
 SQO<ParticleHole> ToParticleHole( SQO<Elementary> const &);
 SQO<Elementary> ToElementary( SQO<ParticleHole> const &);
 

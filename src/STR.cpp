@@ -57,6 +57,7 @@ template<class T> ostream & operator << ( ostream & o, STR<T>  const & ssqo ){
   return o;
 }
 
+
 template<class Formalism> STR<SQO<Formalism>>::STR(): STRBase<SQO<Formalism>>() {}
 template<class Formalism> STR<SQO<Formalism>>::STR( initializer_list<SQO<Formalism>> il) : STRBase<SQO<Formalism>>(il) {}
 template<class Formalism> STR<SQO<Formalism>>::STR( STR<SQO<Formalism>> const & st) : STRBase<SQO<Formalism>>(st) {}
@@ -154,6 +155,14 @@ template<class Formalism> bool STRSQOCompare<Formalism>::operator() (STR<SQO<For
     return tmp1 < tmp2;
   }
 }
+template<class Formalism> STR<SQO<Formalism>> & STR<SQO<Formalism>>::operator = ( STR<SQO<Formalism>> const & rstr) {
+  (*this)._prefactor = rstr._prefactor;
+  (*this).clear();
+  for ( typename list<SQO<Formalism>>::const_iterator it = rstr.begin(); it != rstr.end(); it++ ) {
+    (*this).push_back((*it));
+  }
+  return *this;
+}
 
 template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR() : STRBase<TwoTensorSQO<Formalism>>() {}
 template<class Formalism> STR<TwoTensorSQO<Formalism>>::STR( initializer_list<TwoTensorSQO<Formalism>> il) : STRBase<TwoTensorSQO<Formalism>>(il) {}
@@ -221,9 +230,19 @@ template<class Formalism> bool STRTTCompare<Formalism>::operator () ( STR<TwoTen
     }
   }
 }
+/*
+template<class T1, class T2> STR<SQO<T2>> STRToSTR(STR<SQO<T1>> const & str, T2 const & ref) {
+  STR<SQO<T2>> tmp;
+  for ( typename list<SQO<T1>>::const_iterator it=str.begin(); it!=str.end(); it++ ) {
+    tmp.push_back(SQOToSQO((*it), ref));
+  }
+  tmp._prefactor = str._prefactor;
+  return tmp;
+}*/
 
 
 
+STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<ParticleHole>> const & strparticlehole) { return strparticlehole;}
 STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & strelementary) {
   STR<SQO<ParticleHole>> tmp;
   for ( typename list<SQO<Elementary>>::const_iterator it=strelementary.begin(); it!=strelementary.end(); it++ ) {
@@ -232,6 +251,7 @@ STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & strelemen
     tmp._prefactor = strelementary._prefactor;
   return tmp;
 }
+STR<SQO<Elementary>> ToSTRElementary( STR<SQO<Elementary>> const & strelementary ){ return strelementary;}
 STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & strparticlehole){
   STR<SQO<Elementary>> tmp;
   for ( typename list<SQO<ParticleHole>>::const_iterator it=strparticlehole.begin(); it!=strparticlehole.end(); it++ ) {
@@ -241,9 +261,12 @@ STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & strparticle
   return tmp;
 }
 
-
-
-
+/*
+template STR<SQO<Elementary>> STRToSTR(STR<SQO<Elementary>> const & , Elementary const & );
+template STR<SQO<Elementary>> STRToSTR(STR<SQO<ParticleHole>> const &, Elementary const & );
+template STR<SQO<ParticleHole>> STRToSTR(STR<SQO<ParticleHole>> const & , ParticleHole const & );
+template STR<SQO<ParticleHole>> STRToSTR(STR<SQO<Elementary>> const &, ParticleHole const & );
+*/
 template STR<SQO<Elementary>> operator * ( double const &, STR<SQO<Elementary>> const & );
 template STR<SQO<ParticleHole>> operator * ( double const &, STR<SQO<ParticleHole>> const & );
 template STR<SQO<Elementary>> operator * ( STR<SQO<Elementary>> const &, double const & );
@@ -268,6 +291,8 @@ template bool STR<SQO<Elementary>>::operator == ( STR<SQO<Elementary>> const & )
 template bool STR<SQO<ParticleHole>>::operator == ( STR<SQO<ParticleHole>> const & );
 template bool STRSQOCompare<Elementary>::operator () ( STR<SQO<Elementary>> const &, STR<SQO<Elementary>> const & ) const ;
 template bool STRSQOCompare<ParticleHole>::operator () ( STR<SQO<ParticleHole>> const &, STR<SQO<ParticleHole>> const & ) const;
+template STR<SQO<Elementary>> & STR<SQO<Elementary>>::operator = ( STR<SQO<Elementary>> const & );
+template STR<SQO<ParticleHole>> & STR<SQO<ParticleHole>>::operator = ( STR<SQO<ParticleHole>> const & );
 
 
 template STR<TwoTensorSQO<Elementary>> operator * ( double const &, STR<TwoTensorSQO<Elementary>> const & );
