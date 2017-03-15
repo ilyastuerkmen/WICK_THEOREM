@@ -47,10 +47,18 @@ public:
   bool operator () ( STR<SQO<Formalism>> const &, STR<SQO<Formalism>> const & ) const;
 };
 
+//template<class Formalism, class T2> list<int> PositionsOfNormalFragments( STR<SQO<Formalism>> const &, Ref_State const & );
+
+
 STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<ParticleHole>> const & ) ;
 STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & );
 STR<SQO<Elementary>> ToSTRElementary( STR<SQO<Elementary>> const &  );
 STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & );
+
+STR<SQO<Elementary>> EquateIfPossible( STR<SQO<Elementary>> const &, Elementary const &);
+STR<SQO<Elementary>> EquateIfPossible( STR<SQO<ParticleHole>> const &, Elementary const &);
+STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<Elementary>> const &, ParticleHole const &);
+STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<ParticleHole>> const &, ParticleHole const & );
 
 //template<class T1, class T2> STR<SQO<T2>> STRToSTR(STR<SQO<T1>>, T2 const &);
 

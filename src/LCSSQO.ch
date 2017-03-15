@@ -215,20 +215,12 @@ template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & s
           if ( refstate == Ref_State::vacuum ) {
             STR<SQO<Elementary>> tmpelementary(ToSTRElementary(tmp));
             tmpelementary.normalproduct();
-            if ( is_same<T1, Elementary>::value ) { tmp = tmpelementary; }
-            else if (is_same<T1, ParticleHole>::value ) {
-              STR<SQO<ParticleHole>> tmpparticlehole(ToSTRParticleHole(tmpelementary));
-              tmp = tmpparticlehole;
-            }
+            tmp = EquateIfPossible( tmpelementary, t1 );
           }
           else if ( refstate == Ref_State::fermi ) {
             STR<SQO<ParticleHole>> tmpparticlehole(ToSTRParticleHole(tmp));
             tmpparticlehole.normalproduct();
-            if ( is_same<T1, Elementary>::value  ) {
-              STR<SQO<Elementary>> tmpelementary(ToSTRElementary(tmpparticlehole));
-              tmp = tmpelementary;
-            }
-            //else if (is_same<T1, ParticleHole>::value ) { tmp = tmpparticlehole; }
+            tmp = EquateIfPossible( tmpparticlehole, t1 );
            }
            tmppf = tmppf * tmp._prefactor;
            tmp._prefactor = 1;

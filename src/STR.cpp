@@ -239,9 +239,30 @@ template<class T1, class T2> STR<SQO<T2>> STRToSTR(STR<SQO<T1>> const & str, T2 
   tmp._prefactor = str._prefactor;
   return tmp;
 }*/
+/*
+template<class Formalism, class T2> list<int> PositionsOfNormalFragments( STR<SQO<Formalism>> const & str, Ref_State const & refstate) {
+  list<int> tmp;
+  tmp.push_back(0);
+  int count = 0;
+  if ( refstate == Ref_State::vacuum ) {
+   STR<SQO<Elementary>> tmpelementary( ToSTRElementary(str) );
+   STR<SQO<Elementary>> normalelementary(tmpelementary.normalproduct());
+   if ( tmpelementary == normalelementary) {}
+   else {
+     for ( typename list<SQO<Formalism>> it = tmpelementary.begin(); it != tmpelementary.end(); it++ ) {
+       ++count;
+       if (  )
+     }
+   }
 
+  }
+  else if ( refstate == Ref_State::fermi ) {
 
+  }
 
+  return tmp;
+}
+*/
 STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<ParticleHole>> const & strparticlehole) { return strparticlehole;}
 STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & strelementary) {
   STR<SQO<ParticleHole>> tmp;
@@ -260,6 +281,13 @@ STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & strparticle
   tmp._prefactor = strparticlehole._prefactor;
   return tmp;
 }
+
+
+STR<SQO<Elementary>> EquateIfPossible( STR<SQO<Elementary>> const & str, Elementary const & elem) { return str; }
+STR<SQO<Elementary>> EquateIfPossible( STR<SQO<ParticleHole>> const & str, Elementary const & elem ) { return ToSTRElementary(str) ; }
+STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<Elementary>> const & str, ParticleHole const & ph) { return ToSTRParticleHole(str) ; }
+STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<ParticleHole>> const & str, ParticleHole const & ph) { return str; }
+
 
 /*
 template STR<SQO<Elementary>> STRToSTR(STR<SQO<Elementary>> const & , Elementary const & );

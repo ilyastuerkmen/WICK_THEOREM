@@ -42,10 +42,13 @@ STR<SQO<Elementary>> twobodyop3({q2tmp,p,r2tmp,s2tmp});
 cout << "$$" << twobodyop2 << "$$" << endl;
 LCSSQO<Elementary, Elementary> lcssqo(wickexpansion(twobodyop2, Elementary::vacuum));
 cout << lcssqo << endl;
+LCSSQO<Elementary, Elementary
+> lcssqo2(wickexpansion(twobodyop2, Elementary::fermi));
+cout << lcssqo2 << endl;
 
-//cout << "$$" << op1 << "$$" << endl;
-//LCSSQO<ParticleHole, Elementary> lcssqo2(wickexpansion(op1, Elementary::fermi));
-//cout << lcssqo2 << endl;
+cout << "$$" << op1 << "$$" << endl;
+LCSSQO<ParticleHole, Elementary> lcssqo3(wickexpansion(op1, Elementary::fermi));
+cout << lcssqo3 << endl;
 
 
 }
