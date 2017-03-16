@@ -239,32 +239,24 @@ template<class T1, class T2> STR<SQO<T2>> STRToSTR(STR<SQO<T1>> const & str, T2 
   tmp._prefactor = str._prefactor;
   return tmp;
 }*/
-/*
-template<class Formalism, class T2> list<int> PositionsOfNormalFragments( STR<SQO<Formalism>> const & str, Ref_State const & refstate) {
-  list<int> tmp;
+
+template<class T1> vector<int> PositionOfNextNormalFragment( STR<SQO<T1>> const & str) {
+  vector<int> tmp;
   tmp.push_back(0);
-  int count = 0;
-  if ( refstate == Ref_State::vacuum ) {
-   STR<SQO<Elementary>> tmpelementary( ToSTRElementary(str) );
-   STR<SQO<Elementary>> normalelementary(tmpelementary.normalproduct());
-   if ( tmpelementary == normalelementary) {}
-   else {
-     for ( typename list<SQO<Formalism>> it = tmpelementary.begin(); it != tmpelementary.end(); it++ ) {
-       ++count;
-       if (  )
-     }
-   }
-
+  int count = 1;
+  SQO_Type previoussqotype = (*str.begin()).a;
+  for ( typename list<SQO<T1>>::const_iterator it = (++str.begin()); it != str.end(); it++ ) {
+    if ( previoussqotype ==  SQO_Type::annihliation && (*it).a == SQO_Type::creation ) {
+      tmp.push_back(count);
+    }
+    previoussqotype = (*it).a;
+    ++count;
   }
-  else if ( refstate == Ref_State::fermi ) {
-
-  }
-
   return tmp;
 }
-*/
-STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<ParticleHole>> const & strparticlehole) { return strparticlehole;}
-STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & strelementary) {
+
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<ParticleHole>> const & strparticlehole, ParticleHole const &) { return strparticlehole;}
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<Elementary>> const & strelementary, ParticleHole const &) {
   STR<SQO<ParticleHole>> tmp;
   for ( typename list<SQO<Elementary>>::const_iterator it=strelementary.begin(); it!=strelementary.end(); it++ ) {
     tmp.push_back(ToParticleHole((*it)));
@@ -272,8 +264,8 @@ STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & strelemen
     tmp._prefactor = strelementary._prefactor;
   return tmp;
 }
-STR<SQO<Elementary>> ToSTRElementary( STR<SQO<Elementary>> const & strelementary ){ return strelementary;}
-STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & strparticlehole){
+STR<SQO<Elementary>> STRToSTR( STR<SQO<Elementary>> const & strelementary, Elementary const &){ return strelementary;}
+STR<SQO<Elementary>> STRToSTR( STR<SQO<ParticleHole>> const & strparticlehole, Elementary const &){
   STR<SQO<Elementary>> tmp;
   for ( typename list<SQO<ParticleHole>>::const_iterator it=strparticlehole.begin(); it!=strparticlehole.end(); it++ ) {
     tmp.push_back(ToElementary((*it)));
@@ -284,17 +276,14 @@ STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & strparticle
 
 
 STR<SQO<Elementary>> EquateIfPossible( STR<SQO<Elementary>> const & str, Elementary const & elem) { return str; }
-STR<SQO<Elementary>> EquateIfPossible( STR<SQO<ParticleHole>> const & str, Elementary const & elem ) { return ToSTRElementary(str) ; }
-STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<Elementary>> const & str, ParticleHole const & ph) { return ToSTRParticleHole(str) ; }
+STR<SQO<Elementary>> EquateIfPossible( STR<SQO<ParticleHole>> const & str, Elementary const & elem ) { return STRToSTR(str, elem) ; }
+STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<Elementary>> const & str, ParticleHole const & ph) { return STRToSTR(str, ph) ; }
 STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<ParticleHole>> const & str, ParticleHole const & ph) { return str; }
 
 
-/*
-template STR<SQO<Elementary>> STRToSTR(STR<SQO<Elementary>> const & , Elementary const & );
-template STR<SQO<Elementary>> STRToSTR(STR<SQO<ParticleHole>> const &, Elementary const & );
-template STR<SQO<ParticleHole>> STRToSTR(STR<SQO<ParticleHole>> const & , ParticleHole const & );
-template STR<SQO<ParticleHole>> STRToSTR(STR<SQO<Elementary>> const &, ParticleHole const & );
-*/
+template vector<int> PositionOfNextNormalFragment( STR<SQO<Elementary>> const & );
+template vector<int> PositionOfNextNormalFragment( STR<SQO<ParticleHole>> const & );
+
 template STR<SQO<Elementary>> operator * ( double const &, STR<SQO<Elementary>> const & );
 template STR<SQO<ParticleHole>> operator * ( double const &, STR<SQO<ParticleHole>> const & );
 template STR<SQO<Elementary>> operator * ( STR<SQO<Elementary>> const &, double const & );

@@ -5,6 +5,7 @@
 #include "TwoTensorSQO.h"
 #include <list>
 #include <initializer_list>
+#include <vector>
 
   using namespace std;
 
@@ -47,13 +48,13 @@ public:
   bool operator () ( STR<SQO<Formalism>> const &, STR<SQO<Formalism>> const & ) const;
 };
 
-//template<class Formalism, class T2> list<int> PositionsOfNormalFragments( STR<SQO<Formalism>> const &, Ref_State const & );
+template<class T1> vector<int> PositionOfNextNormalFragment( STR<SQO<T1>> const &);
 
 
-STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<ParticleHole>> const & ) ;
-STR<SQO<ParticleHole>> ToSTRParticleHole( STR<SQO<Elementary>> const & );
-STR<SQO<Elementary>> ToSTRElementary( STR<SQO<Elementary>> const &  );
-STR<SQO<Elementary>> ToSTRElementary( STR<SQO<ParticleHole>> const & );
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<ParticleHole>> const &, ParticleHole const &) ;
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<Elementary>> const &, ParticleHole const &);
+STR<SQO<Elementary>> STRToSTR( STR<SQO<Elementary>> const &, Elementary const &);
+STR<SQO<Elementary>> STRToSTR( STR<SQO<ParticleHole>> const &, Elementary const &);
 
 STR<SQO<Elementary>> EquateIfPossible( STR<SQO<Elementary>> const &, Elementary const &);
 STR<SQO<Elementary>> EquateIfPossible( STR<SQO<ParticleHole>> const &, Elementary const &);

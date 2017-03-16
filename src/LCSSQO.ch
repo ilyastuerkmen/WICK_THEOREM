@@ -175,68 +175,81 @@ template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const & 
   return tmp;
 }
 
-template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & str, T2 const & ref) {
- T1 t1 = T1::vacuum;
- Ref_State refstate;
- STR<SQO<T1>> tmpstr(str);
- if ( ref == T2::vacuum ) {refstate = Ref_State::vacuum;};
- if ( ref == T2::fermi) {refstate = Ref_State::fermi;};
- tmpstr.normalproduct();
- LCSSQO<T1, T2> tmpresult;
- tmpresult = tmpresult + tmpstr;
- LCSSQO<T1, T2> previouscontractions;
 
- for ( int firstpos=0; firstpos < str.size(); firstpos++ ) {
-   for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
-    STR<SQO<T1>> tmp(str);
-    typename list<SQO<T1>>::iterator it1 = tmp.begin();
-    typename list<SQO<T1>>::iterator it2 = tmp.begin();
-    for ( int i=0; i<firstpos; i++ ) { ++it1; }
-    for ( int j=0; j<secondpos; j++ ) { ++it2; }
-    if (
-      (refstate == Ref_State::vacuum && (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation )   ||
-      (refstate == Ref_State::fermi && (*it1).idxtype == SQO_Idx_Type::hole && (*it2).idxtype == SQO_Idx_Type::hole && (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation ) ||
-      (refstate == Ref_State::fermi && (*it1).idxtype == SQO_Idx_Type::particle && (*it2).idxtype == SQO_Idx_Type::particle && (*it1).a == SQO_Type::creation && (*it2).a == SQO_Type::annihliation)
-    )
-    {
-        TwoTensorSQO<T2> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
-        STR<TwoTensorSQO<T2>> tmpstrtt({tmptt});
-        PFSTT<T2> tmppf({tmpstrtt});
-        tmppf = tmppf * tmp._prefactor;
-        int sumofpos = firstpos + secondpos -1;
-        tmppf = tmppf * (( sumofpos % 2  == 0 ) ? 1 : -1);
-        tmp._prefactor = 1;
-        tmp.list<SQO<T1>>::erase(it1);
-        tmp.list<SQO<T1>>::erase(it2);
-        if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }
-        else {
-          previouscontractions = previouscontractions + tmp;
-          previouscontractions[tmp] = tmppf;
-          if ( refstate == Ref_State::vacuum ) {
-            STR<SQO<Elementary>> tmpelementary(ToSTRElementary(tmp));
-            tmpelementary.normalproduct();
-            tmp = EquateIfPossible( tmpelementary, t1 );
+template<class T1, class T2, class T3> LCSSQO<T1, T2> EquateIfPossible( LCSSQO<T3, T2> const & lcssqo, T1 const & t1) {
+  LCSSQO<T1, T2> tmp;
+  tmp.fullcontraction = lcssqo.fullcontraction;
+  for ( typename map< STR<SQO<T3>>, PFSTT<T2>, STRSQOCompare<T3>>::const_iterator it1=lcssqo.begin(); it1!=lcssqo.end(); it1++ ) {
+    tmp.insert( make_pair( EquateIfPossible((*it1).first, t1) , (*it1).second ));
+  }
+  return tmp;
+}
+
+
+template<class T1, class T2> LCSSQO<T1, T2> generalizedWickExpansion(STR<SQO<T1>> const & str, T2 const & ref) {
+  STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
+  LCSSQO<T2, T2>  tmpresult( wickexpansion(tmpstr, ref, PositionOfNextNormalFragment(tmpstr)) );
+  return EquateIfPossible(tmpresult, T1::noreference);
+}
+
+
+template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & str, T2 const & ref, vector<int> const & positionslist) {
+STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
+vector<int> tmplist = positionslist;
+if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}
+tmpstr.normalproduct();
+LCSSQO<T2, T2> tmpresult;
+tmpresult = tmpresult + tmpstr;
+LCSSQO<T2, T2> previouscontractions;
+
+if ( tmplist.size() != 1 ) {
+  if ( tmplist.size() > 1 ) {
+    for ( int i = 1; i<tmplist.size(); i++ ) {
+
+      for ( int firstpos = tmplist[i-1]; firstpos < tmplist[i]; firstpos++ ) {
+        for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
+          STR<SQO<T2>> tmp(STRToSTR(str, ref));
+          typename list<SQO<T2>>::iterator it1 = tmp.begin();
+          typename list<SQO<T2>>::iterator it2 = tmp.begin();
+            for ( int i=0; i<firstpos; i++ ) { ++it1; }
+            for ( int j=0; j<secondpos; j++ ) { ++it2; }
+            if ( (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation )
+            {
+              TwoTensorSQO<T2> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
+              STR<TwoTensorSQO<T2>> tmpstrtt({tmptt});
+              PFSTT<T2> tmppf({tmpstrtt});
+              tmppf = tmppf * tmp._prefactor;
+              int sumofpos = firstpos + secondpos -1;
+              tmppf = tmppf * (( sumofpos % 2  == 0 ) ? 1 : -1);
+              tmp._prefactor = 1;
+              tmp.list<SQO<T2>>::erase(it1);
+              tmp.list<SQO<T2>>::erase(it2);
+              if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }
+              else {
+                previouscontractions = previouscontractions + tmp;
+                previouscontractions[tmp] = tmppf;
+                tmp.normalproduct();
+                tmppf = tmppf * tmp._prefactor;
+                tmp._prefactor = 1;
+                if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
+                else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
+              }
+            }
           }
-          else if ( refstate == Ref_State::fermi ) {
-            STR<SQO<ParticleHole>> tmpparticlehole(ToSTRParticleHole(tmp));
-            tmpparticlehole.normalproduct();
-            tmp = EquateIfPossible( tmpparticlehole, t1 );
-           }
-           tmppf = tmppf * tmp._prefactor;
-           tmp._prefactor = 1;
-           if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
-           else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
-        }
+      }
+
+      vector<int> tmplist2 = tmplist;
+      --tmplist2[i];
+
+      for ( typename map< STR<SQO<T2>>, PFSTT<T2>, STRSQOCompare<T2>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
+        LCSSQO<T2, T2> tmpwick( wickexpansion((*it1).first, ref, tmplist2));
+        PFSTT<T2> whatever = ((((*it1).second * tmpwick).fullcontraction) + (tmpresult.fullcontraction));
+        tmpresult = tmpresult + (*it1).second*tmpwick;
       }
     }
   }
-  for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
-      LCSSQO<T1, T2> tmpwick( wickexpansion((*it1).first, ref));
-      PFSTT<T2> whatever = ((((*it1).second * tmpwick).fullcontraction) + (tmpresult.fullcontraction));
-      tmpresult = tmpresult + (*it1).second*tmpwick;
-  }
-
- return tmpresult;
+}
+return EquateIfPossible(tmpresult, T1::noreference);
 }
 
 template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2> const & lc){
