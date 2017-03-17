@@ -5,7 +5,6 @@ template<class Formalism> SQO<Formalism>::SQO( SQO<Formalism> const & sqo ) : id
 ostream & operator << ( ostream & o, SQO<Elementary> const & sqo ) {
   o << "a_{" << sqo.idx << "}" ;
   if ( sqo.a == SQO_Type::creation ) { o << "^{\\dagger}" ;} ;
-
   return o;
 }
 ostream & operator << ( ostream & o, SQO<ParticleHole> const & sqo ) {

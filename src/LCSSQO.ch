@@ -35,7 +35,6 @@ template<class T1, class T2> LCSSQO<T1, T2> operator + ( LCSSQO<T1, T2> const & 
   tmp.fullcontraction = tmp.fullcontraction + pf;
   return tmp;
 }
-
 template<class T1, class T2> LCSSQO<T1, T2> operator + ( PFSTT<T2>  const & pf, LCSSQO<T1, T2> const & lc) {
   LCSSQO<T1, T2> tmp(lc);
   tmp.fullcontraction = tmp.fullcontraction + pf;
@@ -199,7 +198,7 @@ tmpstr.normalproduct();
 LCSSQO<T2, T2> tmpresult;
 tmpresult = tmpresult + tmpstr;
 LCSSQO<T2, T2> previouscontractions;
-
+vector<int> tmplist3;
 if ( tmplist.size() != 1 ) {
   if ( tmplist.size() > 1 ) {
     for ( int i = 1; i<tmplist.size(); i++ ) {
@@ -235,22 +234,19 @@ if ( tmplist.size() != 1 ) {
             }
           }
       }
-
       vector<int> tmplist2 = tmplist;
-      //for ( int k=0; k< tmplist2.size(); k++) {
-      //  cout << tmplist2[k] << endl;
-      //}
-      //cout << endl;
       for ( int j=i; j<tmplist2.size(); j++) {
         --tmplist2[j];
       }
-      cout << previouscontractions << endl;
+      tmplist3 = tmplist2;
+    }
+
+
       for ( typename map< STR<SQO<T2>>, PFSTT<T2>, STRSQOCompare<T2>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
-        LCSSQO<T2, T2> tmpwick( wickexpansion((*it1).first, ref, tmplist2));
+        LCSSQO<T2, T2> tmpwick( wickexpansion((*it1).first, ref, tmplist3));
         PFSTT<T2> whatever = ((((*it1).second * tmpwick).fullcontraction) + (tmpresult.fullcontraction));
         tmpresult = tmpresult + (*it1).second*tmpwick;
       }
-    }
   }
 }
 return EquateIfPossible(tmpresult, T1::noreference);
@@ -281,8 +277,8 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
         if (it == lc.begin() && lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0 ) {}
         else if ((*((*it).second.begin())).second > 0) { o << "+";  }
       }
-
-      else if ( it != lc.begin() ) { o << "+"; }
+      else if ( it == lc.begin() && lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0 ) {}
+      else {o << "+";}
 
       o << (*it).second << " \\cdot " ;
     }
