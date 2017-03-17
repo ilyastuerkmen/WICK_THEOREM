@@ -160,7 +160,10 @@ template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> 
       }
       else {
         if ( (*it).second > 0 ) { o << "+"; }
-        if ( (*it).second != 1 ) { o << (*it).second << " \\cdot " ; }
+        if ( (*it).second != 1 ) {
+         if ( (*it).second == -1 ) { o << "-" ;}
+         else { o << (*it).second << " \\cdot " ;  }
+       }
         o << (*it).first;
       }
     }

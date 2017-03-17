@@ -65,7 +65,7 @@ strvec.push_back(w);
 
 vector<STR<SQO<Elementary>>> allstr;
 
-for ( int i=0; i<2; i++ ) {
+for ( int i=0; i<1; i++ ) {
    random_shuffle( strvec.begin(), strvec.end() );
    STR<SQO<Elementary>>  tmp;
    for ( int i=0; i<strvec.size(); i++) {
@@ -81,8 +81,7 @@ cout << endl;
 cout << endl;
 cout << endl;
 
-for ( int i=0; i<2
-  ; i++ ) {
+for ( int i=0; i<1; i++ ) {
   cout << allstr[i] << endl;
   cout << generalizedWickExpansion( allstr[i], Elementary::vacuum ) << endl;
 }
