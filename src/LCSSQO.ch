@@ -37,7 +37,7 @@ template<class T1, class T2> LCSSQO<T1, T2> operator + ( LCSSQO<T1, T2> const & 
 }
 template<class T1, class T2> LCSSQO<T1, T2> operator + ( PFSTT<T2>  const & pf, LCSSQO<T1, T2> const & lc) {
   LCSSQO<T1, T2> tmp(lc);
-  tmp.fullcontraction = tmp.fullcontraction + pf;
+  tmp.fullcontraction = pf + tmp.fullcontraction ;
   return tmp;
 }
 template<class T1, class T2> LCSSQO<T1, T2> operator + ( LCSSQO<T1, T2> const & lc , STR<SQO<T1>>  const & str ){
@@ -108,9 +108,9 @@ template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const & 
 }
 template<class T1, class T2> LCSSQO<T1, T2> operator * ( PFSTT<T2>  const & pf, LCSSQO<T1, T2> const & lc){
   LCSSQO<T1, T2> tmp(lc);
-  tmp.fullcontraction = tmp.fullcontraction * pf;
+  tmp.fullcontraction = pf * tmp.fullcontraction ;
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::iterator it=tmp.begin(); it!=tmp.end(); it++ ) {
-   (*it).second = (*it).second * pf;
+   (*it).second = pf * (*it).second;
   }
   return tmp;
 }
@@ -191,11 +191,12 @@ template<class T1, class T2> LCSSQO<T1, T2> generalizedWickExpansion(STR<SQO<T1>
 
 
 template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & str, T2 const & ref, vector<int> const & positionslist) {
+LCSSQO<T2, T2> tmpresult;
 STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
+if ( tmpstr.normalordered() ) { return EquateIfPossible((tmpresult + tmpstr), T1::noreference); }
 vector<int> tmplist = positionslist;
 if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}
 tmpstr.normalproduct();
-LCSSQO<T2, T2> tmpresult;
 tmpresult = tmpresult + tmpstr;
 LCSSQO<T2, T2> previouscontractions;
 vector<int> tmplist3;
@@ -235,22 +236,23 @@ if ( tmplist.size() != 1 ) {
           }
       }
       vector<int> tmplist2 = tmplist;
-      for ( int j=i; j<tmplist2.size(); j++) {
-        --tmplist2[j];
-      }
+      for ( int j=i; j<tmplist2.size(); j++) { --tmplist2[j]; }
       tmplist3 = tmplist2;
     }
 
-
-      for ( typename map< STR<SQO<T2>>, PFSTT<T2>, STRSQOCompare<T2>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
-        LCSSQO<T2, T2> tmpwick( wickexpansion((*it1).first, ref, tmplist3));
-        PFSTT<T2> whatever = ((((*it1).second * tmpwick).fullcontraction) + (tmpresult.fullcontraction));
-        tmpresult = tmpresult + (*it1).second*tmpwick;
-      }
+    for ( typename map< STR<SQO<T2>>, PFSTT<T2>, STRSQOCompare<T2>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
+      LCSSQO<T2, T2> tmpwick = wickexpansion((*it1).first, ref, tmplist3);
+      STR<SQO<T2>> strprevious = (*it1).first;
+      strprevious.normalproduct();
+      tmpwick.erase( tmpwick.find( strprevious ) );
+      tmpresult = tmpresult + (  tmpwick * (*it1).second  )  ;
+    }
   }
 }
 return EquateIfPossible(tmpresult, T1::noreference);
 }
+
+
 
 template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2> const & lc){
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}

@@ -63,9 +63,15 @@ strvec.push_back(u);
 strvec.push_back(v);
 strvec.push_back(w);
 
+STR<SQO<Elementary>> strelem({t,w,s,q,r,v,p,u});
+
+cout << wickexpansion( strelem, Elementary::vacuum ) << endl;
+
+/*
+// RANDOM STRINGS NORMAL ORDER WITH AND WITHOUT generalizedWickExpansion
 vector<STR<SQO<Elementary>>> allstr;
 
-for ( int i=0; i<50; i++ ) {
+for ( int i=0; i<1; i++ ) {
    random_shuffle( strvec.begin(), strvec.end() );
    STR<SQO<Elementary>>  tmp;
    for ( int i=0; i<strvec.size(); i++) {
@@ -81,11 +87,11 @@ cout << endl;
 cout << endl;
 cout << endl;
 
-for ( int i=0; i<50; i++ ) {
+for ( int i=0; i<1; i++ ) {
   cout << allstr[i] << endl;
   cout << generalizedWickExpansion( allstr[i], Elementary::vacuum ) << endl;
 }
-
+*/
 
 
 }

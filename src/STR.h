@@ -26,6 +26,7 @@ public:
   STR<SQO<Formalism>>( initializer_list<SQO<Formalism>> );
   STR(STR<SQO<Formalism>> const &);
   void normalproduct();
+  bool normalordered() const ;
   bool operator == ( STR<SQO<Formalism>> const & );
   STR<SQO<Formalism>> & operator = ( STR<SQO<Formalism>> const & );
 };

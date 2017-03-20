@@ -61,6 +61,14 @@ template<class T> ostream & operator << ( ostream & o, STR<T>  const & ssqo ){
 template<class Formalism> STR<SQO<Formalism>>::STR(): STRBase<SQO<Formalism>>() {}
 template<class Formalism> STR<SQO<Formalism>>::STR( initializer_list<SQO<Formalism>> il) : STRBase<SQO<Formalism>>(il) {}
 template<class Formalism> STR<SQO<Formalism>>::STR( STR<SQO<Formalism>> const & st) : STRBase<SQO<Formalism>>(st) {}
+template<class Formalism> bool STR<SQO<Formalism>>::normalordered() const {
+  SQO_Type previoussqotype;
+  for ( typename list<SQO<Formalism>>::const_iterator it = (*this).begin(); it != (*this).end(); it++ ) {
+    if ( it != (*this).begin() &&  previoussqotype == SQO_Type::annihliation  && (*it).a == SQO_Type::creation ) { return false; }
+      previoussqotype = (*it).a;
+  }
+  return true;
+}
 template<class Formalism> void STR<SQO<Formalism>>::normalproduct() {
   int differencetranspositions = 0;
   int sumtranspositions = 0;
@@ -304,6 +312,8 @@ template STR<SQO<Elementary>>::STR( STR<SQO<Elementary>> const & );
 template STR<SQO<ParticleHole>>::STR( STR<SQO<ParticleHole>> const & );
 template void STR<SQO<Elementary>>::normalproduct();
 template void STR<SQO<ParticleHole>>::normalproduct();
+template bool STR<SQO<ParticleHole>>::normalordered() const ;
+template bool STR<SQO<Elementary>>::normalordered() const;
 template bool STR<SQO<Elementary>>::operator == ( STR<SQO<Elementary>> const & );
 template bool STR<SQO<ParticleHole>>::operator == ( STR<SQO<ParticleHole>> const & );
 template bool STRSQOCompare<Elementary>::operator () ( STR<SQO<Elementary>> const &, STR<SQO<Elementary>> const & ) const ;
