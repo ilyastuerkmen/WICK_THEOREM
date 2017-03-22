@@ -151,7 +151,7 @@ template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> 
     for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++ ) {
       if ( it == pf.begin()) {
         if ( pf.size() ==1 && pf.realnumber == 0 ) {}
-        else { o << "(" ; }
+        //else { o << "(" ; }
         if ( (*it).second != 1 ) {
           if ( (*it).second == -1 ) { o << "-" ;}
           else { o << (*it).second << " \\cdot " ; }
@@ -172,7 +172,7 @@ template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> 
       o << pf.realnumber ;
     }
     if ( pf.size() ==1 && pf.realnumber == 0 ) {}
-    else { o << ")" ; }
+    //else { o << ")" ; }
   }
     return o;
 }

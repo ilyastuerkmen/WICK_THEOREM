@@ -198,12 +198,12 @@ vector<int> tmplist = positionslist;
 if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}
 tmpstr.normalproduct();
 tmpresult = tmpresult + tmpstr;
-LCSSQO<T2, T2> previouscontractions;
+list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >
+ previouscontractions;
 vector<int> tmplist3;
 if ( tmplist.size() != 1 ) {
   if ( tmplist.size() > 1 ) {
     for ( int i = 1; i<tmplist.size(); i++ ) {
-
       for ( int firstpos = tmplist[i-1]; firstpos < tmplist[i]; firstpos++ ) {
         for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
           STR<SQO<T2>> tmp(STRToSTR(str, ref));
@@ -213,6 +213,9 @@ if ( tmplist.size() != 1 ) {
             for ( int j=0; j<secondpos; j++ ) { ++it2; }
             if ( (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation )
             {
+              vector<int> tmplist2 = tmplist;
+              for ( int j=i; j<tmplist2.size(); j++) { --tmplist2[j]; }
+              tmplist2[i-1] = firstpos;
               TwoTensorSQO<T2> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
               STR<TwoTensorSQO<T2>> tmpstrtt({tmptt});
               PFSTT<T2> tmppf({tmpstrtt});
@@ -224,8 +227,7 @@ if ( tmplist.size() != 1 ) {
               tmp.list<SQO<T2>>::erase(it2);
               if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }
               else {
-                previouscontractions = previouscontractions + tmp;
-                previouscontractions[tmp] = tmppf;
+                previouscontractions.push_back( make_pair( make_pair( tmp, tmppf ), tmplist2 ) );
                 tmp.normalproduct();
                 tmppf = tmppf * tmp._prefactor;
                 tmp._prefactor = 1;
@@ -235,17 +237,20 @@ if ( tmplist.size() != 1 ) {
             }
           }
       }
-      vector<int> tmplist2 = tmplist;
-      for ( int j=i; j<tmplist2.size(); j++) { --tmplist2[j]; }
-      tmplist3 = tmplist2;
     }
-
-    for ( typename map< STR<SQO<T2>>, PFSTT<T2>, STRSQOCompare<T2>>::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
-      LCSSQO<T2, T2> tmpwick = wickexpansion((*it1).first, ref, tmplist3);
-      STR<SQO<T2>> strprevious = (*it1).first;
+/*
+    for ( typename list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
+      cout << ( (*it1).first).second << endl;
+    }
+    cout << endl;
+    */
+    for ( typename list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
+      LCSSQO<T2, T2> tmpwick = wickexpansion( ((*it1).first).first, ref, (*it1).second );
+      STR<SQO<T2>> strprevious = ((*it1).first).first;
       strprevious.normalproduct();
+
       tmpwick.erase( tmpwick.find( strprevious ) );
-      tmpresult = tmpresult + (  tmpwick * (*it1).second  )  ;
+      tmpresult = tmpresult + ( ((*it1).first).second * tmpwick  )  ;
     }
   }
 }
@@ -255,7 +260,7 @@ return EquateIfPossible(tmpresult, T1::noreference);
 
 
 template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2> const & lc){
-  if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
+/*  if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
     if ((*it).second.size() == 0 ) {
@@ -286,5 +291,27 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
     }
     o << (*it).first;
   }
+  */
+
+  if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
+  else { o << lc.fullcontraction; }
+  for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
+    for ( typename map< STR<TwoTensorSQO<T2>> , double, STRTTCompare<T2> >::const_iterator it2=((*it).second).begin(); it2!=((*it).second).end(); it2++ ) {
+     if ( it2==((*lc.begin()).second).begin() ) {
+        if ( (*it2).second == -1  ) { o << "-" ;}
+        o << (*it2).first << " \\cdot " <<(*it).first ;
+     }
+     else {
+      if ( (*it2).second == 1  ) { o << "+" ;}
+      if ( (*it2).second == -1  ) { o << "-" ;}
+      o << (*it2).first << " \\cdot " << (*it).first ;
+      }
+    }
+if ( (*it).second.realnumber != 0 ) {
+if ( (*it).second.realnumber == 1  )  { o << "+" ;}
+if ( (*it).second.realnumber == -1  ) { o << "-" ;}
+o << (*it).first ;
+  }
+}
   return o;
 }

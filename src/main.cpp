@@ -9,16 +9,7 @@ using namespace std;
 
 int  main() {
 
-SQO<ParticleHole>  i(SQO_Idx_Type::particle, SQO_Type::creation, "i");
-SQO<ParticleHole>  i2(SQO_Idx_Type::particle, SQO_Type::annihliation, "i");
-SQO<ParticleHole> a2(SQO_Idx_Type::hole, SQO_Type::annihliation, "a");
-SQO<ParticleHole> a(SQO_Idx_Type::hole, SQO_Type::creation, "a");
-SQO<ParticleHole> j2(SQO_Idx_Type::particle, SQO_Type::annihliation, "j");
-SQO<ParticleHole> j(SQO_Idx_Type::particle, SQO_Type::creation, "j");
-SQO<ParticleHole> b(SQO_Idx_Type::hole, SQO_Type::creation, "b");
-SQO<ParticleHole> b2(SQO_Idx_Type::hole, SQO_Type::annihliation, "b");
-
-//pqrs
+    
 SQO<Elementary>  p(SQO_Idx_Type::particle, SQO_Type::creation, "p");
 SQO<Elementary> q(SQO_Idx_Type::particle, SQO_Type::creation, "q");
 SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "r");
@@ -63,30 +54,57 @@ strvec.push_back(u);
 strvec.push_back(v);
 strvec.push_back(w);
 
-STR<SQO<Elementary>> strelem({t,w,s,q,r,v,p,u});
+STR<SQO<Elementary>> strelem({p,q,r,s,t,u,v,w});
 
-cout << wickexpansion( strelem, Elementary::vacuum ) << endl;
+//cout << wickexpansion( strelem, Elementary::vacuum ) << endl;
 
-/*
+
 // RANDOM STRINGS NORMAL ORDER WITH AND WITHOUT generalizedWickExpansion
 vector<STR<SQO<Elementary>>> allstr;
+    
+    for ( int i=0; i<strvec.size()-1; i++ ) {
+        for ( int j=i; j< strvec.size(); j++ ) {
+          vector<SQO<Elementary>> tmp(strvec);
+            SQO_Type tmptype = tmp[i].a;
+            tmp[i].a = tmp[j].a;
+            tmp[j].a = tmptype;
+            
+            STR<SQO<Elementary>> tmpstr;
+            for ( int k=0; k<tmp.size(); k++ ) {
+                tmpstr = tmpstr * tmp[k];
+            }
+            
+            allstr.push_back( tmpstr );
+            cout << tmpstr << endl;
+            cout << wickexpansion( tmpstr, Elementary::vacuum ) << endl;
+            cout << endl;
+            cout << endl;
 
-for ( int i=0; i<1; i++ ) {
-   random_shuffle( strvec.begin(), strvec.end() );
-   STR<SQO<Elementary>>  tmp;
-   for ( int i=0; i<strvec.size(); i++) {
-     tmp.push_back(strvec[i]);
-   }
-   cout << tmp << endl;
-   allstr.push_back(tmp);
-   cout << wickexpansion( tmp, Elementary::vacuum ) << endl;
+      }
+    }
+    
+
+cout << endl;
+cout << endl;
+cout << endl;
+cout << endl;
+
+for ( int i=0; i< allstr.size(); i++) {
+cout <<  "Product<SQOperator>	p" << i << " ;" << endl;
+  for ( typename list<SQO<Elementary>>::const_iterator j=allstr[i].begin(); j!=allstr[i].end(); j++ ) {
+    if ( (*j).a == SQO_Type::creation ) { cout << "p" << i <<  " *= SQOperator('" << static_cast<char>(toupper( ((*j).idx)[0] )) << "');"  << endl; }
+    else { cout << "p" << i <<  " *= SQOperator('" << (*j).idx << "');"  << endl;}
+  }
+
+cout << "Term	term" << i << "(p" << i << ");" << endl; ;
+
+cout << "cout << term" << i << "    <<  endl; " << endl;
+cout << "cout << term" << i << ".normalOrder() << endl;" << endl;
+cout << endl;
 }
 
-cout << endl;
-cout << endl;
-cout << endl;
-cout << endl;
 
+/*
 for ( int i=0; i<1; i++ ) {
   cout << allstr[i] << endl;
   cout << generalizedWickExpansion( allstr[i], Elementary::vacuum ) << endl;
