@@ -15,11 +15,11 @@ CCFLAG  =-O3 -fopenmp -Wall # -g -o segfault
 INCDIR  =./include
 SRCS    =./src
 BINS    =./bin
-INCS    =-I$(INCDIR) -I$(SRCS) -I/nfs/home/tuerkmen/nobackhome
+INCS    =-I$(INCDIR) -I$(SRCS)
 OBJS    =./obj
 DEPS    =./depend
 
-TARGET   = $(BINS)/SQO
+TARGET   = $(BINS)/main
 SOURCES := $(wildcard $(SRCS)/*.cpp)
 OBJECTS := $(patsubst $(SRCS)%.cpp,$(OBJS)%.o,$(SOURCES))    
 
@@ -43,4 +43,3 @@ $(DEPS)/%.d: $(SRCS)/%.cpp
 .PHONY: clean
 clean:
 	rm -rf $(OBJECTS) $(TARGET) $(DEPS)/*.d* src/*~
-

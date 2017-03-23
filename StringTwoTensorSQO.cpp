@@ -1,2 +1,0 @@
-#include "StringTwoTensorSQO.h"
-

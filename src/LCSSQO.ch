@@ -295,6 +295,8 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
 
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
+if ( lc.size() == 1 ) { o << (*lc.begin()).first; }
+else {
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
     for ( typename map< STR<TwoTensorSQO<T2>> , double, STRTTCompare<T2> >::const_iterator it2=((*it).second).begin(); it2!=((*it).second).end(); it2++ ) {
      if ( it2==((*lc.begin()).second).begin() ) {
@@ -307,11 +309,13 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
       o << (*it2).first << " \\cdot " << (*it).first ;
       }
     }
+
 if ( (*it).second.realnumber != 0 ) {
 if ( (*it).second.realnumber == 1  )  { o << "+" ;}
 if ( (*it).second.realnumber == -1  ) { o << "-" ;}
 o << (*it).first ;
   }
+}
 }
   return o;
 }
