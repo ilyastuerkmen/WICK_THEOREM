@@ -30,6 +30,20 @@ template<class T1, class T2> LCSSQO<T1, T2> & LCSSQO<T1, T2>::operator= ( LCSSQO
   }
   return *this;
 }
+
+template<class T1, class T2> LCSSQO<T1,T2> LCSSQO<T1,T2>::cleanUpZero() {
+   (*this).fullcontraction.cleanUpZero();
+   typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::iterator it=(*this).begin();
+   while( it!=(*this).end() ) {
+      (*it).second.cleanUpZero();
+      if ( (*it).second.size() == 0 && (*it).second.realnumber == 0 ) { it = (*this).erase(it); }
+      else { it++ ;}
+   }
+   return *this;
+}
+
+
+
 template<class T1, class T2> LCSSQO<T1, T2> operator + ( LCSSQO<T1, T2> const & lc , PFSTT<T2>  const & pf) {
   LCSSQO<T1, T2> tmp(lc);
   tmp.fullcontraction = tmp.fullcontraction + pf;
@@ -174,6 +188,13 @@ template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const & 
   return tmp;
 }
 
+
+
+
+
+
+
+
 template<class T1, class T2, class T3> LCSSQO<T1, T2> EquateIfPossible( LCSSQO<T3, T2> const & lcssqo, T1 const & t1) {
   LCSSQO<T1, T2> tmp;
   tmp.fullcontraction = lcssqo.fullcontraction;
@@ -191,18 +212,18 @@ template<class T1, class T2> LCSSQO<T1, T2> generalizedWickExpansion(STR<SQO<T1>
 
 
 template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & str, T2 const & ref, vector<int> const & positionslist) {
-LCSSQO<T2, T2> tmpresult;
-STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
-if ( tmpstr.normalordered() ) { return EquateIfPossible((tmpresult + tmpstr), T1::noreference); }
-vector<int> tmplist = positionslist;
-if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}
-tmpstr.normalproduct();
-tmpresult = tmpresult + tmpstr;
-list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >
- previouscontractions;
-vector<int> tmplist3;
-if ( tmplist.size() != 1 ) {
-  if ( tmplist.size() > 1 ) {
+  LCSSQO<T2, T2> tmpresult;
+  STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
+  if ( tmpstr.normalordered() ) { return EquateIfPossible((tmpresult + tmpstr), T1::noreference); }
+  vector<int> tmplist = positionslist;
+  if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}
+  tmpstr.normalproduct();
+  tmpresult = tmpresult + tmpstr;
+  list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >
+  previouscontractions;
+  vector<int> tmplist3;
+  if ( tmplist.size() != 1 ) {
+    if ( tmplist.size() > 1 ) {
     for ( int i = 1; i<tmplist.size(); i++ ) {
       for ( int firstpos = tmplist[i-1]; firstpos < tmplist[i]; firstpos++ ) {
         for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
@@ -260,7 +281,7 @@ return EquateIfPossible(tmpresult, T1::noreference);
 
 
 template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2> const & lc){
-/*  if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
+  if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
     if ((*it).second.size() == 0 ) {
@@ -282,7 +303,7 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
     else {
       if ( (*it).second.size() == 1  && (*it).second.realnumber == 0 ) {
         if (it == lc.begin() && lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0 ) {}
-        else if ((*((*it).second.begin())).second > 0) { o << "+";  }
+        else if ((*((*it).second.begin())).second >= 0) { o << "+";  }
       }
       else if ( it == lc.begin() && lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0 ) {}
       else {o << "+";}
@@ -291,8 +312,9 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
     }
     o << (*it).first;
   }
-  */
 
+
+/* FOR TESTWICK
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
 if ( lc.size() == 1 ) { o << (*lc.begin()).first; }
@@ -317,5 +339,29 @@ o << (*it).first ;
   }
 }
 }
+*/
+
   return o;
+}
+
+
+template<class T1> LCSSQO<T1, ParticleHole> nonzero( LCSSQO<T1, ParticleHole> const & lc) {
+LCSSQO<T1, ParticleHole> tmp(lc);
+
+typename map< STR<SQO<T1>>, PFSTT<ParticleHole>, STRSQOCompare<T1>>::iterator it=tmp.begin();
+  while (it!=tmp.end() ) {
+    typename map< STR<TwoTensorSQO<ParticleHole>> , double, STRTTCompare<ParticleHole> >::iterator it2=((*it).second).begin();
+        while ( it2!=((*it).second).end() ) {
+          typename list<TwoTensorSQO<ParticleHole>>::const_iterator it3= ((*it2).first).begin();
+            while ( it3!=((*it2).first).end() )  {
+                if ( (*it3).idx1.second == SQO_Idx_Type::particle && (*it3).idx2.second == SQO_Idx_Type::particle ) {it3++;}
+                else if ( (*it3).idx1.second == SQO_Idx_Type::hole && (*it3).idx2.second == SQO_Idx_Type::hole ) {it3++;}
+                else { it2 = ((*it).second).erase(it2); break; }
+            }
+            it2++;
+        }
+        it++;
+    }
+
+return tmp;
 }

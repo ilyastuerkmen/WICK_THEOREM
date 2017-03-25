@@ -18,6 +18,7 @@ PFSTT( PFSTT<Formalism> const & );
 double realnumber;
 double & operator [] ( STR<TwoTensorSQO<Formalism>> const & ) ;
 PFSTT<Formalism> & operator = ( PFSTT<Formalism> const & );
+PFSTT<Formalism> cleanUpZero();
 
 };
 

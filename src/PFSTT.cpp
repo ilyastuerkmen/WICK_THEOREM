@@ -36,7 +36,14 @@ template<class Formalism> double & PFSTT<Formalism>::operator [] ( STR<TwoTensor
   (*this).insert(make_pair(str, 0));
   return (*(*this).find(str)).second;
 }
-
+template<class Formalism> PFSTT<Formalism> PFSTT<Formalism>::cleanUpZero() {
+  typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::iterator it=(*this).begin();
+   while ( it!=(*this).end() ) {
+     if ( (*it).second == 0 ) {  it = (*this).erase(it); }
+     else { it++; }
+   }
+   return *this;
+}
 template<class Formalism> PFSTT<Formalism> operator + ( PFSTT<Formalism> const & pf, double const & d ) {
   PFSTT<Formalism> tmp(pf);
   tmp.realnumber += d;
@@ -144,27 +151,28 @@ template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &
 
 template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> const & pf ) {
    if ( pf.size() == 0 ) {
-     if ( pf.realnumber != 1 ) { o << pf.realnumber;}
-     else if ( pf.realnumber == 0 ) {}
+     if ( pf.realnumber == 0 ) {}
+     else if ( pf.realnumber != 1 ) { o << pf.realnumber;}
    }
    else {
     for ( typename map< STR<TwoTensorSQO<Formalism>> , double, STRTTCompare<Formalism> >::const_iterator it=pf.begin(); it!=pf.end(); it++ ) {
       if ( it == pf.begin()) {
         if ( pf.size() ==1 && pf.realnumber == 0 ) {}
-        //else { o << "(" ; }
-        if ( (*it).second != 1 ) {
+        else { o << "(" ; }
+        if ( (*it).second != 1  ) {
           if ( (*it).second == -1 ) { o << "-" ;}
           else { o << (*it).second << " \\cdot " ; }
         }
-        o << (*it).first;
+          o << (*it).first;
       }
       else {
-        if ( (*it).second > 0 ) { o << "+"; }
+        if ( (*it).second >= 0 ) { o << "+"; }
         if ( (*it).second != 1 ) {
          if ( (*it).second == -1 ) { o << "-" ;}
          else { o << (*it).second << " \\cdot " ;  }
        }
-        o << (*it).first;
+          o << (*it).first;
+
       }
     }
     if ( pf.realnumber != 0  ) {
@@ -172,12 +180,16 @@ template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> 
       o << pf.realnumber ;
     }
     if ( pf.size() ==1 && pf.realnumber == 0 ) {}
-    //else { o << ")" ; }
+
+    else { o << ")" ; }
   }
     return o;
 }
 
 
+
+template PFSTT<Elementary> PFSTT<Elementary>::cleanUpZero();
+template PFSTT<ParticleHole> PFSTT<ParticleHole>::cleanUpZero();
 template PFSTT<Elementary>::PFSTT();
 template PFSTT<ParticleHole>::PFSTT();
 template PFSTT<Elementary>::PFSTT( initializer_list<STR<TwoTensorSQO<Elementary>>>, double const & );
