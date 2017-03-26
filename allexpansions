@@ -1,0 +1,1041 @@
+ALLTERMS: 
+a_{i}^{\dagger}a_{i}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{il}\gamma_{il} + 0 \cdot \gamma_{il} \cdot a_{l}a_{i}^{\dagger} + a_{l}a_{l}a_{i}^{\dagger}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{l}a_{d}
+0 \cdot \gamma_{il} \cdot a_{i}^{\dagger}a_{d} + a_{l}a_{i}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{l}a_{k}
+-\gamma_{il}\gamma_{ik} + 0 \cdot \gamma_{il} \cdot a_{k}a_{i}^{\dagger} + 0 \cdot \gamma_{ik} \cdot a_{l}a_{i}^{\dagger} + a_{l}a_{k}a_{i}^{\dagger}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{l}a_{c}
+0 \cdot \gamma_{il} \cdot a_{i}^{\dagger}a_{c} + a_{l}a_{i}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{d}a_{l}
+0 \cdot \gamma_{il} \cdot a_{i}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{i}^{\dagger}a_{i}^{\dagger} - a_{l}a_{i}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+a_{i}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{d}a_{k}
+0 \cdot \gamma_{ik} \cdot a_{i}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{i}^{\dagger}a_{i}^{\dagger} - a_{k}a_{i}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+a_{i}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{k}a_{l}
+-\gamma_{ik}\gamma_{il} + 0 \cdot \gamma_{il} \cdot a_{k}a_{i}^{\dagger} + 0 \cdot \gamma_{ik} \cdot a_{l}a_{i}^{\dagger} + a_{k}a_{l}a_{i}^{\dagger}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{k}a_{d}
+0 \cdot \gamma_{ik} \cdot a_{i}^{\dagger}a_{d} + a_{k}a_{i}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{ik}\gamma_{ik} + 0 \cdot \gamma_{ik} \cdot a_{k}a_{i}^{\dagger} + a_{k}a_{k}a_{i}^{\dagger}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{k}a_{c}
+0 \cdot \gamma_{ik} \cdot a_{i}^{\dagger}a_{c} + a_{k}a_{i}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{c}a_{l}
+0 \cdot \gamma_{il} \cdot a_{i}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{i}^{\dagger}a_{i}^{\dagger} - a_{l}a_{i}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+a_{i}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{c}a_{k}
+0 \cdot \gamma_{ik} \cdot a_{i}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{i}^{\dagger}a_{i}^{\dagger} - a_{k}a_{i}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+a_{i}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{il} \cdot a_{a}^{\dagger}a_{l} + \gamma_{ia} \cdot a_{l}a_{l} - a_{a}^{\dagger}a_{l}a_{l}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+-\gamma_{il} \cdot a_{a}^{\dagger}a_{d} + \gamma_{ia} \cdot a_{l}a_{d} + a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{l}a_{k}
+-\gamma_{il} \cdot a_{a}^{\dagger}a_{k} + \gamma_{ik} \cdot a_{a}^{\dagger}a_{l} + \gamma_{ia} \cdot a_{l}a_{k} - a_{a}^{\dagger}a_{l}a_{k}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+-\gamma_{il} \cdot a_{a}^{\dagger}a_{c} + \gamma_{ia} \cdot a_{l}a_{c} + a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{d}a_{l}
+\gamma_{ia}\gamma_{dl} + \gamma_{il} \cdot a_{a}^{\dagger}a_{d}-\gamma_{dl} \cdot a_{a}^{\dagger}a_{i}^{\dagger}-\gamma_{ia} \cdot a_{l}a_{d} - a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{d}a_{d}
+\gamma_{ia} \cdot a_{d}a_{d} - a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{d}a_{k}
+\gamma_{ia}\gamma_{dk} + \gamma_{ik} \cdot a_{a}^{\dagger}a_{d}-\gamma_{dk} \cdot a_{a}^{\dagger}a_{i}^{\dagger}-\gamma_{ia} \cdot a_{k}a_{d} - a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{d}a_{c}
+\gamma_{ia} \cdot a_{d}a_{c} - a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{k}a_{l}
+\gamma_{il} \cdot a_{a}^{\dagger}a_{k}-\gamma_{ik} \cdot a_{a}^{\dagger}a_{l} + \gamma_{ia} \cdot a_{k}a_{l} - a_{a}^{\dagger}a_{k}a_{l}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+-\gamma_{ik} \cdot a_{a}^{\dagger}a_{d} + \gamma_{ia} \cdot a_{k}a_{d} + a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{ik} \cdot a_{a}^{\dagger}a_{k} + \gamma_{ia} \cdot a_{k}a_{k} - a_{a}^{\dagger}a_{k}a_{k}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+-\gamma_{ik} \cdot a_{a}^{\dagger}a_{c} + \gamma_{ia} \cdot a_{k}a_{c} + a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{c}a_{l}
+\gamma_{ia}\gamma_{cl} + \gamma_{il} \cdot a_{a}^{\dagger}a_{c}-\gamma_{cl} \cdot a_{a}^{\dagger}a_{i}^{\dagger}-\gamma_{ia} \cdot a_{l}a_{c} - a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{c}a_{d}
+\gamma_{ia} \cdot a_{c}a_{d} - a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{c}a_{k}
+\gamma_{ia}\gamma_{ck} + \gamma_{ik} \cdot a_{a}^{\dagger}a_{c}-\gamma_{ck} \cdot a_{a}^{\dagger}a_{i}^{\dagger}-\gamma_{ia} \cdot a_{k}a_{c} - a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{a}^{\dagger}a_{c}a_{c}
+\gamma_{ia} \cdot a_{c}a_{c} - a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{il}\gamma_{jl} + 0 \cdot \gamma_{jl} \cdot a_{l}a_{i}^{\dagger} + 0 \cdot \gamma_{il} \cdot a_{l}a_{j}^{\dagger} + a_{l}a_{l}a_{i}^{\dagger}a_{j}^{\dagger}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{l}a_{d}
+\gamma_{jl} \cdot a_{i}^{\dagger}a_{d}-\gamma_{il} \cdot a_{j}^{\dagger}a_{d} + a_{l}a_{i}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{l}a_{k}
+(\gamma_{ik}\gamma_{jl}-\gamma_{il}\gamma_{jk})-\gamma_{jl} \cdot a_{k}a_{i}^{\dagger} + \gamma_{il} \cdot a_{k}a_{j}^{\dagger} + \gamma_{jk} \cdot a_{l}a_{i}^{\dagger}-\gamma_{ik} \cdot a_{l}a_{j}^{\dagger} + a_{l}a_{k}a_{i}^{\dagger}a_{j}^{\dagger}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{l}a_{c}
+\gamma_{jl} \cdot a_{i}^{\dagger}a_{c}-\gamma_{il} \cdot a_{j}^{\dagger}a_{c} + a_{l}a_{i}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{d}a_{l}
+-\gamma_{jl} \cdot a_{i}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{i}^{\dagger}a_{j}^{\dagger} + \gamma_{il} \cdot a_{j}^{\dagger}a_{d} - a_{l}a_{i}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+a_{i}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{d}a_{k}
+-\gamma_{jk} \cdot a_{i}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{i}^{\dagger}a_{j}^{\dagger} + \gamma_{ik} \cdot a_{j}^{\dagger}a_{d} - a_{k}a_{i}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+a_{i}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{k}a_{l}
+(-\gamma_{ik}\gamma_{jl}+\gamma_{il}\gamma_{jk}) + \gamma_{jl} \cdot a_{k}a_{i}^{\dagger}-\gamma_{il} \cdot a_{k}a_{j}^{\dagger}-\gamma_{jk} \cdot a_{l}a_{i}^{\dagger} + \gamma_{ik} \cdot a_{l}a_{j}^{\dagger} + a_{k}a_{l}a_{i}^{\dagger}a_{j}^{\dagger}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{k}a_{d}
+\gamma_{jk} \cdot a_{i}^{\dagger}a_{d}-\gamma_{ik} \cdot a_{j}^{\dagger}a_{d} + a_{k}a_{i}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{ik}\gamma_{jk} + 0 \cdot \gamma_{jk} \cdot a_{k}a_{i}^{\dagger} + 0 \cdot \gamma_{ik} \cdot a_{k}a_{j}^{\dagger} + a_{k}a_{k}a_{i}^{\dagger}a_{j}^{\dagger}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{k}a_{c}
+\gamma_{jk} \cdot a_{i}^{\dagger}a_{c}-\gamma_{ik} \cdot a_{j}^{\dagger}a_{c} + a_{k}a_{i}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{c}a_{l}
+-\gamma_{jl} \cdot a_{i}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{i}^{\dagger}a_{j}^{\dagger} + \gamma_{il} \cdot a_{j}^{\dagger}a_{c} - a_{l}a_{i}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+a_{i}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{c}a_{k}
+-\gamma_{jk} \cdot a_{i}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{i}^{\dagger}a_{j}^{\dagger} + \gamma_{ik} \cdot a_{j}^{\dagger}a_{c} - a_{k}a_{i}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+a_{i}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{il} \cdot a_{b}^{\dagger}a_{l} + \gamma_{ib} \cdot a_{l}a_{l} - a_{b}^{\dagger}a_{l}a_{l}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+-\gamma_{il} \cdot a_{b}^{\dagger}a_{d} + \gamma_{ib} \cdot a_{l}a_{d} + a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{l}a_{k}
+-\gamma_{il} \cdot a_{b}^{\dagger}a_{k} + \gamma_{ik} \cdot a_{b}^{\dagger}a_{l} + \gamma_{ib} \cdot a_{l}a_{k} - a_{b}^{\dagger}a_{l}a_{k}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+-\gamma_{il} \cdot a_{b}^{\dagger}a_{c} + \gamma_{ib} \cdot a_{l}a_{c} + a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{d}a_{l}
+\gamma_{ib}\gamma_{dl} + \gamma_{il} \cdot a_{b}^{\dagger}a_{d}-\gamma_{dl} \cdot a_{b}^{\dagger}a_{i}^{\dagger}-\gamma_{ib} \cdot a_{l}a_{d} - a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{d}a_{d}
+\gamma_{ib} \cdot a_{d}a_{d} - a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{d}a_{k}
+\gamma_{ib}\gamma_{dk} + \gamma_{ik} \cdot a_{b}^{\dagger}a_{d}-\gamma_{dk} \cdot a_{b}^{\dagger}a_{i}^{\dagger}-\gamma_{ib} \cdot a_{k}a_{d} - a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{d}a_{c}
+\gamma_{ib} \cdot a_{d}a_{c} - a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{k}a_{l}
+\gamma_{il} \cdot a_{b}^{\dagger}a_{k}-\gamma_{ik} \cdot a_{b}^{\dagger}a_{l} + \gamma_{ib} \cdot a_{k}a_{l} - a_{b}^{\dagger}a_{k}a_{l}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+-\gamma_{ik} \cdot a_{b}^{\dagger}a_{d} + \gamma_{ib} \cdot a_{k}a_{d} + a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{ik} \cdot a_{b}^{\dagger}a_{k} + \gamma_{ib} \cdot a_{k}a_{k} - a_{b}^{\dagger}a_{k}a_{k}a_{i}^{\dagger}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+-\gamma_{ik} \cdot a_{b}^{\dagger}a_{c} + \gamma_{ib} \cdot a_{k}a_{c} + a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{c}a_{l}
+\gamma_{ib}\gamma_{cl} + \gamma_{il} \cdot a_{b}^{\dagger}a_{c}-\gamma_{cl} \cdot a_{b}^{\dagger}a_{i}^{\dagger}-\gamma_{ib} \cdot a_{l}a_{c} - a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{c}a_{d}
+\gamma_{ib} \cdot a_{c}a_{d} - a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{c}a_{k}
+\gamma_{ib}\gamma_{ck} + \gamma_{ik} \cdot a_{b}^{\dagger}a_{c}-\gamma_{ck} \cdot a_{b}^{\dagger}a_{i}^{\dagger}-\gamma_{ib} \cdot a_{k}a_{c} - a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{i}^{\dagger}a_{b}^{\dagger}a_{c}a_{c}
+\gamma_{ib} \cdot a_{c}a_{c} - a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{il} \cdot a_{a}^{\dagger}a_{l} + a_{a}^{\dagger}a_{l}a_{l}a_{i}^{\dagger}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{l}a_{d}
+\gamma_{il} \cdot a_{a}^{\dagger}a_{d} - a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{l}a_{k}
+\gamma_{il} \cdot a_{a}^{\dagger}a_{k}-\gamma_{ik} \cdot a_{a}^{\dagger}a_{l} + a_{a}^{\dagger}a_{l}a_{k}a_{i}^{\dagger}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{l}a_{c}
+\gamma_{il} \cdot a_{a}^{\dagger}a_{c} - a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{l}
+-\gamma_{il} \cdot a_{a}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{a}^{\dagger}a_{i}^{\dagger} + a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{k}
+-\gamma_{ik} \cdot a_{a}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{a}^{\dagger}a_{i}^{\dagger} + a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+a_{a}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{k}a_{l}
+-\gamma_{il} \cdot a_{a}^{\dagger}a_{k} + \gamma_{ik} \cdot a_{a}^{\dagger}a_{l} + a_{a}^{\dagger}a_{k}a_{l}a_{i}^{\dagger}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{k}a_{d}
+\gamma_{ik} \cdot a_{a}^{\dagger}a_{d} - a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{ik} \cdot a_{a}^{\dagger}a_{k} + a_{a}^{\dagger}a_{k}a_{k}a_{i}^{\dagger}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{k}a_{c}
+\gamma_{ik} \cdot a_{a}^{\dagger}a_{c} - a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{l}
+-\gamma_{il} \cdot a_{a}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{a}^{\dagger}a_{i}^{\dagger} + a_{a}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{k}
+-\gamma_{ik} \cdot a_{a}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{a}^{\dagger}a_{i}^{\dagger} + a_{a}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+a_{a}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{l}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{l}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{k}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{k}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{d}a_{l}
+\gamma_{dl} \cdot a_{a}^{\dagger}a_{a}^{\dagger} - a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{d}a_{d}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{d}a_{d}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{d}a_{k}
+\gamma_{dk} \cdot a_{a}^{\dagger}a_{a}^{\dagger} - a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{d}a_{c}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{d}a_{c}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{l}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{l}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{k}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{k}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{c}a_{l}
+\gamma_{cl} \cdot a_{a}^{\dagger}a_{a}^{\dagger} - a_{a}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{c}a_{d}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{c}a_{d}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{c}a_{k}
+\gamma_{ck} \cdot a_{a}^{\dagger}a_{a}^{\dagger} - a_{a}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+
+
+a_{a}^{\dagger}a_{a}^{\dagger}a_{c}a_{c}
+a_{a}^{\dagger}a_{a}^{\dagger}a_{c}a_{c}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{jl} \cdot a_{a}^{\dagger}a_{l} + a_{a}^{\dagger}a_{l}a_{l}a_{j}^{\dagger}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{l}a_{d}
+\gamma_{jl} \cdot a_{a}^{\dagger}a_{d} - a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{l}a_{k}
+\gamma_{jl} \cdot a_{a}^{\dagger}a_{k}-\gamma_{jk} \cdot a_{a}^{\dagger}a_{l} + a_{a}^{\dagger}a_{l}a_{k}a_{j}^{\dagger}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{l}a_{c}
+\gamma_{jl} \cdot a_{a}^{\dagger}a_{c} - a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{l}
+-\gamma_{jl} \cdot a_{a}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{a}^{\dagger}a_{j}^{\dagger} + a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{k}
+-\gamma_{jk} \cdot a_{a}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{a}^{\dagger}a_{j}^{\dagger} + a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{k}a_{l}
+-\gamma_{jl} \cdot a_{a}^{\dagger}a_{k} + \gamma_{jk} \cdot a_{a}^{\dagger}a_{l} + a_{a}^{\dagger}a_{k}a_{l}a_{j}^{\dagger}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{k}a_{d}
+\gamma_{jk} \cdot a_{a}^{\dagger}a_{d} - a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{jk} \cdot a_{a}^{\dagger}a_{k} + a_{a}^{\dagger}a_{k}a_{k}a_{j}^{\dagger}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{k}a_{c}
+\gamma_{jk} \cdot a_{a}^{\dagger}a_{c} - a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{l}
+-\gamma_{jl} \cdot a_{a}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{a}^{\dagger}a_{j}^{\dagger} + a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{k}
+-\gamma_{jk} \cdot a_{a}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{a}^{\dagger}a_{j}^{\dagger} + a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{l}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{l}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{k}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{k}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{d}a_{l}
+\gamma_{dl} \cdot a_{a}^{\dagger}a_{b}^{\dagger} - a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{d}a_{d}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{d}a_{d}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{d}a_{k}
+\gamma_{dk} \cdot a_{a}^{\dagger}a_{b}^{\dagger} - a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{d}a_{c}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{d}a_{c}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{l}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{l}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{k}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{k}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{c}a_{l}
+\gamma_{cl} \cdot a_{a}^{\dagger}a_{b}^{\dagger} - a_{a}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{c}a_{d}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{c}a_{d}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{c}a_{k}
+\gamma_{ck} \cdot a_{a}^{\dagger}a_{b}^{\dagger} - a_{a}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+
+
+a_{a}^{\dagger}a_{b}^{\dagger}a_{c}a_{c}
+a_{a}^{\dagger}a_{b}^{\dagger}a_{c}a_{c}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{jl}\gamma_{il} + 0 \cdot \gamma_{jl} \cdot a_{l}a_{i}^{\dagger} + 0 \cdot \gamma_{il} \cdot a_{l}a_{j}^{\dagger} + a_{l}a_{l}a_{j}^{\dagger}a_{i}^{\dagger}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{l}a_{d}
+-\gamma_{jl} \cdot a_{i}^{\dagger}a_{d} + \gamma_{il} \cdot a_{j}^{\dagger}a_{d} + a_{l}a_{j}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{l}a_{k}
+(\gamma_{jk}\gamma_{il}-\gamma_{jl}\gamma_{ik}) + \gamma_{jl} \cdot a_{k}a_{i}^{\dagger}-\gamma_{il} \cdot a_{k}a_{j}^{\dagger}-\gamma_{jk} \cdot a_{l}a_{i}^{\dagger} + \gamma_{ik} \cdot a_{l}a_{j}^{\dagger} + a_{l}a_{k}a_{j}^{\dagger}a_{i}^{\dagger}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{l}a_{c}
+-\gamma_{jl} \cdot a_{i}^{\dagger}a_{c} + \gamma_{il} \cdot a_{j}^{\dagger}a_{c} + a_{l}a_{j}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{d}a_{l}
+\gamma_{jl} \cdot a_{i}^{\dagger}a_{d}-\gamma_{il} \cdot a_{j}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{j}^{\dagger}a_{i}^{\dagger} - a_{l}a_{j}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+a_{j}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{d}a_{k}
+\gamma_{jk} \cdot a_{i}^{\dagger}a_{d}-\gamma_{ik} \cdot a_{j}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{j}^{\dagger}a_{i}^{\dagger} - a_{k}a_{j}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+a_{j}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{k}a_{l}
+(-\gamma_{jk}\gamma_{il}+\gamma_{jl}\gamma_{ik})-\gamma_{jl} \cdot a_{k}a_{i}^{\dagger} + \gamma_{il} \cdot a_{k}a_{j}^{\dagger} + \gamma_{jk} \cdot a_{l}a_{i}^{\dagger}-\gamma_{ik} \cdot a_{l}a_{j}^{\dagger} + a_{k}a_{l}a_{j}^{\dagger}a_{i}^{\dagger}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{k}a_{d}
+-\gamma_{jk} \cdot a_{i}^{\dagger}a_{d} + \gamma_{ik} \cdot a_{j}^{\dagger}a_{d} + a_{k}a_{j}^{\dagger}a_{i}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{jk}\gamma_{ik} + 0 \cdot \gamma_{jk} \cdot a_{k}a_{i}^{\dagger} + 0 \cdot \gamma_{ik} \cdot a_{k}a_{j}^{\dagger} + a_{k}a_{k}a_{j}^{\dagger}a_{i}^{\dagger}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{k}a_{c}
+-\gamma_{jk} \cdot a_{i}^{\dagger}a_{c} + \gamma_{ik} \cdot a_{j}^{\dagger}a_{c} + a_{k}a_{j}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{c}a_{l}
+\gamma_{jl} \cdot a_{i}^{\dagger}a_{c}-\gamma_{il} \cdot a_{j}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{j}^{\dagger}a_{i}^{\dagger} - a_{l}a_{j}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+a_{j}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{c}a_{k}
+\gamma_{jk} \cdot a_{i}^{\dagger}a_{c}-\gamma_{ik} \cdot a_{j}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{j}^{\dagger}a_{i}^{\dagger} - a_{k}a_{j}^{\dagger}a_{i}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+a_{j}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{jl} \cdot a_{a}^{\dagger}a_{l} + \gamma_{ja} \cdot a_{l}a_{l} - a_{a}^{\dagger}a_{l}a_{l}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+-\gamma_{jl} \cdot a_{a}^{\dagger}a_{d} + \gamma_{ja} \cdot a_{l}a_{d} + a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{l}a_{k}
+-\gamma_{jl} \cdot a_{a}^{\dagger}a_{k} + \gamma_{jk} \cdot a_{a}^{\dagger}a_{l} + \gamma_{ja} \cdot a_{l}a_{k} - a_{a}^{\dagger}a_{l}a_{k}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+-\gamma_{jl} \cdot a_{a}^{\dagger}a_{c} + \gamma_{ja} \cdot a_{l}a_{c} + a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{d}a_{l}
+\gamma_{ja}\gamma_{dl} + \gamma_{jl} \cdot a_{a}^{\dagger}a_{d}-\gamma_{dl} \cdot a_{a}^{\dagger}a_{j}^{\dagger}-\gamma_{ja} \cdot a_{l}a_{d} - a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{d}a_{d}
+\gamma_{ja} \cdot a_{d}a_{d} - a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{d}a_{k}
+\gamma_{ja}\gamma_{dk} + \gamma_{jk} \cdot a_{a}^{\dagger}a_{d}-\gamma_{dk} \cdot a_{a}^{\dagger}a_{j}^{\dagger}-\gamma_{ja} \cdot a_{k}a_{d} - a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{d}a_{c}
+\gamma_{ja} \cdot a_{d}a_{c} - a_{a}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{k}a_{l}
+\gamma_{jl} \cdot a_{a}^{\dagger}a_{k}-\gamma_{jk} \cdot a_{a}^{\dagger}a_{l} + \gamma_{ja} \cdot a_{k}a_{l} - a_{a}^{\dagger}a_{k}a_{l}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+-\gamma_{jk} \cdot a_{a}^{\dagger}a_{d} + \gamma_{ja} \cdot a_{k}a_{d} + a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{jk} \cdot a_{a}^{\dagger}a_{k} + \gamma_{ja} \cdot a_{k}a_{k} - a_{a}^{\dagger}a_{k}a_{k}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+-\gamma_{jk} \cdot a_{a}^{\dagger}a_{c} + \gamma_{ja} \cdot a_{k}a_{c} + a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{c}a_{l}
+\gamma_{ja}\gamma_{cl} + \gamma_{jl} \cdot a_{a}^{\dagger}a_{c}-\gamma_{cl} \cdot a_{a}^{\dagger}a_{j}^{\dagger}-\gamma_{ja} \cdot a_{l}a_{c} - a_{a}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{c}a_{d}
+\gamma_{ja} \cdot a_{c}a_{d} - a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{c}a_{k}
+\gamma_{ja}\gamma_{ck} + \gamma_{jk} \cdot a_{a}^{\dagger}a_{c}-\gamma_{ck} \cdot a_{a}^{\dagger}a_{j}^{\dagger}-\gamma_{ja} \cdot a_{k}a_{c} - a_{a}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{a}^{\dagger}a_{c}a_{c}
+\gamma_{ja} \cdot a_{c}a_{c} - a_{a}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{jl}\gamma_{jl} + 0 \cdot \gamma_{jl} \cdot a_{l}a_{j}^{\dagger} + a_{l}a_{l}a_{j}^{\dagger}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{l}a_{d}
+0 \cdot \gamma_{jl} \cdot a_{j}^{\dagger}a_{d} + a_{l}a_{j}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{l}a_{k}
+-\gamma_{jl}\gamma_{jk} + 0 \cdot \gamma_{jl} \cdot a_{k}a_{j}^{\dagger} + 0 \cdot \gamma_{jk} \cdot a_{l}a_{j}^{\dagger} + a_{l}a_{k}a_{j}^{\dagger}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{l}a_{c}
+0 \cdot \gamma_{jl} \cdot a_{j}^{\dagger}a_{c} + a_{l}a_{j}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{d}a_{l}
+0 \cdot \gamma_{jl} \cdot a_{j}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{j}^{\dagger}a_{j}^{\dagger} - a_{l}a_{j}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+a_{j}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{d}a_{k}
+0 \cdot \gamma_{jk} \cdot a_{j}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{j}^{\dagger}a_{j}^{\dagger} - a_{k}a_{j}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+a_{j}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{k}a_{l}
+-\gamma_{jk}\gamma_{jl} + 0 \cdot \gamma_{jl} \cdot a_{k}a_{j}^{\dagger} + 0 \cdot \gamma_{jk} \cdot a_{l}a_{j}^{\dagger} + a_{k}a_{l}a_{j}^{\dagger}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{k}a_{d}
+0 \cdot \gamma_{jk} \cdot a_{j}^{\dagger}a_{d} + a_{k}a_{j}^{\dagger}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{jk}\gamma_{jk} + 0 \cdot \gamma_{jk} \cdot a_{k}a_{j}^{\dagger} + a_{k}a_{k}a_{j}^{\dagger}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{k}a_{c}
+0 \cdot \gamma_{jk} \cdot a_{j}^{\dagger}a_{c} + a_{k}a_{j}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{c}a_{l}
+0 \cdot \gamma_{jl} \cdot a_{j}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{j}^{\dagger}a_{j}^{\dagger} - a_{l}a_{j}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+a_{j}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{c}a_{k}
+0 \cdot \gamma_{jk} \cdot a_{j}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{j}^{\dagger}a_{j}^{\dagger} - a_{k}a_{j}^{\dagger}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+a_{j}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{jl} \cdot a_{b}^{\dagger}a_{l} + \gamma_{jb} \cdot a_{l}a_{l} - a_{b}^{\dagger}a_{l}a_{l}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+-\gamma_{jl} \cdot a_{b}^{\dagger}a_{d} + \gamma_{jb} \cdot a_{l}a_{d} + a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{l}a_{k}
+-\gamma_{jl} \cdot a_{b}^{\dagger}a_{k} + \gamma_{jk} \cdot a_{b}^{\dagger}a_{l} + \gamma_{jb} \cdot a_{l}a_{k} - a_{b}^{\dagger}a_{l}a_{k}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+-\gamma_{jl} \cdot a_{b}^{\dagger}a_{c} + \gamma_{jb} \cdot a_{l}a_{c} + a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{d}a_{l}
+\gamma_{jb}\gamma_{dl} + \gamma_{jl} \cdot a_{b}^{\dagger}a_{d}-\gamma_{dl} \cdot a_{b}^{\dagger}a_{j}^{\dagger}-\gamma_{jb} \cdot a_{l}a_{d} - a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{d}a_{d}
+\gamma_{jb} \cdot a_{d}a_{d} - a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{d}a_{k}
+\gamma_{jb}\gamma_{dk} + \gamma_{jk} \cdot a_{b}^{\dagger}a_{d}-\gamma_{dk} \cdot a_{b}^{\dagger}a_{j}^{\dagger}-\gamma_{jb} \cdot a_{k}a_{d} - a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{d}a_{c}
+\gamma_{jb} \cdot a_{d}a_{c} - a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{k}a_{l}
+\gamma_{jl} \cdot a_{b}^{\dagger}a_{k}-\gamma_{jk} \cdot a_{b}^{\dagger}a_{l} + \gamma_{jb} \cdot a_{k}a_{l} - a_{b}^{\dagger}a_{k}a_{l}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+-\gamma_{jk} \cdot a_{b}^{\dagger}a_{d} + \gamma_{jb} \cdot a_{k}a_{d} + a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{jk} \cdot a_{b}^{\dagger}a_{k} + \gamma_{jb} \cdot a_{k}a_{k} - a_{b}^{\dagger}a_{k}a_{k}a_{j}^{\dagger}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+-\gamma_{jk} \cdot a_{b}^{\dagger}a_{c} + \gamma_{jb} \cdot a_{k}a_{c} + a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{c}a_{l}
+\gamma_{jb}\gamma_{cl} + \gamma_{jl} \cdot a_{b}^{\dagger}a_{c}-\gamma_{cl} \cdot a_{b}^{\dagger}a_{j}^{\dagger}-\gamma_{jb} \cdot a_{l}a_{c} - a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{c}a_{d}
+\gamma_{jb} \cdot a_{c}a_{d} - a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{c}a_{k}
+\gamma_{jb}\gamma_{ck} + \gamma_{jk} \cdot a_{b}^{\dagger}a_{c}-\gamma_{ck} \cdot a_{b}^{\dagger}a_{j}^{\dagger}-\gamma_{jb} \cdot a_{k}a_{c} - a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{j}^{\dagger}a_{b}^{\dagger}a_{c}a_{c}
+\gamma_{jb} \cdot a_{c}a_{c} - a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{il} \cdot a_{b}^{\dagger}a_{l} + a_{b}^{\dagger}a_{l}a_{l}a_{i}^{\dagger}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{l}a_{d}
+\gamma_{il} \cdot a_{b}^{\dagger}a_{d} - a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{l}a_{k}
+\gamma_{il} \cdot a_{b}^{\dagger}a_{k}-\gamma_{ik} \cdot a_{b}^{\dagger}a_{l} + a_{b}^{\dagger}a_{l}a_{k}a_{i}^{\dagger}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{l}a_{c}
+\gamma_{il} \cdot a_{b}^{\dagger}a_{c} - a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{l}
+-\gamma_{il} \cdot a_{b}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{b}^{\dagger}a_{i}^{\dagger} + a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{d}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{k}
+-\gamma_{ik} \cdot a_{b}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{b}^{\dagger}a_{i}^{\dagger} + a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+a_{b}^{\dagger}a_{i}^{\dagger}a_{d}a_{c}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{k}a_{l}
+-\gamma_{il} \cdot a_{b}^{\dagger}a_{k} + \gamma_{ik} \cdot a_{b}^{\dagger}a_{l} + a_{b}^{\dagger}a_{k}a_{l}a_{i}^{\dagger}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{k}a_{d}
+\gamma_{ik} \cdot a_{b}^{\dagger}a_{d} - a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{ik} \cdot a_{b}^{\dagger}a_{k} + a_{b}^{\dagger}a_{k}a_{k}a_{i}^{\dagger}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{k}a_{c}
+\gamma_{ik} \cdot a_{b}^{\dagger}a_{c} - a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{l}
+-\gamma_{il} \cdot a_{b}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{b}^{\dagger}a_{i}^{\dagger} + a_{b}^{\dagger}a_{l}a_{i}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{d}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{k}
+-\gamma_{ik} \cdot a_{b}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{b}^{\dagger}a_{i}^{\dagger} + a_{b}^{\dagger}a_{k}a_{i}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+a_{b}^{\dagger}a_{i}^{\dagger}a_{c}a_{c}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{l}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{l}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{k}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{k}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{d}a_{l}
+\gamma_{dl} \cdot a_{b}^{\dagger}a_{a}^{\dagger} - a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{d}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{d}a_{d}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{d}a_{d}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{d}a_{k}
+\gamma_{dk} \cdot a_{b}^{\dagger}a_{a}^{\dagger} - a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{d}a_{c}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{d}a_{c}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{l}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{l}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{d}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{k}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{k}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{c}a_{l}
+\gamma_{cl} \cdot a_{b}^{\dagger}a_{a}^{\dagger} - a_{b}^{\dagger}a_{a}^{\dagger}a_{l}a_{c}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{c}a_{d}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{c}a_{d}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{c}a_{k}
+\gamma_{ck} \cdot a_{b}^{\dagger}a_{a}^{\dagger} - a_{b}^{\dagger}a_{a}^{\dagger}a_{k}a_{c}
+
+
+a_{b}^{\dagger}a_{a}^{\dagger}a_{c}a_{c}
+a_{b}^{\dagger}a_{a}^{\dagger}a_{c}a_{c}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{l}a_{l}
+0 \cdot \gamma_{jl} \cdot a_{b}^{\dagger}a_{l} + a_{b}^{\dagger}a_{l}a_{l}a_{j}^{\dagger}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{l}a_{d}
+\gamma_{jl} \cdot a_{b}^{\dagger}a_{d} - a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{l}a_{k}
+\gamma_{jl} \cdot a_{b}^{\dagger}a_{k}-\gamma_{jk} \cdot a_{b}^{\dagger}a_{l} + a_{b}^{\dagger}a_{l}a_{k}a_{j}^{\dagger}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{l}a_{c}
+\gamma_{jl} \cdot a_{b}^{\dagger}a_{c} - a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{l}
+-\gamma_{jl} \cdot a_{b}^{\dagger}a_{d} + \gamma_{dl} \cdot a_{b}^{\dagger}a_{j}^{\dagger} + a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{d}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{k}
+-\gamma_{jk} \cdot a_{b}^{\dagger}a_{d} + \gamma_{dk} \cdot a_{b}^{\dagger}a_{j}^{\dagger} + a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+a_{b}^{\dagger}a_{j}^{\dagger}a_{d}a_{c}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{k}a_{l}
+-\gamma_{jl} \cdot a_{b}^{\dagger}a_{k} + \gamma_{jk} \cdot a_{b}^{\dagger}a_{l} + a_{b}^{\dagger}a_{k}a_{l}a_{j}^{\dagger}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{k}a_{d}
+\gamma_{jk} \cdot a_{b}^{\dagger}a_{d} - a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{d}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{k}a_{k}
+0 \cdot \gamma_{jk} \cdot a_{b}^{\dagger}a_{k} + a_{b}^{\dagger}a_{k}a_{k}a_{j}^{\dagger}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{k}a_{c}
+\gamma_{jk} \cdot a_{b}^{\dagger}a_{c} - a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{l}
+-\gamma_{jl} \cdot a_{b}^{\dagger}a_{c} + \gamma_{cl} \cdot a_{b}^{\dagger}a_{j}^{\dagger} + a_{b}^{\dagger}a_{l}a_{j}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{d}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{k}
+-\gamma_{jk} \cdot a_{b}^{\dagger}a_{c} + \gamma_{ck} \cdot a_{b}^{\dagger}a_{j}^{\dagger} + a_{b}^{\dagger}a_{k}a_{j}^{\dagger}a_{c}
+
+
+a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+a_{b}^{\dagger}a_{j}^{\dagger}a_{c}a_{c}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{l}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{l}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{k}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{k}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{d}a_{l}
+\gamma_{dl} \cdot a_{b}^{\dagger}a_{b}^{\dagger} - a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{d}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{d}a_{d}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{d}a_{d}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{d}a_{k}
+\gamma_{dk} \cdot a_{b}^{\dagger}a_{b}^{\dagger} - a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{d}a_{c}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{d}a_{c}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{l}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{l}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{d}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{k}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{k}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{c}a_{l}
+\gamma_{cl} \cdot a_{b}^{\dagger}a_{b}^{\dagger} - a_{b}^{\dagger}a_{b}^{\dagger}a_{l}a_{c}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{c}a_{d}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{c}a_{d}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{c}a_{k}
+\gamma_{ck} \cdot a_{b}^{\dagger}a_{b}^{\dagger} - a_{b}^{\dagger}a_{b}^{\dagger}a_{k}a_{c}
+
+
+a_{b}^{\dagger}a_{b}^{\dagger}a_{c}a_{c}
+a_{b}^{\dagger}a_{b}^{\dagger}a_{c}a_{c}
+
+
+
+
+
+
+ALLWICKTERM: 
+
+
+
+
+
+
+
+
+
+(\delta_{ij}+2 \cdot \delta_{ij}\delta_{ab}+0 \cdot \delta_{ij}\delta_{ab}\delta_{kc})
+(\delta_{ij}+2 \cdot \delta_{ij}\delta_{ab})

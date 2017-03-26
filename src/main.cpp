@@ -3,6 +3,7 @@
 #include "LCSSQO.h"
 
 #include <iostream>
+#include <fstream>
 #include <string>
 
 using namespace std;
@@ -58,10 +59,10 @@ cout << lcssqo3 << endl;
     SQO<Elementary> q(SQO_Idx_Type::particle, SQO_Type::creation, "j");
     SQO<Elementary>  p2(SQO_Idx_Type::hole, SQO_Type::creation, "a");
     SQO<Elementary> q2(SQO_Idx_Type::hole, SQO_Type::creation, "b");
-    SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "i");
-    SQO<Elementary> s(SQO_Idx_Type::particle, SQO_Type::annihliation, "j");
-    SQO<Elementary> r2(SQO_Idx_Type::hole, SQO_Type::annihliation, "a");
-    SQO<Elementary> s2(SQO_Idx_Type::hole, SQO_Type::annihliation, "b");
+    SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "k");
+    SQO<Elementary> s(SQO_Idx_Type::particle, SQO_Type::annihliation, "l");
+    SQO<Elementary> r2(SQO_Idx_Type::hole, SQO_Type::annihliation, "c");
+    SQO<Elementary> s2(SQO_Idx_Type::hole, SQO_Type::annihliation, "d");
 
 
 
@@ -81,9 +82,9 @@ LCSSQO<Elementary, ParticleHole> allwickterms;
 
 
     for ( int i=0; i<4; i++ ) {
-        for ( int j=0; j<4; j++  ) {
+        for ( int j=i+1; j<4; j++  ) {
             for ( int k=4; k<8; k++ ) {
-                for ( int l=4; l<8; l++ ) {
+                for ( int l=k+1; l<8; l++ ) {
                     STR<SQO<Elementary>> tmp( {strvec[i], strvec[j], strvec[k], strvec[l] } );
                     veclc.push_back(tmp);
                 }
@@ -92,10 +93,14 @@ LCSSQO<Elementary, ParticleHole> allwickterms;
     }
     cout << "ALLTERMS: " << endl;
 
-    for ( int i=0; i<veclc.size(); i++) { cout << veclc[i] << endl; }
+    //for ( int i=0; i<veclc.size(); i++) { cout << veclc[i] << endl; }
 
     for ( int i=0; i<veclc.size(); i++ ) {
+        cout << veclc[i] << endl;
+        cout << wickexpansion( veclc[i], ParticleHole::fermi ) << endl;
         allwickterms = allwickterms + wickexpansion( veclc[i], ParticleHole::fermi );
+        cout << endl;
+        cout << endl;
     }
 
     cout << endl;
@@ -109,19 +114,19 @@ LCSSQO<Elementary, ParticleHole> allwickterms;
     cout << endl;
     cout << endl;
     cout << endl;
-    cout << allwickterms.cleanUpZero() << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << endl;
-    cout << "NONZEROWICKTERMS: " << endl;
-    cout << nonzero(allwickterms) << endl;
-
+    fstream f;
+    fstream g;
+    f.open("allwickterms", ios::out);
+    g.open("nonzerowickterms", ios::out);
+    f << allwickterms.cleanUpZero() << endl;
+    g << nonzero(allwickterms) << endl;
+    f.close();
+    g.close();
 
 PFSTT<Elementary> pf;
-TwoTensorSQO<Elementary> tt1(make_pair("i", SQO_Idx_Type::hole), make_pair("j", SQO_Idx_Type::particle));
-TwoTensorSQO<Elementary> tt2(make_pair("a", SQO_Idx_Type::hole), make_pair("b", SQO_Idx_Type::particle));
-TwoTensorSQO<Elementary> tt3(make_pair("k", SQO_Idx_Type::hole), make_pair("c", SQO_Idx_Type::particle));
+TwoTensorSQO<Elementary> tt1(make_pair("i", SQO_Idx_Type::particle), make_pair("j", SQO_Idx_Type::particle));
+TwoTensorSQO<Elementary> tt2(make_pair("a", SQO_Idx_Type::hole), make_pair("b", SQO_Idx_Type::hole));
+TwoTensorSQO<Elementary> tt3(make_pair("k", SQO_Idx_Type::particle), make_pair("c", SQO_Idx_Type::hole));
 
 STR<TwoTensorSQO<Elementary>> strtt1({tt1});
 STR<TwoTensorSQO<Elementary>> strtt2({tt1, tt2});
