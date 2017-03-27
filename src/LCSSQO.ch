@@ -212,53 +212,53 @@ template<class T1, class T2> LCSSQO<T1, T2> generalizedWickExpansion(STR<SQO<T1>
 
 
 template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & str, T2 const & ref, vector<int> const & positionslist) {
-  LCSSQO<T2, T2> tmpresult;
-  STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
-  if ( tmpstr.normalordered() ) { return EquateIfPossible((tmpresult + tmpstr), T1::noreference); }
+  LCSSQO<T2, T2> tmpresult;                                                                                                 // ERGEBNIS
+  STR<SQO<T2>> tmpstr(STRToSTR(str, ref));                                                                                  // Ursprünglicher STR in STR zur Referenz umwandeln
+  if ( tmpstr.normalordered() ) { return EquateIfPossible((tmpresult + tmpstr), T1::noreference); }                         // Wenn normalgeordnet zuruckgeben
   vector<int> tmplist = positionslist;
-  if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}
+  if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}                                        // Default positionlist wird anfang -> 0; ende -> str.size()
   tmpstr.normalproduct();
-  tmpresult = tmpresult + tmpstr;
-  list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >
-  previouscontractions;
+  tmpresult = tmpresult + tmpstr;                                                                                           // normalgeordneten STR zum Ergebnis
+  list< pair< pair<STR<SQO<T2>>,PFSTT<T2>>  , vector<int> > >   previouscontractions;                                       // list< (TwoTensor,STR) , positionsliste >
   vector<int> tmplist3;
+
   if ( tmplist.size() != 1 ) {
-    if ( tmplist.size() > 1 ) {
-    for ( int i = 1; i<tmplist.size(); i++ ) {
-      for ( int firstpos = tmplist[i-1]; firstpos < tmplist[i]; firstpos++ ) {
+    if ( tmplist.size() > 1 ) {                                                                      //   tmplist  (0,3,6)
+    for ( int i = 1; i<tmplist.size(); i++ ) {                                                       //   STR  012 345 6789
+      for ( int firstpos = tmplist[i-1]; firstpos < tmplist[i]; firstpos++ ) {                       //        ^   ^   ^        wobei " ^ " stelle von nächsten normalgeordneten fragment
         for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
           STR<SQO<T2>> tmp(STRToSTR(str, ref));
-          typename list<SQO<T2>>::iterator it1 = tmp.begin();
-          typename list<SQO<T2>>::iterator it2 = tmp.begin();
-            for ( int i=0; i<firstpos; i++ ) { ++it1; }
-            for ( int j=0; j<secondpos; j++ ) { ++it2; }
-            if ( (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation )
+          typename list<SQO<T2>>::iterator it1 = tmp.begin();                                        //   STR   012 345 6789
+          typename list<SQO<T2>>::iterator it2 = tmp.begin();                                        //         ^   ^               iterieren
+            for ( int i=0; i<firstpos; i++ ) { ++it1; }                                              //         ^    ^
+            for ( int j=0; j<secondpos; j++ ) { ++it2; }                                             //         ^     ^
+            if ( (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation )              //   Wenn an der ersten Position ein vernichter und an der zweiten ein erzeuger ist
             {
               vector<int> tmplist2 = tmplist;
-              for ( int j=i; j<tmplist2.size(); j++) { --tmplist2[j]; }
-              tmplist2[i-1] = firstpos;
+              for ( int j=i; j<tmplist2.size(); j++) { --tmplist2[j]; }                                                    //  tmplist2 (-1,2,5)             ^ ^   ^
+              tmplist2[i-1] = firstpos;                                                                                    //  tmplist2 (0,2,5)   //   STR   012 345 6789
               TwoTensorSQO<T2> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
               STR<TwoTensorSQO<T2>> tmpstrtt({tmptt});
-              PFSTT<T2> tmppf({tmpstrtt});
-              tmppf = tmppf * tmp._prefactor;
-              int sumofpos = firstpos + secondpos -1;
-              tmppf = tmppf * (( sumofpos % 2  == 0 ) ? 1 : -1);
+              PFSTT<T2> tmppf({tmpstrtt});                                                          //  TwoTensor vorfaktor
+              tmppf = tmppf * tmp._prefactor;                                                       //  STR vorfaktor auf Tensor übertragen
               tmp._prefactor = 1;
-              tmp.list<SQO<T2>>::erase(it1);
-              tmp.list<SQO<T2>>::erase(it2);
-              if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }
+              int sumofpos = firstpos + secondpos - 1 ;                                             //  Transpositionen um operatoren nach links zu verschieben. Reihenfolge bleibt (-1).
+              tmppf = tmppf * (( sumofpos % 2  == 0 ) ? 1 : -1);                                    //  Vorzeichen der permutation
+              tmp.list<SQO<T2>>::erase(it1);                                                        //  ersten sqo aus str löschen
+              tmp.list<SQO<T2>>::erase(it2);                                                        //  zweiten sqo aus str löschen
+              if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }                  // STR leer, dass voll kontrahiert
               else {
-                previouscontractions.push_back( make_pair( make_pair( tmp, tmppf ), tmplist2 ) );
+                previouscontractions.push_back( make_pair( make_pair( tmp, tmppf ), tmplist2 ) );                         // tmp nicht normalgeordnet in previous
                 tmp.normalproduct();
                 tmppf = tmppf * tmp._prefactor;
                 tmp._prefactor = 1;
-                if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }
+                if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }                                 // tmp normalgeordnet in Ergebnis
                 else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
               }
             }
           }
       }
-    }
+    } // für alle previous wickexpansion aufrufen und  den jeweiligen str im ergebnis löschen, da sonst doppelt
     for ( typename list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
       LCSSQO<T2, T2> tmpwick = wickexpansion( ((*it1).first).first, ref, (*it1).second );
       STR<SQO<T2>> strprevious = ((*it1).first).first;

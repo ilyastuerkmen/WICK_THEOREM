@@ -36,4 +36,6 @@ template<class Formalism> PFSTT<Formalism> operator * ( PFSTT<Formalism> const &
 
 template<class Formalism> ostream & operator << ( ostream &, PFSTT<Formalism> const & );
 
+#include "PFSTT.ch"
+
 #endif

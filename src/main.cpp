@@ -55,14 +55,14 @@ cout << lcssqo3 << endl;
 */
 
 
-    SQO<Elementary>  p(SQO_Idx_Type::particle, SQO_Type::creation, "i");
-    SQO<Elementary> q(SQO_Idx_Type::particle, SQO_Type::creation, "j");
-    SQO<Elementary>  p2(SQO_Idx_Type::hole, SQO_Type::creation, "a");
-    SQO<Elementary> q2(SQO_Idx_Type::hole, SQO_Type::creation, "b");
-    SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "k");
-    SQO<Elementary> s(SQO_Idx_Type::particle, SQO_Type::annihliation, "l");
-    SQO<Elementary> r2(SQO_Idx_Type::hole, SQO_Type::annihliation, "c");
-    SQO<Elementary> s2(SQO_Idx_Type::hole, SQO_Type::annihliation, "d");
+    SQO<Elementary>  p(SQO_Idx_Type::particle, SQO_Type::creation, "p");
+    SQO<Elementary> q(SQO_Idx_Type::particle, SQO_Type::creation, "q");
+    SQO<Elementary>  p2(SQO_Idx_Type::hole, SQO_Type::creation, "p");
+    SQO<Elementary> q2(SQO_Idx_Type::hole, SQO_Type::creation, "q");
+    SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "r");
+    SQO<Elementary> s(SQO_Idx_Type::particle, SQO_Type::annihliation, "s");
+    SQO<Elementary> r2(SQO_Idx_Type::hole, SQO_Type::annihliation, "r");
+    SQO<Elementary> s2(SQO_Idx_Type::hole, SQO_Type::annihliation, "s");
 
 
 
@@ -80,17 +80,58 @@ strvec.push_back(r2);
 LCSSQO<Elementary, ParticleHole> allwickterms;
     vector< STR<SQO<Elementary>> > veclc;
 
+STR<SQO<Elementary>> test1({p,q,s,r});
 
+STR<SQO<Elementary>> test2({p2,q,s,r});
+STR<SQO<Elementary>> test3({p,q2,s,r});
+STR<SQO<Elementary>> test4({p,q,s2,r});
+STR<SQO<Elementary>> test5({p,q,s,r2});
+
+STR<SQO<Elementary>> test6({p2,q2,s,r});
+STR<SQO<Elementary>> test7({p2,q,s2,r});
+STR<SQO<Elementary>> test8({p2,q,s,r2});
+STR<SQO<Elementary>> test9({p,q2,s2,r});
+STR<SQO<Elementary>> test10({p,q2,s,r2});
+STR<SQO<Elementary>> test11({p,q,s2,r2});
+
+STR<SQO<Elementary>> test12({p2,q2,s2,r});
+STR<SQO<Elementary>> test13({p2,q2,s,r2});
+STR<SQO<Elementary>> test14({p2,q,s2,r2});
+STR<SQO<Elementary>> test15({p,q2,s2,r2});
+
+STR<SQO<Elementary>> test16({p2,q2,s2,r2});
+
+veclc.push_back(test1);
+veclc.push_back(test2);
+veclc.push_back(test3);
+veclc.push_back(test4);
+veclc.push_back(test5);
+veclc.push_back(test6);
+veclc.push_back(test7);
+veclc.push_back(test8);
+veclc.push_back(test9);
+veclc.push_back(test10);
+veclc.push_back(test11);
+veclc.push_back(test12);
+veclc.push_back(test13);
+veclc.push_back(test14);
+veclc.push_back(test15);
+veclc.push_back(test16);
+
+
+
+/*
     for ( int i=0; i<4; i++ ) {
-        for ( int j=i+1; j<4; j++  ) {
+        for ( int j=0; j<4; j++  ) {
             for ( int k=4; k<8; k++ ) {
-                for ( int l=k+1; l<8; l++ ) {
+                for ( int l=4; l<8; l++ ) {
                     STR<SQO<Elementary>> tmp( {strvec[i], strvec[j], strvec[k], strvec[l] } );
                     veclc.push_back(tmp);
                 }
             }
         }
     }
+    */
     cout << "ALLTERMS: " << endl;
 
     //for ( int i=0; i<veclc.size(); i++) { cout << veclc[i] << endl; }
@@ -140,4 +181,7 @@ cout << endl;
 
 cout << pf << endl;
 cout << pf.cleanUpZero() << endl;
+
+
+
 }

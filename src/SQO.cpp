@@ -45,8 +45,6 @@ SQO<Elementary> ToElementary( SQO<Elementary> const & elementary) {
 
 
 
-
-
 template SQO<Elementary>::SQO( SQO_Idx_Type const &, SQO_Type const & , string const  & );
 template SQO<ParticleHole>::SQO( SQO_Idx_Type const &, SQO_Type const & , string const  & );
 template SQO<Elementary>::SQO( SQO<Elementary> const & );

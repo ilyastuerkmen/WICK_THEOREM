@@ -1,4 +1,4 @@
-#include "PFSTT.h"
+
 
 template<class Formalism> PFSTT<Formalism>::PFSTT() : map<STR<TwoTensorSQO<Formalism>>, double, STRTTCompare<Formalism>>() , realnumber(0) {}
 template<class Formalism> PFSTT<Formalism>::PFSTT( initializer_list<STR<TwoTensorSQO<Formalism>>> il, double const & rn)
@@ -185,43 +185,3 @@ template<class Formalism> ostream & operator << ( ostream & o, PFSTT<Formalism> 
   }
     return o;
 }
-
-
-
-template PFSTT<Elementary> PFSTT<Elementary>::cleanUpZero();
-template PFSTT<ParticleHole> PFSTT<ParticleHole>::cleanUpZero();
-template PFSTT<Elementary>::PFSTT();
-template PFSTT<ParticleHole>::PFSTT();
-template PFSTT<Elementary>::PFSTT( initializer_list<STR<TwoTensorSQO<Elementary>>>, double const & );
-template PFSTT<ParticleHole>::PFSTT( initializer_list<STR<TwoTensorSQO<ParticleHole>>>, double const & );
-template PFSTT<Elementary>::PFSTT( PFSTT<Elementary> const & );
-template PFSTT<ParticleHole>::PFSTT( PFSTT<ParticleHole> const & );
-template PFSTT<Elementary> & PFSTT<Elementary>::operator = ( PFSTT<Elementary> const & );
-template PFSTT<ParticleHole> & PFSTT<ParticleHole>::operator = ( PFSTT<ParticleHole> const & );
-
-template ostream & operator << ( ostream &, PFSTT<Elementary> const & );
-template ostream & operator << ( ostream &, PFSTT<ParticleHole> const & );
-template double & PFSTT<Elementary>::operator [] ( STR<TwoTensorSQO<Elementary>> const & );
-template double & PFSTT<ParticleHole>::operator [] ( STR<TwoTensorSQO<ParticleHole>> const & );
-
-template PFSTT<Elementary> operator + ( PFSTT<Elementary> const &, double const & );
-template PFSTT<ParticleHole> operator + ( PFSTT<ParticleHole> const &, double const & );
-template PFSTT<Elementary> operator + ( double const &, PFSTT<Elementary> const & );
-template PFSTT<ParticleHole> operator + ( double const &, PFSTT<ParticleHole> const & );
-template PFSTT<Elementary> operator + ( PFSTT<Elementary> const &, STR<TwoTensorSQO<Elementary>> const &);
-template PFSTT<ParticleHole> operator + ( PFSTT<ParticleHole> const &, STR<TwoTensorSQO<ParticleHole>> const &);
-template PFSTT<Elementary> operator + ( STR<TwoTensorSQO<Elementary>> const &, PFSTT<Elementary> const & );
-template PFSTT<ParticleHole> operator + ( STR<TwoTensorSQO<ParticleHole>> const &, PFSTT<ParticleHole> const & );
-template PFSTT<Elementary> operator + ( PFSTT<Elementary> const & , PFSTT<Elementary> const &);
-template PFSTT<ParticleHole> operator + ( PFSTT<ParticleHole> const & , PFSTT<ParticleHole> const &);
-
-template PFSTT<Elementary> operator * ( PFSTT<Elementary> const &, double const & );
-template PFSTT<Elementary> operator * ( double const & , PFSTT<Elementary> const &);
-template PFSTT<Elementary> operator * ( PFSTT<Elementary> const &, STR<TwoTensorSQO<Elementary>> const & );
-template PFSTT<Elementary> operator * ( STR<TwoTensorSQO<Elementary>> const &, PFSTT<Elementary> const & );
-template PFSTT<Elementary> operator * ( PFSTT<Elementary> const &, PFSTT<Elementary> const & );
-template PFSTT<ParticleHole> operator * ( PFSTT<ParticleHole> const &, double const & );
-template PFSTT<ParticleHole> operator * ( double const & , PFSTT<ParticleHole> const &);
-template PFSTT<ParticleHole> operator * ( PFSTT<ParticleHole> const &, STR<TwoTensorSQO<ParticleHole>> const & );
-template PFSTT<ParticleHole> operator * ( STR<TwoTensorSQO<ParticleHole>> const &, PFSTT<ParticleHole> const & );
-template PFSTT<ParticleHole> operator * ( PFSTT<ParticleHole> const &, PFSTT<ParticleHole> const & );

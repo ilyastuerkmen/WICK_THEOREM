@@ -72,4 +72,6 @@ template<class T> STR<T>  operator * ( STR<T> const &, T const & );
 template<class T> STR<T>  operator * ( STR<T> const & , STR<T> const & );
 template<class T> ostream & operator << ( ostream &, STR<T> const & );
 
+#include "STR.ch"
+
 #endif
