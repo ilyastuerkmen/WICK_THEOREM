@@ -23,8 +23,8 @@ SQO<ParticleHole> ToParticleHole( SQO<ParticleHole> const & particlehole) {
 SQO<ParticleHole> ToParticleHole( SQO<Elementary> const & elementary) {
   SQO_Type tmpsqotype;
   if ( elementary.idxtype == SQO_Idx_Type::general ) { throw;}
-  else if ( elementary.idxtype == SQO_Idx_Type::particle  &&  elementary.a == SQO_Type::annihliation ) { tmpsqotype = SQO_Type::creation;  }
-  else if ( elementary.idxtype == SQO_Idx_Type::particle  &&  elementary.a == SQO_Type::creation ) { tmpsqotype = SQO_Type::annihliation;  }
+  else if ( elementary.idxtype == SQO_Idx_Type::particle  &&  elementary.a == SQO_Type::annihilation ) { tmpsqotype = SQO_Type::creation;  }
+  else if ( elementary.idxtype == SQO_Idx_Type::particle  &&  elementary.a == SQO_Type::creation ) { tmpsqotype = SQO_Type::annihilation;  }
   else if ( elementary.idxtype == SQO_Idx_Type::hole) { tmpsqotype = elementary.a;  }
   SQO<ParticleHole>  tmp(elementary.idxtype, tmpsqotype, elementary.idx);
   return tmp;
@@ -32,8 +32,8 @@ SQO<ParticleHole> ToParticleHole( SQO<Elementary> const & elementary) {
 SQO<Elementary> ToElementary( SQO<ParticleHole> const & particlehole){
   SQO_Type tmpsqotype;
   if ( particlehole.idxtype == SQO_Idx_Type::general ) { throw;}
-  else if ( particlehole.idxtype == SQO_Idx_Type::particle  &&  particlehole.a == SQO_Type::annihliation ) { tmpsqotype = SQO_Type::creation;  }
-  else if ( particlehole.idxtype == SQO_Idx_Type::particle  &&  particlehole.a == SQO_Type::creation ) { tmpsqotype = SQO_Type::annihliation;  }
+  else if ( particlehole.idxtype == SQO_Idx_Type::particle  &&  particlehole.a == SQO_Type::annihilation ) { tmpsqotype = SQO_Type::creation;  }
+  else if ( particlehole.idxtype == SQO_Idx_Type::particle  &&  particlehole.a == SQO_Type::creation ) { tmpsqotype = SQO_Type::annihilation;  }
   else if ( particlehole.idxtype == SQO_Idx_Type::hole) { tmpsqotype = particlehole.a;  }
   SQO<Elementary>  tmp(particlehole.idxtype, tmpsqotype, particlehole.idx);
   return tmp;

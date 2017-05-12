@@ -10,28 +10,28 @@ using namespace std;
 int  main() {
 /*
 SQO<ParticleHole>  i(SQO_Idx_Type::particle, SQO_Type::creation, "i");
-SQO<ParticleHole>  i2(SQO_Idx_Type::particle, SQO_Type::annihliation, "i");
-SQO<ParticleHole> a2(SQO_Idx_Type::hole, SQO_Type::annihliation, "a");
+SQO<ParticleHole>  i2(SQO_Idx_Type::particle, SQO_Type::annihilation, "i");
+SQO<ParticleHole> a2(SQO_Idx_Type::hole, SQO_Type::annihilation, "a");
 SQO<ParticleHole> a(SQO_Idx_Type::hole, SQO_Type::creation, "a");
-SQO<ParticleHole> j2(SQO_Idx_Type::particle, SQO_Type::annihliation, "j");
+SQO<ParticleHole> j2(SQO_Idx_Type::particle, SQO_Type::annihilation, "j");
 SQO<ParticleHole> j(SQO_Idx_Type::particle, SQO_Type::creation, "j");
 SQO<ParticleHole> b(SQO_Idx_Type::hole, SQO_Type::creation, "b");
-SQO<ParticleHole> b2(SQO_Idx_Type::hole, SQO_Type::annihliation, "b");
+SQO<ParticleHole> b2(SQO_Idx_Type::hole, SQO_Type::annihilation, "b");
 
 //pqrs
 SQO<Elementary>  p(SQO_Idx_Type::particle, SQO_Type::creation, "p");
 SQO<Elementary> q(SQO_Idx_Type::particle, SQO_Type::creation, "q");
-SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "r");
-SQO<Elementary> s(SQO_Idx_Type::particle, SQO_Type::annihliation, "s");
+SQO<Elementary> r(SQO_Idx_Type::particle, SQO_Type::annihilation, "r");
+SQO<Elementary> s(SQO_Idx_Type::particle, SQO_Type::annihilation, "s");
 SQO<Elementary>  t(SQO_Idx_Type::particle, SQO_Type::creation, "t");
-SQO<Elementary> u(SQO_Idx_Type::particle, SQO_Type::annihliation, "u");
+SQO<Elementary> u(SQO_Idx_Type::particle, SQO_Type::annihilation, "u");
 SQO<Elementary> v(SQO_Idx_Type::particle, SQO_Type::creation, "v");
-SQO<Elementary> w(SQO_Idx_Type::particle, SQO_Type::annihliation, "w");
+SQO<Elementary> w(SQO_Idx_Type::particle, SQO_Type::annihilation, "w");
 
 SQO<Elementary>  p2tmp(SQO_Idx_Type::particle, SQO_Type::creation, "p");
 SQO<Elementary> r2tmp(SQO_Idx_Type::particle, SQO_Type::creation, "r");
-SQO<Elementary> q2tmp(SQO_Idx_Type::particle, SQO_Type::annihliation, "q");
-SQO<Elementary> s2tmp(SQO_Idx_Type::particle, SQO_Type::annihliation, "s");
+SQO<Elementary> q2tmp(SQO_Idx_Type::particle, SQO_Type::annihilation, "q");
+SQO<Elementary> s2tmp(SQO_Idx_Type::particle, SQO_Type::annihilation, "s");
 
 
 STR<SQO<ParticleHole>> op1({a2,i,b,j2});
@@ -54,19 +54,19 @@ cout << lcssqo3 << endl;
     //pqrs
     SQO<ParticleHole>  p(SQO_Idx_Type::particle, SQO_Type::creation, "i");
     SQO<ParticleHole> q(SQO_Idx_Type::particle, SQO_Type::creation, "j");
-    SQO<ParticleHole> r(SQO_Idx_Type::particle, SQO_Type::annihliation, "k");
-    SQO<ParticleHole> s(SQO_Idx_Type::particle, SQO_Type::annihliation, "l");
-    
+    SQO<ParticleHole> r(SQO_Idx_Type::particle, SQO_Type::annihilation, "k");
+    SQO<ParticleHole> s(SQO_Idx_Type::particle, SQO_Type::annihilation, "l");
+
     SQO<ParticleHole>  p2(SQO_Idx_Type::hole, SQO_Type::creation, "a");
     SQO<ParticleHole> q2(SQO_Idx_Type::hole, SQO_Type::creation, "b");
-    SQO<ParticleHole> r2(SQO_Idx_Type::hole, SQO_Type::annihliation, "c");
-    SQO<ParticleHole> s2(SQO_Idx_Type::hole, SQO_Type::annihliation, "d");
-    
-    
-    
-    
-    
-    
+    SQO<ParticleHole> r2(SQO_Idx_Type::hole, SQO_Type::annihilation, "c");
+    SQO<ParticleHole> s2(SQO_Idx_Type::hole, SQO_Type::annihilation, "d");
+
+
+
+
+
+
 vector<SQO<Elementary>> strvec;
 strvec.push_back(p);
 strvec.push_back(q);
@@ -79,6 +79,6 @@ strvec.push_back(s2);
 
 
 
-    
+
 
 }

@@ -64,7 +64,7 @@ template<class Formalism> STR<SQO<Formalism>>::STR( STR<SQO<Formalism>> const & 
 template<class Formalism> bool STR<SQO<Formalism>>::normalordered() const {
   SQO_Type previoussqotype;
   for ( typename list<SQO<Formalism>>::const_iterator it = (*this).begin(); it != (*this).end(); it++ ) {
-    if ( it != (*this).begin() &&  previoussqotype == SQO_Type::annihliation  && (*it).a == SQO_Type::creation ) { return false; }
+    if ( it != (*this).begin() &&  previoussqotype == SQO_Type::annihilation  && (*it).a == SQO_Type::creation ) { return false; }
       previoussqotype = (*it).a;
   }
   return true;
@@ -73,7 +73,7 @@ template<class Formalism> void STR<SQO<Formalism>>::normalproduct() {
   int differencetranspositions = 0;
   int sumtranspositions = 0;
   STR<SQO<Formalism>> creations;
-  STR<SQO<Formalism>> annihliations;
+  STR<SQO<Formalism>> annihilations;
   SQO_Type previoussqotype ;
 
   for ( typename list<SQO<Formalism>>::const_iterator it = (*this).begin(); it != (*this).end(); it++ ) {
@@ -81,18 +81,19 @@ template<class Formalism> void STR<SQO<Formalism>>::normalproduct() {
       creations.list<SQO<Formalism>>::push_back(*it);
       sumtranspositions += differencetranspositions ;
     }
-    else if ( (*it).a == SQO_Type::annihliation ) {
-      annihliations.list<SQO<Formalism>>::push_back(*it);
+    else if ( (*it).a == SQO_Type::annihilation ) {
+      annihilations.list<SQO<Formalism>>::push_back(*it);
       differencetranspositions += 1;
     }
   };
 
   (*this).list<SQO<Formalism>>::clear() ;
+  *this = creations * annihilations;
   (*this)._prefactor *= ( sumtranspositions % 2  == 0 ) ? 1 : -1 ;
-
+/*
   for ( typename list<SQO<Formalism>>::const_iterator it = creations.begin(); it != creations.end(); it++ ) { (*this).push_back(*it); }
-  for ( typename list<SQO<Formalism>>::const_iterator it = annihliations.begin(); it != annihliations.end(); it++ ) { (*this).push_back(*it); }
-
+  for ( typename list<SQO<Formalism>>::const_iterator it = annihilations.begin(); it != annihilations.end(); it++ ) { (*this).push_back(*it); }
+*/
 
 }
 template<class Formalism> bool STR<SQO<Formalism>>::operator == ( STR<SQO<Formalism>> const & s) {
@@ -115,7 +116,7 @@ template<class Formalism> bool STR<SQO<Formalism>>::operator == ( STR<SQO<Formal
 	  typename  list<SQO<Formalism>>::iterator second = tmp.begin();
 	  ++second;
 	  for ( int increment=1; increment<positionoffirst; increment++) { ++first; ++second; }
-	  if ( ((*first).idxtype == (*second).idxtype) && ((*first).a != (*second).a) ) {}
+	  if ( ((*first).idxtype == (*second).idxtype) && ((*first).a != (*second).a) && (*first).idx == (*second).idx) {}
 	  else {
 	    SQO<Formalism> pos1((*first));
 	    SQO<Formalism> pos2((*second));
@@ -143,10 +144,10 @@ template<class Formalism> bool STR<SQO<Formalism>>::operator == ( STR<SQO<Formal
     }
     /*
     cout << "ALL EQUAL STRINGS: " << endl;
-    for ( typename  list<STR<SQO>>::iterator it4=equalstrings.begin(); it4!=equalstrings.end(); it4++) {
+    for ( typename  list<STR<SQO<Formalism>>>::iterator it4=equalstrings.begin(); it4!=equalstrings.end(); it4++) {
       cout << (*it4) << endl;
     }
-    */
+  */
     return equal;
   }
 }
@@ -192,8 +193,8 @@ template<class Formalism> bool STR<TwoTensorSQO<Formalism>>::operator == ( STR<T
           tmpbool = true ;
 	        break;
 	      }
-        if (tmpbool == false ) { ++it1;}
       }
+      if (tmpbool == false ) { break;}
     }
     if ( tmp1.size() == 0) { return true; }
     return false;
@@ -245,7 +246,7 @@ template<class T1> vector<int> PositionOfNextNormalFragment( STR<SQO<T1>> const 
   int count = 1;
   SQO_Type previoussqotype = (*str.begin()).a;
   for ( typename list<SQO<T1>>::const_iterator it = (++str.begin()); it != str.end(); it++ ) {
-    if ( previoussqotype ==  SQO_Type::annihliation && (*it).a == SQO_Type::creation ) {
+    if ( previoussqotype ==  SQO_Type::annihilation && (*it).a == SQO_Type::creation ) {
       tmp.push_back(count);
     }
     previoussqotype = (*it).a;

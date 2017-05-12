@@ -232,7 +232,7 @@ template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & s
           typename list<SQO<T2>>::iterator it2 = tmp.begin();                                        //         ^   ^               iterieren
             for ( int i=0; i<firstpos; i++ ) { ++it1; }                                              //         ^    ^
             for ( int j=0; j<secondpos; j++ ) { ++it2; }                                             //         ^     ^
-            if ( (*it1).a == SQO_Type::annihliation && (*it2).a == SQO_Type::creation )              //   Wenn an der ersten Position ein vernichter und an der zweiten ein erzeuger ist
+            if ( (*it1).a == SQO_Type::annihilation && (*it2).a == SQO_Type::creation )              //   Wenn an der ersten Position ein vernichter und an der zweiten ein erzeuger ist
             {
               vector<int> tmplist2 = tmplist;
               for ( int j=i; j<tmplist2.size(); j++) { --tmplist2[j]; }                                                    //  tmplist2 (-1,2,5)             ^ ^   ^
@@ -275,6 +275,7 @@ return EquateIfPossible(tmpresult, T1::noreference);
 
 
 template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2> const & lc){
+
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
@@ -307,8 +308,7 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
     o << (*it).first;
   }
 
-
-/* FOR TESTWICK
+/*FOR TESTWICK
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
 if ( lc.size() == 1 ) { o << (*lc.begin()).first; }
@@ -316,19 +316,19 @@ else {
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
     for ( typename map< STR<TwoTensorSQO<T2>> , double, STRTTCompare<T2> >::const_iterator it2=((*it).second).begin(); it2!=((*it).second).end(); it2++ ) {
      if ( it2==((*lc.begin()).second).begin() ) {
-        if ( (*it2).second == -1  ) { o << " - " ;}
+        if ( (*it2).second == -1  ) { o << "-" ;}
         o << (*it2).first << " \\cdot " <<(*it).first ;
      }
      else {
-      if ( (*it2).second == 1  ) { o << " + " ;}
-      if ( (*it2).second == -1  ) { o << " - " ;}
+      if ( (*it2).second == 1  ) { o << "+" ;}
+      if ( (*it2).second == -1  ) { o << "-" ;}
       o << (*it2).first << " \\cdot " << (*it).first ;
       }
     }
 
 if ( (*it).second.realnumber != 0 ) {
-if ( (*it).second.realnumber == 1  )  { o << " + " ;}
-if ( (*it).second.realnumber == -1  ) { o << " - " ;}
+if ( (*it).second.realnumber == 1  )  { o << "+" ;}
+if ( (*it).second.realnumber == -1  ) { o << "-" ;}
 o << (*it).first ;
   }
 }
