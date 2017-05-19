@@ -255,8 +255,8 @@ template<class T1> vector<int> PositionOfNextNormalFragment( STR<SQO<T1>> const 
   return tmp;
 }
 
-STR<SQO<ParticleHole>> STRToSTR( STR<SQO<ParticleHole>> const & strparticlehole, ParticleHole const &) { return strparticlehole;}
-STR<SQO<ParticleHole>> STRToSTR( STR<SQO<Elementary>> const & strelementary, ParticleHole const &) {
+STR<SQO<ParticleHole>> strtostr( STR<SQO<ParticleHole>> const & strparticlehole, ParticleHole const &) { return strparticlehole;}
+STR<SQO<ParticleHole>> strtostr( STR<SQO<Elementary>> const & strelementary, ParticleHole const &) {
   STR<SQO<ParticleHole>> tmp;
   for ( typename list<SQO<Elementary>>::const_iterator it=strelementary.begin(); it!=strelementary.end(); it++ ) {
     tmp.push_back(ToParticleHole((*it)));
@@ -264,8 +264,8 @@ STR<SQO<ParticleHole>> STRToSTR( STR<SQO<Elementary>> const & strelementary, Par
     tmp._prefactor = strelementary._prefactor;
   return tmp;
 }
-STR<SQO<Elementary>> STRToSTR( STR<SQO<Elementary>> const & strelementary, Elementary const &){ return strelementary;}
-STR<SQO<Elementary>> STRToSTR( STR<SQO<ParticleHole>> const & strparticlehole, Elementary const &){
+STR<SQO<Elementary>> strtostr( STR<SQO<Elementary>> const & strelementary, Elementary const &){ return strelementary;}
+STR<SQO<Elementary>> strtostr( STR<SQO<ParticleHole>> const & strparticlehole, Elementary const &){
   STR<SQO<Elementary>> tmp;
   for ( typename list<SQO<ParticleHole>>::const_iterator it=strparticlehole.begin(); it!=strparticlehole.end(); it++ ) {
     tmp.push_back(ToElementary((*it)));
@@ -275,10 +275,10 @@ STR<SQO<Elementary>> STRToSTR( STR<SQO<ParticleHole>> const & strparticlehole, E
 }
 
 
-STR<SQO<Elementary>> EquateIfPossible( STR<SQO<Elementary>> const & str, Elementary const & elem) { return str; }
-STR<SQO<Elementary>> EquateIfPossible( STR<SQO<ParticleHole>> const & str, Elementary const & elem ) { return STRToSTR(str, elem) ; }
-STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<Elementary>> const & str, ParticleHole const & ph) { return STRToSTR(str, ph) ; }
-STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<ParticleHole>> const & str, ParticleHole const & ph) { return str; }
+STR<SQO<Elementary>> STRToSTR( STR<SQO<Elementary>> const & str, Elementary const & elem) { return str; }
+STR<SQO<Elementary>> STRToSTR( STR<SQO<ParticleHole>> const & str, Elementary const & elem ) { return strtostr(str, elem) ; }
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<Elementary>> const & str, ParticleHole const & ph) { return strtostr(str, ph) ; }
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<ParticleHole>> const & str, ParticleHole const & ph) { return str; }
 
 
 

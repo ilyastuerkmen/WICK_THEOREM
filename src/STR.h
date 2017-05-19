@@ -52,17 +52,17 @@ public:
 template<class T1> vector<int> PositionOfNextNormalFragment( STR<SQO<T1>> const &);
 
 
-STR<SQO<ParticleHole>> STRToSTR( STR<SQO<ParticleHole>> const &, ParticleHole const &) ;
-STR<SQO<ParticleHole>> STRToSTR( STR<SQO<Elementary>> const &, ParticleHole const &);
+STR<SQO<ParticleHole>> strtostr( STR<SQO<ParticleHole>> const &, ParticleHole const &) ;
+STR<SQO<ParticleHole>> strtostr( STR<SQO<Elementary>> const &, ParticleHole const &);
+STR<SQO<Elementary>> strtostr( STR<SQO<Elementary>> const &, Elementary const &);
+STR<SQO<Elementary>> strtostr( STR<SQO<ParticleHole>> const &, Elementary const &);
+
 STR<SQO<Elementary>> STRToSTR( STR<SQO<Elementary>> const &, Elementary const &);
 STR<SQO<Elementary>> STRToSTR( STR<SQO<ParticleHole>> const &, Elementary const &);
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<Elementary>> const &, ParticleHole const &);
+STR<SQO<ParticleHole>> STRToSTR( STR<SQO<ParticleHole>> const &, ParticleHole const & );
 
-STR<SQO<Elementary>> EquateIfPossible( STR<SQO<Elementary>> const &, Elementary const &);
-STR<SQO<Elementary>> EquateIfPossible( STR<SQO<ParticleHole>> const &, Elementary const &);
-STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<Elementary>> const &, ParticleHole const &);
-STR<SQO<ParticleHole>> EquateIfPossible( STR<SQO<ParticleHole>> const &, ParticleHole const & );
-
-//template<class T1, class T2> STR<SQO<T2>> STRToSTR(STR<SQO<T1>>, T2 const &);
+//template<class T1, class T2> STR<SQO<T2>> strtostr(STR<SQO<T1>>, T2 const &);
 
 
 template<class T> STR<T>  operator * ( double const &, STR<T> const & );

@@ -30,7 +30,6 @@ template<class T1, class T2> LCSSQO<T1, T2> & LCSSQO<T1, T2>::operator= ( LCSSQO
   }
   return *this;
 }
-
 template<class T1, class T2> LCSSQO<T1,T2> LCSSQO<T1,T2>::cleanUpZero() {
    (*this).fullcontraction.cleanUpZero();
    typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::iterator it=(*this).begin();
@@ -190,92 +189,83 @@ template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const & 
 
 
 
-
-
-
-
-
-template<class T1, class T2, class T3> LCSSQO<T1, T2> EquateIfPossible( LCSSQO<T3, T2> const & lcssqo, T1 const & t1) {
+template<class T1, class T2, class T3> LCSSQO<T1, T2> LCSSQOToLCSSQO( LCSSQO<T3, T2> const & lcssqo, T1 const & t1) {
   LCSSQO<T1, T2> tmp;
   tmp.fullcontraction = lcssqo.fullcontraction;
   for ( typename map< STR<SQO<T3>>, PFSTT<T2>, STRSQOCompare<T3>>::const_iterator it1=lcssqo.begin(); it1!=lcssqo.end(); it1++ ) {
-    tmp.insert( make_pair( EquateIfPossible((*it1).first, t1) , (*it1).second ));
+    tmp.insert( make_pair( STRToSTR((*it1).first, t1) , (*it1).second ));
   }
   return tmp;
 }
-
 template<class T1, class T2> LCSSQO<T1, T2> generalizedWickExpansion(STR<SQO<T1>> const & str, T2 const & ref) {
   STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
   LCSSQO<T2, T2>  tmpresult( wickexpansion(tmpstr, ref, PositionOfNextNormalFragment(tmpstr)) );
-  return EquateIfPossible(tmpresult, T1::noreference);
+  return LCSSQOToLCSSQO(tmpresult, T1::noreference);
 }
-
-
 template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & str, T2 const & ref, vector<int> const & positionslist) {
   LCSSQO<T2, T2> tmpresult;                                                                                                 // ERGEBNIS
   STR<SQO<T2>> tmpstr(STRToSTR(str, ref));                                                                                  // Ursprünglicher STR in STR zur Referenz umwandeln
-  if ( tmpstr.normalordered() ) { return EquateIfPossible((tmpresult + tmpstr), T1::noreference); }                         // Wenn normalgeordnet zuruckgeben
+  if ( tmpstr.normalordered() ) { return LCSSQOToLCSSQO((tmpresult + tmpstr), T1::noreference); }                         // Wenn normalgeordnet zuruckgeben
   vector<int> tmplist = positionslist;
   if ( tmplist.size() == 0 ) { tmplist.push_back(0); tmplist.push_back(str.size());}                                        // Default positionlist wird anfang -> 0; ende -> str.size()
   tmpstr.normalproduct();
   tmpresult = tmpresult + tmpstr;                                                                                           // normalgeordneten STR zum Ergebnis
-  list< pair< pair<STR<SQO<T2>>,PFSTT<T2>>  , vector<int> > >   previouscontractions;                                       // list< (TwoTensor,STR) , positionsliste >
+  list< pair< pair<STR<SQO<T2>>,PFSTT<T2>>  , vector<int> > >   previouscontractions;                                   // list< (TwoTensor,STR) , positionsliste >
   vector<int> tmplist3;
-
-  if ( tmplist.size() != 1 ) {
-    if ( tmplist.size() > 1 ) {                                                                      //   tmplist  (0,3,6)
-    for ( int i = 1; i<tmplist.size(); i++ ) {                                                       //   STR  012 345 6789
-      for ( int firstpos = tmplist[i-1]; firstpos < tmplist[i]; firstpos++ ) {                       //        ^   ^   ^        wobei " ^ " stelle von nächsten normalgeordneten fragment
-        for ( int secondpos=firstpos+1; secondpos<str.size(); secondpos++ ) {
-          STR<SQO<T2>> tmp(STRToSTR(str, ref));
-          typename list<SQO<T2>>::iterator it1 = tmp.begin();                                        //   STR   012 345 6789
-          typename list<SQO<T2>>::iterator it2 = tmp.begin();                                        //         ^   ^               iterieren
-            for ( int i=0; i<firstpos; i++ ) { ++it1; }                                              //         ^    ^
-            for ( int j=0; j<secondpos; j++ ) { ++it2; }                                             //         ^     ^
-            if ( (*it1).a == SQO_Type::annihilation && (*it2).a == SQO_Type::creation )              //   Wenn an der ersten Position ein vernichter und an der zweiten ein erzeuger ist
-            {
-              vector<int> tmplist2 = tmplist;
-              for ( int j=i; j<tmplist2.size(); j++) { --tmplist2[j]; }                                                    //  tmplist2 (-1,2,5)             ^ ^   ^
-              tmplist2[i-1] = firstpos;                                                                                    //  tmplist2 (0,2,5)   //   STR   012 345 6789
-              TwoTensorSQO<T2> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
-              STR<TwoTensorSQO<T2>> tmpstrtt({tmptt});
-              PFSTT<T2> tmppf({tmpstrtt});                                                          //  TwoTensor vorfaktor
-              tmppf = tmppf * tmp._prefactor;                                                       //  STR vorfaktor auf Tensor übertragen
+  for ( int i = 1; i<tmplist.size(); i++ ) {                                                       //   STR  012 345 6789
+    for ( int firstpos = tmplist[i-1]; firstpos < tmplist[i]; firstpos++ ) {                       //        ^   ^   ^        wobei " ^ " stelle von nächsten normalgeordneten fragment
+      for ( int secondpos= ( (tmplist[i] - str.size()) ? tmplist[i] : firstpos+1 ) ; secondpos<str.size(); secondpos++ ) {
+        STR<SQO<T2>> tmp(STRToSTR(str, ref));
+        typename list<SQO<T2>>::iterator it1 = tmp.begin();                                        //   STR   012 345 6789
+        typename list<SQO<T2>>::iterator it2 = tmp.begin();                                        //         ^   ^               iterieren
+          for ( int i=0; i<firstpos; i++ ) { ++it1; }                                              //         ^    ^
+          for ( int j=0; j<secondpos; j++ ) { ++it2; }                                             //         ^     ^
+          if ( (*it1).a == SQO_Type::annihilation && (*it2).a == SQO_Type::creation )              //   Wenn an der ersten Position ein vernichter und an der zweiten ein erzeuger ist
+          {
+            vector<int> tmplist2;
+            tmplist2.push_back(firstpos);
+            for ( int j=i; j<tmplist.size(); j++) {
+               if ( secondpos < tmplist[j] ) { tmplist2.push_back(tmplist[j]-2); }
+               else  {tmplist2.push_back(tmplist[j]-1);}
+            }                                                   //  tmplist2 (-1,2,5)             ^ ^   ^                                                                                   //  tmplist2 (0,2,5)   //   STR   012 345 6789
+            TwoTensorSQO<T2> tmptt(make_pair((*it1).idx, (*it1).idxtype), make_pair((*it2).idx, (*it2).idxtype));
+            STR<TwoTensorSQO<T2>> tmpstrtt({tmptt});
+            PFSTT<T2> tmppf({tmpstrtt});                                                          //  TwoTensor vorfaktor
+            tmppf = tmppf * tmp._prefactor;                                                       //  STR vorfaktor auf Tensor übertragen
+            tmp._prefactor = 1;
+            int sumofpos = firstpos + secondpos - 1 ;                                             //  Transpositionen um operatoren nach links zu verschieben. Reihenfolge bleibt (-1).
+            tmppf = tmppf * (( sumofpos % 2  == 0 ) ? 1 : -1);                                    //  Vorzeichen der permutation
+            tmp.list<SQO<T2>>::erase(it1);                                                        //  ersten sqo aus str löschen
+            tmp.list<SQO<T2>>::erase(it2);                                                        //  zweiten sqo aus str löschen
+            if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }                  // STR leer, dass voll kontrahiert
+            else {
+              previouscontractions.push_back( make_pair(make_pair( tmp, tmppf ), tmplist2 ) );                // tmp nicht normalgeordnet in previous
+              tmp.normalproduct();
+              tmppf = tmppf * tmp._prefactor;
               tmp._prefactor = 1;
-              int sumofpos = firstpos + secondpos - 1 ;                                             //  Transpositionen um operatoren nach links zu verschieben. Reihenfolge bleibt (-1).
-              tmppf = tmppf * (( sumofpos % 2  == 0 ) ? 1 : -1);                                    //  Vorzeichen der permutation
-              tmp.list<SQO<T2>>::erase(it1);                                                        //  ersten sqo aus str löschen
-              tmp.list<SQO<T2>>::erase(it2);                                                        //  zweiten sqo aus str löschen
-              if ( tmp.size() == 0 ) {  tmpresult.fullcontraction = tmpresult.fullcontraction + tmppf; }                  // STR leer, dass voll kontrahiert
-              else {
-                previouscontractions.push_back( make_pair( make_pair( tmp, tmppf ), tmplist2 ) );                         // tmp nicht normalgeordnet in previous
-                tmp.normalproduct();
-                tmppf = tmppf * tmp._prefactor;
-                tmp._prefactor = 1;
-                if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }                                 // tmp normalgeordnet in Ergebnis
-                else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
-              }
+              if ( tmpresult.find(tmp) == tmpresult.end() ) { tmpresult[tmp] = tmppf; }                                 // tmp normalgeordnet in Ergebnis
+              else { tmpresult[tmp] =  tmpresult[tmp] + tmppf; }
             }
           }
       }
-    } // für alle previous wickexpansion aufrufen und  den jeweiligen str im ergebnis löschen, da sonst doppelt
-    for ( typename list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
+    }
+  } // für alle previous wickexpansion aufrufen und  den jeweiligen str im ergebnis löschen, da sonst doppelt
+      for ( typename list< pair<pair<STR<SQO<T2>>,PFSTT<T2>>, vector<int>> >::const_iterator it1=previouscontractions.begin(); it1!=previouscontractions.end(); it1++  ) {
       LCSSQO<T2, T2> tmpwick = wickexpansion( ((*it1).first).first, ref, (*it1).second );
       STR<SQO<T2>> strprevious = ((*it1).first).first;
-      strprevious.normalproduct();
+        strprevious.normalproduct();
 
-      tmpwick.erase( tmpwick.find( strprevious ) );
-      tmpresult = tmpresult + ( ((*it1).first).second * tmpwick  )  ;
-    }
-  }
-}
-return EquateIfPossible(tmpresult, T1::noreference);
+        tmpwick.erase( tmpwick.find( strprevious ) );
+        tmpresult = tmpresult + ( ((*it1).first).second * tmpwick  )  ;
+      }
+
+  return LCSSQOToLCSSQO(tmpresult, T1::noreference);
 }
 
 
 
 template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2> const & lc){
-
+/*
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
@@ -307,8 +297,8 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
     }
     o << (*it).first;
   }
-
-/*FOR TESTWICK
+*/
+//FOR TESTWICK
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
 if ( lc.size() == 1 ) { o << (*lc.begin()).first; }
@@ -333,7 +323,7 @@ o << (*it).first ;
   }
 }
 }
-*/
+
 
   return o;
 }
@@ -342,8 +332,8 @@ o << (*it).first ;
 template<class T1> LCSSQO<T1, ParticleHole> nonzero( LCSSQO<T1, ParticleHole> const & lc) {
 LCSSQO<T1, ParticleHole> tmp(lc);
 
-typename map< STR<TwoTensorSQO<ParticleHole>> , double, STRTTCompare<ParticleHole> >::iterator it4=(tmp.fullcontraction).begin();
-while ( it4 != (tmp.fullcontraction).end() ) {
+  typename map< STR<TwoTensorSQO<ParticleHole>> , double, STRTTCompare<ParticleHole> >::iterator it4=(tmp.fullcontraction).begin();
+  while ( it4 != (tmp.fullcontraction).end() ) {
   bool tmpbool(false);
   typename list<TwoTensorSQO<ParticleHole>>::const_iterator it5= ((*it4).first).begin();
     while ( it5!=((*it4).first).end() )  {
@@ -354,9 +344,9 @@ while ( it4 != (tmp.fullcontraction).end() ) {
   }
 
 
-typename map< STR<SQO<T1>>, PFSTT<ParticleHole>, STRSQOCompare<T1>>::iterator it=tmp.begin();
-  while (it!=tmp.end() ) {
-    typename map< STR<TwoTensorSQO<ParticleHole>> , double, STRTTCompare<ParticleHole> >::iterator it2=((*it).second).begin();
+  typename map< STR<SQO<T1>>, PFSTT<ParticleHole>, STRSQOCompare<T1>>::iterator it=tmp.begin();
+    while (it!=tmp.end() ) {
+      typename map< STR<TwoTensorSQO<ParticleHole>> , double, STRTTCompare<ParticleHole> >::iterator it2=((*it).second).begin();
         while ( it2!=((*it).second).end() ) {
         bool tmpbool(false);
           typename list<TwoTensorSQO<ParticleHole>>::const_iterator it3= ((*it2).first).begin();
