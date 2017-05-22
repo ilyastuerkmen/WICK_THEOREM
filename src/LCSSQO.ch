@@ -171,10 +171,10 @@ template<class T1, class T2> LCSSQO<T1, T2> operator * ( STR<SQO<T1>> const & st
 }
 template<class T1, class T2> LCSSQO<T1, T2> operator * ( LCSSQO<T1, T2> const & llc, LCSSQO<T1, T2> const & rlc){
   LCSSQO<T1, T2> tmp;
-  for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it1=llc.begin(); it1!=rlc.end(); it1++ ) {
+  for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it1=llc.begin(); it1!=llc.end(); it1++ ) {
     if(tmp.find((*it1).first) == tmp.end() ) { tmp[(*it1).first] = (*it1).second * rlc.fullcontraction; }
     else { tmp[(*it1).first] = tmp[(*it1).first] +  ((*it1).second * rlc.fullcontraction);  }
-    for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it2=rlc.begin(); it2!=llc.end(); it2++ ) {
+    for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it2=rlc.begin(); it2!=rlc.end(); it2++ ) {
       if ( it1 == llc.begin() ) {
         if(tmp.find((*it2).first) == tmp.end() ) { tmp[(*it2).first] = llc.fullcontraction * (*it2).second; }
         else { tmp[(*it2).first] = tmp[(*it2).first] + (llc.fullcontraction * (*it2).second);  }
@@ -198,9 +198,7 @@ template<class T1, class T2, class T3> LCSSQO<T1, T2> LCSSQOToLCSSQO( LCSSQO<T3,
   return tmp;
 }
 template<class T1, class T2> LCSSQO<T1, T2> generalizedWickExpansion(STR<SQO<T1>> const & str, T2 const & ref) {
-  STR<SQO<T2>> tmpstr(STRToSTR(str, ref));
-  LCSSQO<T2, T2>  tmpresult( wickexpansion(tmpstr, ref, PositionOfNextNormalFragment(tmpstr)) );
-  return LCSSQOToLCSSQO(tmpresult, T1::noreference);
+  return wickexpansion(str, ref, PositionOfNextNormalFragment(str));
 }
 template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & str, T2 const & ref, vector<int> const & positionslist) {
   LCSSQO<T2, T2> tmpresult;                                                                                                 // ERGEBNIS
@@ -220,7 +218,7 @@ template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & s
         typename list<SQO<T2>>::iterator it2 = tmp.begin();                                        //         ^   ^               iterieren
           for ( int i=0; i<firstpos; i++ ) { ++it1; }                                              //         ^    ^
           for ( int j=0; j<secondpos; j++ ) { ++it2; }                                             //         ^     ^
-          if ( (*it1).a == SQO_Type::annihilation && (*it2).a == SQO_Type::creation )              //   Wenn an der ersten Position ein vernichter und an der zweiten ein erzeuger ist
+          if ( (*it1).a == SQO_Type::annihilation && (*it2).a == SQO_Type::creation && (*it1).idxtype == (*it2).idxtype )               //   Wenn an der ersten Position ein vernichter und an der zweiten ein erzeuger ist
           {
             vector<int> tmplist2;
             tmplist2.push_back(firstpos);
@@ -265,7 +263,7 @@ template<class T1, class T2> LCSSQO<T1, T2> wickexpansion(STR<SQO<T1>> const & s
 
 
 template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2> const & lc){
-/*
+
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
   for ( typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::const_iterator it=lc.begin(); it!=lc.end(); it++ ) {
@@ -297,8 +295,8 @@ template<class T1, class T2> ostream & operator << ( ostream & o, LCSSQO<T1, T2>
     }
     o << (*it).first;
   }
-*/
-//FOR TESTWICK
+
+/*FOR TESTWICK
   if ( lc.fullcontraction.size() == 0 && lc.fullcontraction.realnumber == 0)  {}
   else { o << lc.fullcontraction; }
 if ( lc.size() == 1 ) { o << (*lc.begin()).first; }
@@ -323,43 +321,109 @@ o << (*it).first ;
   }
 }
 }
-
+*/
 
   return o;
 }
 
 
-template<class T1> LCSSQO<T1, ParticleHole> nonzero( LCSSQO<T1, ParticleHole> const & lc) {
-LCSSQO<T1, ParticleHole> tmp(lc);
+template<class T1,class T2> LCSSQO<T1, T2> nonzero( LCSSQO<T1, T2> const & lc) {
+LCSSQO<T1, T2> tmp(lc);
 
-  typename map< STR<TwoTensorSQO<ParticleHole>> , double, STRTTCompare<ParticleHole> >::iterator it4=(tmp.fullcontraction).begin();
+  typename map< STR<TwoTensorSQO<T2>> , double, STRTTCompare<T2> >::iterator it4=(tmp.fullcontraction).begin();
   while ( it4 != (tmp.fullcontraction).end() ) {
   bool tmpbool(false);
-  typename list<TwoTensorSQO<ParticleHole>>::const_iterator it5= ((*it4).first).begin();
+  typename list<TwoTensorSQO<T2>>::const_iterator it5= ((*it4).first).begin();
     while ( it5!=((*it4).first).end() )  {
-        if ( (*it5).idx1.second ==  (*it5).idx2.second  ) {it5++;}
+        if ( (*it5).idx1.first ==  (*it5).idx2.first  ) {it5++;}
         else { it4 =  (tmp.fullcontraction).erase(it4); tmpbool = true; break; }
     }
     if ( tmpbool == false ) {it4++;}
   }
 
 
-  typename map< STR<SQO<T1>>, PFSTT<ParticleHole>, STRSQOCompare<T1>>::iterator it=tmp.begin();
+  typename map< STR<SQO<T1>>, PFSTT<T2>, STRSQOCompare<T1>>::iterator it=tmp.begin();
     while (it!=tmp.end() ) {
-      typename map< STR<TwoTensorSQO<ParticleHole>> , double, STRTTCompare<ParticleHole> >::iterator it2=((*it).second).begin();
+      typename map< STR<TwoTensorSQO<T2>> , double, STRTTCompare<T2> >::iterator it2=((*it).second).begin();
         while ( it2!=((*it).second).end() ) {
         bool tmpbool(false);
-          typename list<TwoTensorSQO<ParticleHole>>::const_iterator it3= ((*it2).first).begin();
+          typename list<TwoTensorSQO<T2>>::const_iterator it3= ((*it2).first).begin();
             while ( it3!=((*it2).first).end() )  {
-                if ( (*it3).idx1.second ==  (*it3).idx2.second  ) {it3++;}
+                if ( (*it3).idx1.first ==  (*it3).idx2.first  ) {it3++;}
                 else { it2 =  ((*it).second).erase(it2); tmpbool = true; break; }
             }
             if ( tmpbool == false ) {it2++;}
         }
-        if ( (*it).second.size() == 0  &&  (*it).second.size() != (*(lc.find( (*it).first ) )).second.size() ) { it = tmp.erase(it) ;}
+        if ( (*it).second.size() == 0  && (*it).second.realnumber == 0 &&  (*it).second.size() != (*(lc.find( (*it).first ) )).second.size() ) { it = tmp.erase(it) ;}
         else {it++;}
-
+        it++;
     }
 
 return tmp;
+}
+
+
+template<class T1> PFSTT<T1> usesymmetry(PFSTT<T1> const & pfstt ) {
+  PFSTT<T1> tmp(pfstt);
+  int count = 0;
+  string p1;
+  string p2;
+  string q1;
+  string q2;
+  string s1;
+  string s2;
+  string r1;
+  string r2;
+  for ( int i = 0; i<tmp.size()-1 ; i++) {
+    for (int j = i+1; j < tmp.size(); j++) {
+      count = 0;
+      p1 = "p1";
+      p2 = "p2";
+      q1 = "q1";
+      q2 = "q2";
+      s1 = "s1";
+      s2 = "s2";
+      r1 = "r1";
+      r2 = "r2";
+      typename map< STR<TwoTensorSQO<T1>> , double, STRTTCompare<T1> >::iterator it=(tmp).begin();
+      typename map< STR<TwoTensorSQO<T1>> , double, STRTTCompare<T1> >::iterator it2=(tmp).begin();
+      for ( int k = 0; k< i; k++) {++it;}
+      for ( int l = 0; l< j; l++) {++it2;}
+      for ( typename list<TwoTensorSQO<T1>>::const_iterator it3=(*it).first.begin(); it3!=(*it).first.end(); ++it3) {
+        for ( typename list<TwoTensorSQO<T1>>::const_iterator it4=(*it2).first.begin(); it4!=(*it2).first.end(); ++it4 ) {
+          if ( (*it3) == (*it4) ) {  ++count;  }
+
+          if ( (*it3).idx1.first == "p" ) { p1 = (*it3).idx2.first; }
+          else if ( (*it3).idx2.first == "p" ) { p1 = (*it3).idx1.first; }
+          else if ( (*it3).idx1.first == "q" ) { q1 = (*it3).idx2.first; }
+          else if ( (*it3).idx2.first == "q" ) { q1 = (*it3).idx1.first; }
+          else if ( (*it3).idx1.first == "s" ) { s1 = (*it3).idx2.first; }
+          else if ( (*it3).idx2.first == "s" ) { s1 = (*it3).idx1.first; }
+          else if ( (*it3).idx1.first == "r" ) { r1 = (*it3).idx2.first; }
+          else if ( (*it3).idx2.first == "r" ) { r1 = (*it3).idx1.first; }
+
+          if ( (*it4).idx1.first == "p" ) { p2 = (*it4).idx2.first; }
+          else if ( (*it4).idx2.first == "p" ) { p2 = (*it4).idx1.first; }
+          else if ( (*it4).idx1.first == "q" ) { q2 = (*it4).idx2.first; }
+          else if ( (*it4).idx2.first == "q" ) { q2 = (*it4).idx1.first; }
+          else if ( (*it4).idx1.first == "s" ) { s2 = (*it4).idx2.first; }
+          else if ( (*it4).idx2.first == "s" ) { s2 = (*it4).idx1.first; }
+          else if ( (*it4).idx1.first == "r" ) { r2 = (*it4).idx2.first; }
+          else if ( (*it4).idx2.first == "r" ) { r2 = (*it4).idx1.first; }
+
+        }
+      }
+
+      if ( (count == 2) && (r1 == s2) && (r2 == s1) ) {
+        if ( (*it).second > 0 ) { (*it).second = (*it).second - (*it2).second;  tmp.erase(it2);  }
+        else if ( (*it2).second > 0 ){ (*it2).second = (*it2).second - (*it).second;  tmp.erase(it); }
+        else { (*it).second = (*it).second - (*it2).second;  tmp.erase(it2);    }
+      }
+      else if ( (count == 0) && (p1 == q2) && (p2 == q1) && (s1 == r2) && (s2==r1) ) { (*it).second = (*it).second + (*it2).second;  tmp.erase(it2);   }
+    }
+  }
+
+  if ( tmp != pfstt ) { tmp = usesymmetry(tmp); }
+
+  return tmp;
 }
