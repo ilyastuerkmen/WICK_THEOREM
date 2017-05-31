@@ -414,16 +414,51 @@ template<class T1> PFSTT<T1> usesymmetry(PFSTT<T1> const & pfstt ) {
         }
       }
 
-      if ( (count == 2) && (r1 == s2) && (r2 == s1) ) {
+      if (
+        ( (p1 == p2) && (q1 == q2) && (r1 == s2) && (r2 == s1) && ( (*it).first.size() - count == 2))  ||
+        ( (p1 == q2) && (p2 == q1) && (s1 == s2) && (r1==r2) && ( (*it).first.size() - count == 2) )
+      ) {
         if ( (*it).second > 0 ) { (*it).second = (*it).second - (*it2).second;  tmp.erase(it2);  }
         else if ( (*it2).second > 0 ){ (*it2).second = (*it2).second - (*it).second;  tmp.erase(it); }
         else { (*it).second = (*it).second - (*it2).second;  tmp.erase(it2);    }
       }
-      else if ( (count == 0) && (p1 == q2) && (p2 == q1) && (s1 == r2) && (s2==r1) ) { (*it).second = (*it).second + (*it2).second;  tmp.erase(it2);   }
+      else if ( (p1 == q2) && (p2 == q1) && (s1 == r2) && (s2==r1) && ( (*it).first.size() - count == 4)) { (*it).second = (*it).second + (*it2).second;  tmp.erase(it2);   }
     }
   }
 
   if ( tmp != pfstt ) { tmp = usesymmetry(tmp); }
 
   return tmp;
+}
+
+
+template<class T1> NParticleAntisymmetricTwoParticleOperatorExpectationValue<T1>  antisymmetricExpectationValue(PFSTT<T1> const & pf) {
+  NParticleAntisymmetricTwoParticleOperatorExpectationValue<T1> np;
+  string p;
+  string q;
+  string r;
+  string s;
+  vector<STR<TwoTensorSQO<T1>>> tmpstrtt;
+  for ( typename map<STR<TwoTensorSQO<T1>>, double, STRTTCompare<T1>>::const_iterator it=pf.begin(); it!=pf.end(); it++ ) {
+    p = "p";
+    q = "q";
+    r = "r";
+    s = "s";
+    STR<TwoTensorSQO<T1>> str;
+    for ( typename list<TwoTensorSQO<T1>>::const_iterator it2=(*it).first.begin(); it2!=(*it).first.end(); ++it2) {
+      if ( (*it2).idx1.first == "p" ) { p = (*it2).idx2.first; }
+      else if ( (*it2).idx2.first == "p" ) { p = (*it2).idx1.first; }
+      else if ( (*it2).idx1.first == "q" ) { q = (*it2).idx2.first; }
+      else if ( (*it2).idx2.first == "q" ) { q = (*it2).idx1.first; }
+      else if ( (*it2).idx1.first == "s" ) { s = (*it2).idx2.first; }
+      else if ( (*it2).idx2.first == "s" ) { s = (*it2).idx1.first; }
+      else if ( (*it2).idx1.first == "r" ) { r = (*it2).idx2.first; }
+      else if ( (*it2).idx2.first == "r" ) { r = (*it2).idx1.first; }
+      else  { str = str * (*it2) ; }
+    }
+    AntisymmetricTwoParticleOperatorExpectationValue tmp(p,q,r,s);
+    np.push_back(make_pair(tmp, 0.25 * (*it).second * str));
+  }
+  return np;
+
 }
